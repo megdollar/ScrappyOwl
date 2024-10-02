@@ -27,26 +27,8 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         Debug.Log("Score: " + score);
-        score += newScore;
-        scoreText.text = "Score: " + score.ToSring(" ");
-
-        // Add sound effects or something along those lines.
+        // TO DO, update the score on the screen
     }
-
-    // Show the Pause Screen
-    public void ShowPauseScreen()
-    {
-        ShowPauseScreen.SetActive(true);
-        Time.timeScale = 0; // Pause the Game
-    }
-
-    // Updte the high score display on the UI
-    private void UpdateHighScoreText()
-    {
-        highScoreText.text = "High Score: " + highScore;
-    }
-}
-
 }
 
 }
