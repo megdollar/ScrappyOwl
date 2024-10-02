@@ -43,7 +43,7 @@ public class ScrappyOwlModel : MonoBehaviour
         if (isAlive)
         {
             //TO DO
-            
+
         }
     }
 
@@ -59,8 +59,8 @@ public class ScrappyOwlModel : MonoBehaviour
     // Method to reset the game
     public void ResetOwl()
     {
-        position = Vector2.zero;  
-        velocity = Vector2.zero; 
+        position = Vector2.zero;
+        velocity = Vector2.zero;
         isAlive = true;
     }
 
