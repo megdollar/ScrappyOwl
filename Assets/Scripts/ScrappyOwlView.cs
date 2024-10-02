@@ -24,10 +24,13 @@ public class ScrappyOwlView : MonoBehaviour
         }
 
     // Show the score
-    public void UpdateScore(int score)
+    public void UpdateScore(int newScore)
     {
         Debug.Log("Score: " + score);
-        // TO DO, update the score on the screen
+        score += newScore;
+        scoreText.text = "Score: " + score.ToSring(" ");
+
+        // Add sound effects or something along those lines.
     }
 
     // Show the Pause Screen
@@ -42,6 +45,8 @@ public class ScrappyOwlView : MonoBehaviour
     {
         highScoreText.text = "High Score: " + highScore;
     }
+}
+
 }
 
 }
