@@ -15,8 +15,13 @@ public class ScrappyOwlView : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
-        // TO DO, show a game over screen
-    }
+        // Check if the current score is new High Score
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore" , highScore);
+            UpdateHighScoreText();
+        }
 
     // Show the score
     public void UpdateScore(int score)
@@ -24,4 +29,19 @@ public class ScrappyOwlView : MonoBehaviour
         Debug.Log("Score: " + score);
         // TO DO, update the score on the screen
     }
+
+    // Show the Pause Screen
+    public void ShowPauseScreen()
+    {
+        ShowPauseScreen.SetActive(true);
+        Time.timeScale = 0; // Pause the Game
+    }
+
+    // Updte the high score display on the UI
+    private void UpdateHighScoreText()
+    {
+        highScoreText.text = "High Score: " + highScore;
+    }
+}
+
 }
