@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ScrappyOwlController : MonoBehaviour
 {
     // Lunk to model, view, easy mode, hard mode and set initial score to 0
-    public ScrappyOwlModel owModel;  
+    public ScrappyOwlModel owlModel;  
     public ScrappyOwlView owlView;    
     public Button easy;  
     public Button hard;  
@@ -18,8 +18,8 @@ public class ScrappyOwlController : MonoBehaviour
         hard.onClick.AddListener(StartHardMode);
 
         // Initialize the game with beginning position
-        owlModel.ResetGame();
-        owlView.UpdatePosition(owlModel.GetPosition());
+        owlModel.ResetOwl();
+        owlView.UpdateOwlPosition(owlModel.GetPosition());
     }
 
     void Update()
