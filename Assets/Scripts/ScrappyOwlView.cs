@@ -78,9 +78,18 @@ public class ScrappyOwlView : MonoBehaviour
     // Move logs across the screen during game
     public void MoveLogs()
     {
+        float moveSpeed = 5f; //this is the speed, adjust as needed
+        float resetPosition = -10f; //starting position on X where the log resets to
+        float startPosition = 10f; // where the log starts off screen to the right
+
         // Iterate through the array of logs
         foreach (GameObject log in logs)
         {
+            log.transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+            if (log.transform.position.x <= resetPosition)
+            {
+                log.transform.position = new Vector3(startPosition, log.transform.position.y, log.transform.position.z);
+            }
             
         }
     }
