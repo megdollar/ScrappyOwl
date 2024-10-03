@@ -2,18 +2,70 @@ using UnityEngine;
 
 public class ScrappyOwlView : MonoBehaviour
 {
-    // Owl sprite is the game object 
-    public GameObject owlSprite;  
+    public GameObject homeScreen;
+    public GameObject pauseScreen;
+    public GameObject gameOverScreen;
+    public GameObject scoreScreen;
+    public Text scoreText;
+    public Text difficultyText;  
 
-    // Update the position of the owl
+    public GameObject owlSprite;
+    public GameObject[] logs;  
+
+    // Method to show home screen
+    public void ShowHomeScreen()
+    {
+        homeScreen.SetActive(true);
+        pauseScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+        scoreScreen.SetActive(false);
+    }
+
+    // Method to show the pause screen
+    public void ShowPauseScreen()
+    {
+        pauseScreen.SetActive(true);
+    }
+
+    // Hide all the screens when game is playing
+    public void HideScreens()
+    {
+        homeScreen.SetActive(false);
+        pauseScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+        scoreScreen.SetActive(false);
+    }
+
+    // Method to show game over screen and score
+    public void ShowGameOverScreen(int score)
+    {
+        gameOverScreen.SetActive(true);
+        scoreText.text = "Game Over! Your score: " + score.ToString();
+    }
+
+    // Show the score screen and display the current score
+    public void ShowScoreScreen(int score)
+    {
+        scoreScreen.SetActive(true);
+        scoreText.text = "Current score: " + score.ToString();
+    }
+
+    // Update the owl's position
     public void UpdateOwlPosition(Vector2 position)
     {
         owlSprite.transform.position = new Vector3(position.x, position.y, 0);
     }
 
-    // Game over view
-    public void GameOver()
+    // Method to show the score in the UI
+    public void UpdateScore(int score)
     {
+
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    // Display the difficulty level 
+    public void UpdateDifficultyDisplay(bool hardMode)
+
         Debug.Log("Game Over!");
         // Check if the current score is new High Score
         if (score > highScore)
@@ -25,10 +77,29 @@ public class ScrappyOwlView : MonoBehaviour
 
     // Show the score
     public void UpdateScore(int newScore)
+
     {
-        Debug.Log("Score: " + score);
-        // TO DO, update the score on the screen
+        if (hardMode)
+        {
+            difficultyText.text = "Difficulty: Hard";
+        }
+        else
+        {
+            difficultyText.text = "Difficulty: Easy";
+        }
+    }
+
+    // Move logs across the screen during game
+    public void MoveLogs()
+    {
+        // Iterate through the array of logs
+        foreach (GameObject log in logs)
+        {
+            
+        }
     }
 }
 
+
 }
+
