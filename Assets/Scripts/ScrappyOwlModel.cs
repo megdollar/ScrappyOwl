@@ -24,7 +24,7 @@ public class ScrappyOwlModel : MonoBehaviour
             // Hard mode settings
             // 15 is stronger than the eath's pull
             gravity = -15f;
-            // lower jump height
+            // lower jump 
             jumpHeight = 4f;
         }
         else
@@ -32,7 +32,7 @@ public class ScrappyOwlModel : MonoBehaviour
             // Easy mode settings
             // 9.8 m/s close to earth's pull
             gravity = -9.8f;
-            // higher jump force
+            // higher jump 
             jumpHeight = 7f;
         }
     }
@@ -52,7 +52,7 @@ public class ScrappyOwlModel : MonoBehaviour
     {
         if (isAlive)
         {
-            // TO DO
+            velocity.y = jumpHeight;
         }
     }
 
@@ -70,9 +70,4 @@ public class ScrappyOwlModel : MonoBehaviour
         return position;
     }
 
-    // Method for game over
-    public void Dead()
-    {
-        isAlive = false;
-    }
-}
+
