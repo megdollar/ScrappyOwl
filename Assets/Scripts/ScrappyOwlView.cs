@@ -59,11 +59,25 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show the score in the UI
     public void UpdateScore(int score)
     {
+
         scoreText.text = "Score: " + score.ToString();
     }
 
     // Display the difficulty level 
     public void UpdateDifficultyDisplay(bool hardMode)
+
+        Debug.Log("Game Over!");
+        // Check if the current score is new High Score
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore" , highScore);
+            UpdateHighScoreText();
+        }
+
+    // Show the score
+    public void UpdateScore(int newScore)
+
     {
         if (hardMode)
         {
@@ -85,4 +99,7 @@ public class ScrappyOwlView : MonoBehaviour
         }
     }
 }
+
+
+
 
