@@ -59,7 +59,7 @@ public class ScrappyOwlController : MonoBehaviour
             if (!owlModel.isAlive)
             {
                 // If dead, game over
-                owlView.ShowGameOverScreen();
+                owlView.ShowGameOverScreen(score);
             }
         }
     }
