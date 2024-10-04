@@ -64,21 +64,8 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode)
+    public void UpdateDifficultyDisplay(bool hardMode){
 
-        Debug.Log("Game Over!");
-        // Check if the current score is new High Score
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt("HighScore" , highScore);
-            UpdateHighScoreText();
-        }
-
-    // Show the score
-    public void UpdateScore(int newScore)
-
-    {
         if (hardMode)
         {
             difficultyText.text = "Difficulty: Hard";
@@ -86,8 +73,10 @@ public class ScrappyOwlView : MonoBehaviour
         else
         {
             difficultyText.text = "Difficulty: Easy";
-        }
+        }   
     }
+
+
 
     // Move logs across the screen during game
     public void MoveLogs()

@@ -69,5 +69,6 @@ public class ScrappyOwlModel : MonoBehaviour
     {
         return position;
     }
+}
 
 
