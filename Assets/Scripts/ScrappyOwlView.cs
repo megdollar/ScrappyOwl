@@ -12,6 +12,9 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject owlSprite;
     public GameObject[] logs;  
 
+    private int currentScore = 0;
+    private int highScore = 0;
+
     // Method to show home screen
     public void ShowHomeScreen()
     {
@@ -37,17 +40,24 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show game over screen and score
-    public void ShowGameOverScreen(int score)
+    public void ShowGameOverScreen()
     {
         gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
-    }
+
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
+    
+
 
     // Show the score screen and display the current score
     public void ShowScoreScreen(int score)
     {
         scoreScreen.SetActive(true);
-        scoreText.text = "Current score: " + score.ToString();
+        scoreText.text = "Current score: " + currentScore.ToString();
     }
 
     // Update the owl's position
@@ -57,10 +67,10 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show the score in the UI
-    public void UpdateScore(int score)
+    public void UpdateScore(int newScore)
     {
-
-        scoreText.text = "Score: " + score.ToString();
+        currentScore += newScore;
+        scoreText.text = "Score: " + currentScore.ToString();
     }
 
     // Display the difficulty level 
@@ -74,11 +84,6 @@ public class ScrappyOwlView : MonoBehaviour
             PlayerPrefs.SetInt("HighScore" , highScore);
             UpdateHighScoreText();
         }
-
-    // Show the score
-    public void UpdateScore(int newScore)
-
-    {
         if (hardMode)
         {
             difficultyText.text = "Difficulty: Hard";
