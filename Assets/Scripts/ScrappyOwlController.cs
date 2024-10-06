@@ -52,8 +52,8 @@ public class ScrappyOwlController : MonoBehaviour
             owlModel.UpdatePosition(Time.deltaTime);
             owlView.UpdateOwlPosition(owlModel.GetPosition());
 
-            // Logs move accross the screen
-            owlView.MoveLogs();
+            //// Logs move accross the screen
+            //owlView.LogMove();
 
             // Check if the owl is still alive
             if (!owlModel.isAlive)
