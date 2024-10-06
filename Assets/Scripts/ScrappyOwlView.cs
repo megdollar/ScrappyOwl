@@ -13,6 +13,9 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject owlSprite;
     public GameObject[] logs;  
 
+    private int currentScore = 0;
+    private int highScore = 0;
+
     // Method to show home screen
     public void ShowHomeScreen()
     {
@@ -42,13 +45,20 @@ public class ScrappyOwlView : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
+
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
     }
+
 
     // Show the score screen and display the current score
     public void ShowScoreScreen(int score)
     {
         scoreScreen.SetActive(true);
-        scoreText.text = "Current score: " + score.ToString();
+        scoreText.text = "Current score: " + currentScore.ToString();
     }
 
     // Update the owl's position
@@ -58,15 +68,28 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show the score in the UI
-    public void UpdateScore(int score)
+    public void UpdateScore(int newScore)
     {
-
-        scoreText.text = "Score: " + score.ToString();
+        currentScore += newScore;
+        scoreText.text = "Score: " + currentScore.ToString();
     }
 
     // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode){
+    public void UpdateDifficultyDisplay(bool hardMode, int score){
 
+
+        Debug.Log("Game Over!");
+        // Check if the current score is new High Score
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore" , highScore);
+            // please add this method below or the logic that needs to be here
+            //UpdateHighScoreText();
+        }
+
+    public void UpdateDifficultyDisplay(bool hardMode)
+    {
         if (hardMode)
         {
             difficultyText.text = "Difficulty: Hard";
@@ -74,7 +97,7 @@ public class ScrappyOwlView : MonoBehaviour
         else
         {
             difficultyText.text = "Difficulty: Easy";
-        }   
+        }      
     }
 
     /* DELETE THE FOLLOWING...

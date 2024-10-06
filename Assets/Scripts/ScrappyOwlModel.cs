@@ -42,7 +42,8 @@ public class ScrappyOwlModel
     {
         if (isAlive)
         {
-            //TO DO
+            velocity.y += gravity * deltaTime;
+            position += velocity * deltaTime;
 
         }
     }
@@ -69,4 +70,5 @@ public class ScrappyOwlModel
     {
         return position;
     }
+
 }
