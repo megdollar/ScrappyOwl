@@ -42,7 +42,8 @@ public class ScrappyOwlModel : MonoBehaviour
     {
         if (isAlive)
         {
-            //TO DO
+            velocity.y += gravity * deltaTime;
+            position += velocity * deltaTime;
 
         }
     }
@@ -70,4 +71,4 @@ public class ScrappyOwlModel : MonoBehaviour
         return position;
     }
 
-
+}
