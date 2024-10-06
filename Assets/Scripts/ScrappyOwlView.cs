@@ -41,7 +41,7 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show game over screen and score
-    public void ShowGameOverScreen()
+    public void ShowGameOverScreen(int score)
     {
         gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
@@ -75,6 +75,19 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Display the difficulty level 
+    public void UpdateDifficultyDisplay(bool hardMode, int score){
+
+
+        Debug.Log("Game Over!");
+        // Check if the current score is new High Score
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore" , highScore);
+            // please add this method below or the logic that needs to be here
+            //UpdateHighScoreText();
+        }
+
     public void UpdateDifficultyDisplay(bool hardMode)
     {
         if (hardMode)
