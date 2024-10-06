@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScrappyOwlModel : MonoBehaviour
+public class ScrappyOwlModel
 {
 
     // Variables for the game
@@ -42,7 +42,8 @@ public class ScrappyOwlModel : MonoBehaviour
     {
         if (isAlive)
         {
-            //TO DO
+            velocity.y += gravity * deltaTime;
+            position += velocity * deltaTime;
 
         }
     }
