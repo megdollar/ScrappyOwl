@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScrappyOwlModel : MonoBehaviour
+public class ScrappyOwlModel
 {
 
     // Variables for the game

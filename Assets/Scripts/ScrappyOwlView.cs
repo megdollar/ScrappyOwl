@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrappyOwlView : MonoBehaviour
 {
@@ -74,7 +75,8 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode)
+    public void UpdateDifficultyDisplay(bool hardMode){
+
 
         Debug.Log("Game Over!");
         // Check if the current score is new High Score
@@ -84,6 +86,7 @@ public class ScrappyOwlView : MonoBehaviour
             PlayerPrefs.SetInt("HighScore" , highScore);
             UpdateHighScoreText();
         }
+
         if (hardMode)
         {
             difficultyText.text = "Difficulty: Hard";
@@ -91,18 +94,34 @@ public class ScrappyOwlView : MonoBehaviour
         else
         {
             difficultyText.text = "Difficulty: Easy";
-        }
+        }   
     }
 
-    // Move logs across the screen during game
-    public void MoveLogs()
-    {
-        // Iterate through the array of logs
-        foreach (GameObject log in logs)
-        {
-            
-        }
-    }
+    /* DELETE THE FOLLOWING...
+     * There should be a clear seperation of concerns: 
+     * ScrappyOwlView handles the UI and game state, while LogMoveScript is responsible for moving the logs. 
+     * This structure aligns with the MVC pattern, making our codebase more manageable and easier to understand. 
+     * Thanks!
+     -Ginger */
+
+    //// Move logs across the screen during game
+    //public void MoveLogs()
+    //{
+    //    float moveSpeed = 5f; //this is the speed, adjust as needed
+    //    float resetPosition = -10f; //starting position on X where the log resets to
+    //    float startPosition = 10f; // where the log starts off screen to the right
+
+    //    // Iterate through the array of logs
+    //    foreach (GameObject log in logs)
+    //    {
+    //        log.transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+    //        if (log.transform.position.x <= resetPosition)
+    //        {
+    //            log.transform.position = new Vector3(startPosition, log.transform.position.y, log.transform.position.z);
+    //        }
+
+    //    }
+    //}
 }
 
 
