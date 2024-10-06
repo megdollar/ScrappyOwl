@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScrappyOwlModel : MonoBehaviour
+public class ScrappyOwlModel
 {
 
     // Variables for the game
@@ -69,6 +69,4 @@ public class ScrappyOwlModel : MonoBehaviour
     {
         return position;
     }
-}
-
 }
