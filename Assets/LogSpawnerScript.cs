@@ -5,7 +5,7 @@ using UnityEngine;
 public class LogSpawnerScript : MonoBehaviour
 {
     public GameObject log;
-    public float spawnRate = 7;
+    public float spawnRate = 3;
     private float timer = 0;
     public float heightOffset = 8;
 
@@ -21,11 +21,14 @@ public class LogSpawnerScript : MonoBehaviour
         if (timer < spawnRate)
         {
             timer = timer + Time.deltaTime;
+            Debug.Log("Timer: " + timer); // Check timer value
         }
         else
         {
             spawnLog();
             timer = 0;
+            Debug.Log("Log Spawned"); // Confirm log spawning
+
         }
     }
 
