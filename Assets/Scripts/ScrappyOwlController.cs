@@ -61,14 +61,14 @@ public class ScrappyOwlController : MonoBehaviour
             owlModel.UpdatePosition(Time.deltaTime);
             owlView.UpdateOwlPosition(owlModel.GetPosition());
 
-            // Logs move accross the screen
-            owlView.MoveLogs();
+            //// Logs move accross the screen
+            //owlView.LogMove();
 
             // Check if the owl is still alive
             if (!owlModel.isAlive)
             {
                 // If dead, game over
-                owlView.ShowGameOverScreen();
+                owlView.ShowGameOverScreen(score);
             }
         }
     }
@@ -110,6 +110,7 @@ public class ScrappyOwlController : MonoBehaviour
         if (!pauseGame && !gameOver)
         {
             pauseGame = true;
+            Time.timeScale = 0f;
             owlView.ShowPauseScreen();
         }
     }
@@ -118,6 +119,7 @@ public class ScrappyOwlController : MonoBehaviour
     public void ResumeGame()
     {
         pauseGame = false;
+        Time.timeScale = 1f;
         owlView.HideScreens();
     }
 

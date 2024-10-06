@@ -1,18 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LogMoveScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float moveSpeed = 5;
+    public float deadZone = -45;
+    public float deleteDelay = 2f; // Delay before deletion in seconds
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // Move the log to the left
+        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+
+        // Check if the log is past the deadZone
+        if (transform.position.x < deadZone)
+        {
+            Debug.Log("Log will be deleted after delay");
+            StartCoroutine(DeleteLogAfterDelay());
+        }
+    }
+
+    private IEnumerator DeleteLogAfterDelay()
+    {
+        // Wait for the specified delay time
+        yield return new WaitForSeconds(deleteDelay);
+
+        // Destroy the log after the delay
+        Debug.Log("Log Deleted");
+        Destroy(gameObject);
     }
 }
