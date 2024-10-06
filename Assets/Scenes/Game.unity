@@ -130,6 +130,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1892842749275522274, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892842749275522274, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1900495861
+      objectReference: {fileID: 0}
     - target: {fileID: 7586351580774314081, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
       propertyPath: m_Name
       value: Cloud (1)
@@ -191,6 +199,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1892842749275522274, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892842749275522274, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1900495861
+      objectReference: {fileID: 0}
     - target: {fileID: 7586351580774314081, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
       propertyPath: m_Name
       value: Cloud (2)
@@ -439,8 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a3f07ffc04b44a1a424b7f95397baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScore: 0
-  scoreText: {fileID: 0}
   gameOverScreen: {fileID: 0}
 --- !u!4 &1146666290
 Transform:
@@ -903,6 +917,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1892842749275522274, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892842749275522274, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1900495861
+      objectReference: {fileID: 0}
     - target: {fileID: 7586351580774314081, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
       propertyPath: m_Name
       value: Cloud
