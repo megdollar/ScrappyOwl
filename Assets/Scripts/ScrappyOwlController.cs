@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;  
+using UnityEngine.UI; 
 
 //Controller class 
 public class ScrappyOwlController : MonoBehaviour
 {
-    // Lunk to model, view, easy mode, hard mode and set initial score to 0
+    // Link to model, view, easy mode, hard mode and set initial score to 0
     public ScrappyOwlModel owlModel;  
     public ScrappyOwlView owlView;    
     public Button easy;  
@@ -12,12 +13,16 @@ public class ScrappyOwlController : MonoBehaviour
     public Button pause;
     public Button play;
     public Button showScore;
+    public Button settings;
+    public Slider musicSlider; // New Slider for music volume
+    public Button musicToggle; // Toggle music on/off
     public InputField userName;
     public Text scoreText;
     public int score = 0;
     public bool pauseGame = false;
     public bool gameOver = false;
     public bool hardMode = false;
+    public float musicVolume = 1.0f; // Initial music volume
 
     void Start()
     {
@@ -31,6 +36,11 @@ public class ScrappyOwlController : MonoBehaviour
         showScore.onClick.AddListener(ShowScore);
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
+        settings.onClick.AddListener(ShowSettingsScreen);
+        if (musicToggle != null)
+            musicToggle.onClick.AddListener(ToggleMusic);
+
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume" , 1.0f);
 
         // Initialize the game with beginning position
         owlModel.ResetOwl();
@@ -145,7 +155,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);  
-        owlView.UpdateDifficultyDisplay(false);
+        owlView.UpdateDifficultyDisplay(false, score);
         // Debugging, remove later
         Debug.Log("Easy Mode");
     }
@@ -156,7 +166,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true); 
-        owlView.UpdateDifficultyDisplay(true);   
+        owlView.UpdateDifficultyDisplay(true, score);   
         // Debugging, remove late 
         Debug.Log("Hard Mode Selected");
     }
@@ -178,5 +188,25 @@ public class ScrappyOwlController : MonoBehaviour
     {
         score++;
         owlView.UpdateScore(score);
+    }
+
+    // Show Settings Screen method
+    public void ShowSettingsScreen()
+    {
+        // Pause if game is playing
+        if (!pauseGame)
+            PauseGame();
+            // Please add a method to the view to showSettingScene like th other methods above and call it here
+            // SceneManager.LoadScene("SettingsScene");
+    }
+
+    public void ToggleMusic()
+    {
+        musicVolume = musicVolume == 0.0f ? 1.0f : 0.0f;
+    }
+
+    public void OnMusicSliderChanged(float value)
+    {
+        musicVolume = value;
     }
 }
