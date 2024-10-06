@@ -88,6 +88,8 @@ public class ScrappyOwlView : MonoBehaviour
             //UpdateHighScoreText();
         }
 
+    public void UpdateDifficultyDisplay(bool hardMode)
+    {
         if (hardMode)
         {
             difficultyText.text = "Difficulty: Hard";
@@ -95,7 +97,7 @@ public class ScrappyOwlView : MonoBehaviour
         else
         {
             difficultyText.text = "Difficulty: Easy";
-        }   
+        }      
     }
 
     /* DELETE THE FOLLOWING...
