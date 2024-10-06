@@ -76,7 +76,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     // Display the difficulty level 
     public void UpdateDifficultyDisplay(bool hardMode, int score){
-
+    {
 
         Debug.Log("Game Over!");
         // Check if the current score is new High Score
@@ -87,6 +87,13 @@ public class ScrappyOwlView : MonoBehaviour
             // please add this method below or the logic that needs to be here
             //UpdateHighScoreText();
         }
+    }
+
+    public void UpdateHighScoreText();
+    {
+        highScoreText.text = "High Score: " + highScore.ToString();
+    }
+    }
 
     public void UpdateDifficultyDisplay(bool hardMode)
     {
@@ -99,6 +106,14 @@ public class ScrappyOwlView : MonoBehaviour
             difficultyText.text = "Difficulty: Easy";
         }      
     }
+
+    public void ShowSettingsScreen()
+    {
+        HideScreens();
+        settingsScreen.SetActive(true);
+    }
+
+
 
     /* DELETE THE FOLLOWING...
      * There should be a clear seperation of concerns: 
