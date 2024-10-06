@@ -13,6 +13,9 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject owlSprite;
     public GameObject[] logs;  
 
+    private int currentScore = 0;
+    private int highScore = 0;
+
     // Method to show home screen
     public void ShowHomeScreen()
     {
@@ -38,17 +41,24 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show game over screen and score
-    public void ShowGameOverScreen(int score)
+    public void ShowGameOverScreen()
     {
         gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
-    }
+
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
+    
+
 
     // Show the score screen and display the current score
     public void ShowScoreScreen(int score)
     {
         scoreScreen.SetActive(true);
-        scoreText.text = "Current score: " + score.ToString();
+        scoreText.text = "Current score: " + currentScore.ToString();
     }
 
     // Update the owl's position
@@ -58,14 +68,25 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show the score in the UI
-    public void UpdateScore(int score)
+    public void UpdateScore(int newScore)
     {
-        scoreText.text = "Score: " + score.ToString();
+        currentScore += newScore;
+        scoreText.text = "Score: " + currentScore.ToString();
     }
 
     // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode)
-    {
+    public void UpdateDifficultyDisplay(bool hardMode){
+
+
+        Debug.Log("Game Over!");
+        // Check if the current score is new High Score
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore" , highScore);
+            UpdateHighScoreText();
+        }
+
         if (hardMode)
         {
             difficultyText.text = "Difficulty: Hard";
@@ -73,26 +94,36 @@ public class ScrappyOwlView : MonoBehaviour
         else
         {
             difficultyText.text = "Difficulty: Easy";
-        }
+        }   
     }
 
-    // Move logs across the screen during game
-    public void MoveLogs()
-    {
-        float moveSpeed = 5f; //this is the speed, adjust as needed
-        float resetPosition = -10f; //starting position on X where the log resets to
-        float startPosition = 10f; // where the log starts off screen to the right
+    /* DELETE THE FOLLOWING...
+     * There should be a clear seperation of concerns: 
+     * ScrappyOwlView handles the UI and game state, while LogMoveScript is responsible for moving the logs. 
+     * This structure aligns with the MVC pattern, making our codebase more manageable and easier to understand. 
+     * Thanks!
+     -Ginger */
 
-        // Iterate through the array of logs
-        foreach (GameObject log in logs)
-        {
-            log.transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-            if (log.transform.position.x <= resetPosition)
-            {
-                log.transform.position = new Vector3(startPosition, log.transform.position.y, log.transform.position.z);
-            }
-            
-        }
-    }
+    //// Move logs across the screen during game
+    //public void MoveLogs()
+    //{
+    //    float moveSpeed = 5f; //this is the speed, adjust as needed
+    //    float resetPosition = -10f; //starting position on X where the log resets to
+    //    float startPosition = 10f; // where the log starts off screen to the right
+
+    //    // Iterate through the array of logs
+    //    foreach (GameObject log in logs)
+    //    {
+    //        log.transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+    //        if (log.transform.position.x <= resetPosition)
+    //        {
+    //            log.transform.position = new Vector3(startPosition, log.transform.position.y, log.transform.position.z);
+    //        }
+
+    //    }
+    //}
 }
+
+
+
 
