@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;  
-using UnityEngine.UI; 
 
 //Controller class 
 public class ScrappyOwlController : MonoBehaviour
