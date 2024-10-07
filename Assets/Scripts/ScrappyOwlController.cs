@@ -204,8 +204,6 @@ public class ScrappyOwlController : MonoBehaviour
             PauseGame();
 
         owlView.ShowSettingsScreen();
-            // Please add a method to the view to showSettingScene like th other methods above and call it here
-            // SceneManager.LoadScene("SettingsScene");
     }
 
     public void ToggleMusic()
