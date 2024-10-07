@@ -7,6 +7,7 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
     public GameObject scoreScreen;
+    public GameObject settingScreen;
     public Text scoreText;
     public Text difficultyText;  
 
@@ -84,8 +85,6 @@ public class ScrappyOwlView : MonoBehaviour
         {
             highScore = score;
             PlayerPrefs.SetInt("HighScore" , highScore);
-            // please add this method below or the logic that needs to be here
-            //UpdateHighScoreText();
         }
     }
 
@@ -93,7 +92,6 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateHighScoreText();
     {
         highScoreText.text = "High Score: " + highScore.ToString();
-    }
     }
 
 
