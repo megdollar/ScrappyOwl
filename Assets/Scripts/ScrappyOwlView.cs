@@ -89,11 +89,13 @@ public class ScrappyOwlView : MonoBehaviour
         }
     }
 
+
     public void UpdateHighScoreText();
     {
         highScoreText.text = "High Score: " + highScore.ToString();
     }
     }
+
 
     public void UpdateDifficultyDisplay(bool hardMode)
     {
