@@ -76,7 +76,7 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode, int score){
+    public void UpdateDifficultyDisplay(bool hardMode, int score)
     {
 
         Debug.Log("Game Over!");
