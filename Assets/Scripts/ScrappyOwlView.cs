@@ -51,6 +51,7 @@ public class ScrappyOwlView : MonoBehaviour
         {
             highScore = currentScore;
             PlayerPrefs.SetInt("HighScore", highScore);
+            UpdateHighScoreText();
         }
     }
 
