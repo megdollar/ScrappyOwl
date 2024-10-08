@@ -13,6 +13,7 @@ public class ScrappyOwlController : MonoBehaviour
     public Button play;
     public Button showScore;
     public Button settings;
+    public Button showLeaderboard;
     public Slider musicSlider; // New Slider for music volume
     public Button musicToggle; // Toggle music on/off
     public InputField userName;
@@ -36,6 +37,7 @@ public class ScrappyOwlController : MonoBehaviour
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
         settings.onClick.AddListener(ShowSettingsScreen);
+        showLeaderboard.onClick.AddListener(ShowLeaderboard);
         if (musicToggle != null)
             musicToggle.onClick.AddListener(ToggleMusic);
 
@@ -143,14 +145,10 @@ public class ScrappyOwlController : MonoBehaviour
     public void ShowGameOver()
     {
         gameOver = true;
+        SaveScore();
         owlView.ShowGameOverScreen(score);
 
-        if (score > owlView.highScore)
-        {
-            owlView.highScore = score;
-            PlayerPrefs.SetInt("HighScore" , owlViewhighScore);
-            owlView.UpdateHighScoreText();
-        }
+        
     }
 
 
@@ -206,6 +204,12 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowSettingsScreen();
     }
 
+    // Method to show the leaderboard screen
+    public void ShowLeaderboard()
+    {
+        owlView.ShowLeaderboardScreen();
+    }
+
     public void ToggleMusic()
     {
         musicVolume = musicVolume == 0.0f ? 1.0f : 0.0f;
@@ -215,4 +219,18 @@ public class ScrappyOwlController : MonoBehaviour
     {
         musicVolume = value;
     }
+    
+    // Method to save the high score with initials
+    public void SaveScore()
+    {
+        string initials = userName.text;
+        int highScore = score;
+
+        // Save the high score and users initials
+        LeaderboardLogic.Instance.AddHighScore(initials, highScore);
+
+        // Clear the userName input field for next user
+        userName.text = "";
+    }
+
 }
