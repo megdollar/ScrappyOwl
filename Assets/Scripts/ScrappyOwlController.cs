@@ -144,6 +144,13 @@ public class ScrappyOwlController : MonoBehaviour
     {
         gameOver = true;
         owlView.ShowGameOverScreen(score);
+
+        if (score > owlView.highScore)
+        {
+            owlView.highScore = score;
+            PlayerPrefs.SetInt("HighScore" , owlViewhighScore);
+            owlView.UpdateHighScoreText();
+        }
     }
 
 
@@ -195,8 +202,8 @@ public class ScrappyOwlController : MonoBehaviour
         // Pause if game is playing
         if (!pauseGame)
             PauseGame();
-            // Please add a method to the view to showSettingScene like th other methods above and call it here
-            // SceneManager.LoadScene("SettingsScene");
+
+        owlView.ShowSettingsScreen();
     }
 
     public void ToggleMusic()
