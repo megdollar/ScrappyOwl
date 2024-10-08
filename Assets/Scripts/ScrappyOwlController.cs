@@ -205,12 +205,7 @@ public class ScrappyOwlController : MonoBehaviour
 
         owlView.ShowSettingsScreen();
     }
-
-    public void ToggleMusic()
-    {
-        musicVolume = musicVolume == 0.0f ? 1.0f : 0.0f;
-    }
-
+    
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
