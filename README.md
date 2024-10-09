@@ -3,7 +3,7 @@ Scrappy Owl, is an arcade-style game where a player controls an owl character, w
 
 Installation: 
 
-How to Play: The goal of this game is gain points by dodging incoming obstacles. Rhythmaclly press the space bar to control Scrappy’s wings and keep yourself out of harms way.
+How to Play: The goal of this game is to gain points by dodging incoming obstacles. Rhythmaclly press the space bar to control Scrappy’s height and keep yourself out of harms way. Scrappy Owl is an endless side scroller that continues until the player fails or quits the game.
 
 Difficulty Modes: Scrappy Owl has two difficulty modes - Easy mode and Hard mode. The main distinction between these modes is the number of obstacles and how fast they appear. 
 
