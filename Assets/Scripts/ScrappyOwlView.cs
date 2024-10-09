@@ -83,18 +83,6 @@ public class ScrappyOwlView : MonoBehaviour
         scoreText.text = "Score: " + currentScore.ToString();
     }
 
-    // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode, int score)
-    {
-
-        Debug.Log("Game Over!");
-        // Check if the current score is new High Score
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt("HighScore" , highScore);
-        }
-    }
 
 
     public void UpdateHighScoreText(int highScore)
@@ -127,24 +115,24 @@ public class ScrappyOwlView : MonoBehaviour
         leaderboardScreen.SetActive(true);  
 
         // Get the high scores from  LeaderboardLogic
-        List<HighScoreEntry> highScores = LeaderboardLogic.Instance.GetHighScores();
+        //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
 
         // String to hold the text
-        string leaderboardDisplay = "";
+        // string leaderboardDisplay = "";
 
-        if (highScores.Count == 0)
-        {
-            leaderboardDisplay += "You can be the top player, start a new game now!";
-        }
-        else
-        {
-            foreach (HighScoreEntry entry in highScores)
-            {
-                leaderboardDisplay += entry.initials + "\t" + entry.score.ToString() + "\n";
-            }
-        }
+        // if (highScores.Count == 0)
+        // {
+        //     leaderboardDisplay += "You can be the top player, start a new game now!";
+        // }
+        // else
+        // {
+        //     foreach (HighScoreEntry entry in highScores)
+        //     {
+        //         leaderboardDisplay += entry.initials + "\t" + entry.score.ToString() + "\n";
+        //     }
+        // }
 
-        leaderboardText.text = leaderboardDisplay;
+        // leaderboardText.text = leaderboardDisplay;
     }
 
 
