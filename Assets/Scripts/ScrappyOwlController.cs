@@ -202,6 +202,7 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowSettingsScreen();
     }
 
+
     // Method to show the leaderboard screen
     public void ShowLeaderboard()
     {
