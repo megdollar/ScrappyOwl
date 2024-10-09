@@ -8,8 +8,12 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject scoreScreen;
     public GameObject settingScreen;
+    public GameObject leaderboardScreen;
+    public Text leaderboardText;
+
     public Text scoreText;
     public Text difficultyText;  
+    public Text highScoreText;
 
     public GameObject owlSprite;
     public GameObject[] logs;  
@@ -39,6 +43,8 @@ public class ScrappyOwlView : MonoBehaviour
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
         scoreScreen.SetActive(false);
+        settingScreen.SetActive(false);
+        leaderboardScreen.SetActive(false);
     }
 
     // Method to show game over screen and score
@@ -47,12 +53,13 @@ public class ScrappyOwlView : MonoBehaviour
         gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
 
-        if (currentScore > highScore)
+        if (score > highScore)
         {
-            highScore = currentScore;
+            highScore = score;
             PlayerPrefs.SetInt("HighScore", highScore);
-            UpdateHighScoreText();
+            UpdateHighScoreText(highScore);
         }
+        
     }
 
 
@@ -76,21 +83,9 @@ public class ScrappyOwlView : MonoBehaviour
         scoreText.text = "Score: " + currentScore.ToString();
     }
 
-    // Display the difficulty level 
-    public void UpdateDifficultyDisplay(bool hardMode, int score)
-    {
-
-        Debug.Log("Game Over!");
-        // Check if the current score is new High Score
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt("HighScore" , highScore);
-        }
-    }
 
 
-    public void UpdateHighScoreText();
+    public void UpdateHighScoreText(int highScore)
     {
         highScoreText.text = "High Score: " + highScore.ToString();
     }
@@ -111,8 +106,38 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowSettingsScreen()
     {
         HideScreens();
-        settingsScreen.SetActive(true);
+        settingScreen.SetActive(true);
     }
+
+    public void ShowLeaderboardScreen()
+    {
+        HideScreens();  
+        leaderboardScreen.SetActive(true);  
+
+        // Get the high scores from  LeaderboardLogic
+        //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
+
+        // String to hold the text
+        // string leaderboardDisplay = "";
+
+        // if (highScores.Count == 0)
+        // {
+        //     leaderboardDisplay += "You can be the top player, start a new game now!";
+        // }
+        // else
+        // {
+        //     foreach (HighScoreEntry entry in highScores)
+        //     {
+        //         leaderboardDisplay += entry.initials + "\t" + entry.score.ToString() + "\n";
+        //     }
+        // }
+
+        // leaderboardText.text = leaderboardDisplay;
+    }
+
+
+
+
 
 
 

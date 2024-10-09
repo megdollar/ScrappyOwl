@@ -13,8 +13,8 @@ public class ScrappyOwlController : MonoBehaviour
     public Button play;
     public Button showScore;
     public Button settings;
+    public Button showLeaderboard;
     public Slider musicSlider; // New Slider for music volume
-    public Button musicToggle; // Toggle music on/off
     public InputField userName;
     public Text scoreText;
     public int score = 0;
@@ -36,8 +36,7 @@ public class ScrappyOwlController : MonoBehaviour
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
         settings.onClick.AddListener(ShowSettingsScreen);
-        if (musicToggle != null)
-            musicToggle.onClick.AddListener(ToggleMusic);
+        // showLeaderboard.onClick.AddListener(ShowLeaderboard);
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume" , 1.0f);
 
@@ -49,17 +48,13 @@ public class ScrappyOwlController : MonoBehaviour
     void Update()
     {
          // Update the game if it is not paused/game over
-        if (!pauseGame && !gameOver)
+        if (!pauseGame && !gameOver && owlModel.isAlive)
         {
             // Handle input to make the owl jump
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 owlModel.Jump();
             }
-
-            // Update the owl's position and view each frame
-            owlModel.UpdatePosition(Time.deltaTime);
-            owlView.UpdateOwlPosition(owlModel.GetPosition());
 
             //// Logs move accross the screen
             //owlView.LogMove();
@@ -70,13 +65,18 @@ public class ScrappyOwlController : MonoBehaviour
                 // If dead, game over
                 owlView.ShowGameOverScreen(score);
             }
+            
+            // Update the owl's position and view each frame
+            owlView.UpdateOwlPosition(owlModel.GetPosition());
         }
     }
 
     // Handle owl's collision with branches
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Branch"))
+        //if (collision.gameObject.CompareTag("Logs") && owlModel.isAlive)
+        if (owlModel.isAlive)
+
         {
             owlModel.isAlive = false;  
             DecreaseScore();  
@@ -143,14 +143,10 @@ public class ScrappyOwlController : MonoBehaviour
     public void ShowGameOver()
     {
         gameOver = true;
+        //SaveScore();
         owlView.ShowGameOverScreen(score);
 
-        if (score > owlView.highScore)
-        {
-            owlView.highScore = score;
-            PlayerPrefs.SetInt("HighScore" , owlViewhighScore);
-            owlView.UpdateHighScoreText();
-        }
+        
     }
 
 
@@ -161,7 +157,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);  
-        owlView.UpdateDifficultyDisplay(false, score);
+        owlView.UpdateDifficultyDisplay(false);
         // Debugging, remove later
         Debug.Log("Easy Mode");
     }
@@ -172,7 +168,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true); 
-        owlView.UpdateDifficultyDisplay(true, score);   
+        owlView.UpdateDifficultyDisplay(true);   
         // Debugging, remove late 
         Debug.Log("Hard Mode Selected");
     }
@@ -205,9 +201,31 @@ public class ScrappyOwlController : MonoBehaviour
 
         owlView.ShowSettingsScreen();
     }
-    
+
+
+    // Method to show the leaderboard screen
+    public void ShowLeaderboard()
+    {
+        owlView.ShowLeaderboardScreen();
+    }
+
+
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
     }
+    
+    // Method to save the high score with initials
+    public void SaveScore()
+    {
+        string initials = userName.text;
+        int highScore = score;
+
+        // Save the high score and users initials
+        // LeaderboardLogic.Instance.AddHighScore(initials, highScore);
+
+        // Clear the userName input field for next user
+        userName.text = "";
+    }
+
 }
