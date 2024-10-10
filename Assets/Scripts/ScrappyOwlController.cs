@@ -14,6 +14,9 @@ public class ScrappyOwlController : MonoBehaviour
     public Button showScore;
     public Button settings;
     public Button showLeaderboard;
+    public Button showModeSelection;
+
+    public Button showInstructionsBtn;
     public Slider musicSlider; // New Slider for music volume
     public InputField userName;
     public Text scoreText;
@@ -36,7 +39,10 @@ public class ScrappyOwlController : MonoBehaviour
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
         settings.onClick.AddListener(ShowSettingsScreen);
-        // showLeaderboard.onClick.AddListener(ShowLeaderboard);
+        showLeaderboard.onClick.AddListener(ShowLeaderboard);
+        showModeSelection.onClick.AddListener(ShowModeSelection);
+        showInstructionsBtn.onClick.AddListener(showInstructions);
+
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
@@ -164,6 +170,23 @@ public class ScrappyOwlController : MonoBehaviour
         gameOver = true;
         //SaveScore();
         owlView.ShowGameOverScreen(score);
+
+
+    }
+    // Method to modeSelection
+    public void ShowModeSelection()
+    {
+
+        owlView.ShowModeSelectionScreen();
+
+
+    }
+
+    // Method to instructions
+    public void showInstructions()
+    {
+
+        owlView.ShowInstructionsScreen();
 
 
     }
