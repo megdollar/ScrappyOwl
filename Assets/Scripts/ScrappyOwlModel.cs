@@ -23,13 +23,17 @@ public class ScrappyOwlModel : MonoBehaviour
 
     private void Start()
     {
-        owlRigidbody = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D attached to the owl
+         if (owlRigidbody == null)
+        {
+            owlRigidbody = GetComponent<Rigidbody2D>();
+        }
         SetDifficulty(false);  // Start in easy mode by default
     }
 
     // Method to change difficulty
     public void SetDifficulty(bool hardMode)
     {
+        this.hardMode = hardMode;
         // Adjust gravity based on difficulty mode
         owlRigidbody.gravityScale = hardMode ? hardGravity : easyGravity;
     }

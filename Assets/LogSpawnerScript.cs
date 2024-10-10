@@ -21,13 +21,11 @@ public class LogSpawnerScript : MonoBehaviour
         if (timer < spawnRate)
         {
             timer = timer + Time.deltaTime;
-            Debug.Log("Timer: " + timer); // Check timer value
         }
         else
         {
             spawnLog();
             timer = 0;
-            Debug.Log("Log Spawned"); // Confirm log spawning
 
         }
     }
@@ -39,6 +37,7 @@ public class LogSpawnerScript : MonoBehaviour
         float highestPoint = transform.position.y + heightOffset;
 
         //create an object at a specified position and rotation
-        Instantiate(log, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        GameObject newLog = Instantiate(log, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        newLog.tag = "Log";
     }
 }

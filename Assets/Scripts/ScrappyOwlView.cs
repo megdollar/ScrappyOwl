@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScrappyOwlView : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject leaderboardScreen;
     public Text leaderboardText;
 
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public Text difficultyText;  
     public Text highScoreText;
 
@@ -80,7 +81,7 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         currentScore += newScore;
-        scoreText.text = "Score: " + currentScore.ToString();
+        scoreText.text = currentScore.ToString();
     }
 
 
@@ -135,37 +136,6 @@ public class ScrappyOwlView : MonoBehaviour
         // leaderboardText.text = leaderboardDisplay;
     }
 
-
-
-
-
-
-
-    /* DELETE THE FOLLOWING...
-     * There should be a clear seperation of concerns: 
-     * ScrappyOwlView handles the UI and game state, while LogMoveScript is responsible for moving the logs. 
-     * This structure aligns with the MVC pattern, making our codebase more manageable and easier to understand. 
-     * Thanks!
-     -Ginger */
-
-    //// Move logs across the screen during game
-    //public void MoveLogs()
-    //{
-    //    float moveSpeed = 5f; //this is the speed, adjust as needed
-    //    float resetPosition = -10f; //starting position on X where the log resets to
-    //    float startPosition = 10f; // where the log starts off screen to the right
-
-    //    // Iterate through the array of logs
-    //    foreach (GameObject log in logs)
-    //    {
-    //        log.transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-    //        if (log.transform.position.x <= resetPosition)
-    //        {
-    //            log.transform.position = new Vector3(startPosition, log.transform.position.y, log.transform.position.z);
-    //        }
-
-    //    }
-    //}
 }
 
 

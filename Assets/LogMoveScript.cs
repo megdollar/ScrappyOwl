@@ -15,7 +15,6 @@ public class LogMoveScript : MonoBehaviour
         // Check if the log is past the deadZone
         if (transform.position.x < deadZone)
         {
-            Debug.Log("Log will be deleted after delay");
             StartCoroutine(DeleteLogAfterDelay());
         }
     }
@@ -26,7 +25,6 @@ public class LogMoveScript : MonoBehaviour
         yield return new WaitForSeconds(deleteDelay);
 
         // Destroy the log after the delay
-        Debug.Log("Log Deleted");
         Destroy(gameObject);
     }
 }
