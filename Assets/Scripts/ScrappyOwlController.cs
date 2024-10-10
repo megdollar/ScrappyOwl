@@ -84,7 +84,7 @@ public class ScrappyOwlController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
 
-            Debug.Log("Owl collided with: " + collision.gameObject.name);
+        Debug.Log("Owl collided with: " + collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -149,6 +149,7 @@ public class ScrappyOwlController : MonoBehaviour
         score = 0;
         owlModel.ResetOwl();  
         owlView.HideScreens();
+        owlView.ShowGameScreen();
     }
 
     // Method to show score when score button is pressed
@@ -176,6 +177,7 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.UpdateDifficultyDisplay(false);
         // Debugging, remove later
         Debug.Log("Easy Mode");
+        PlayGame();
     }
 
     // Method for Hard Mode
@@ -187,6 +189,7 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.UpdateDifficultyDisplay(true);   
         // Debugging, remove late 
         Debug.Log("Hard Mode Selected");
+        PlayGame();
     }
 
     // Method to decrease score
