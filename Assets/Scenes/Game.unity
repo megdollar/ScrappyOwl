@@ -2353,7 +2353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bf39c0fea110e47b498b6676be81fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owlModel: {fileID: 1142143149}
+  owlModel: {fileID: 1603059392}
   owlView: {fileID: 86818214}
   easy: {fileID: 0}
   hard: {fileID: 0}
@@ -4026,56 +4026,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1142143148
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1142143150}
-  - component: {fileID: 1142143149}
-  m_Layer: 0
-  m_Name: Model
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1142143149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142143148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caf482279359ad34c9de127d2960b1af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owlRigidbody: {fileID: 1603059393}
-  easyJump: 7
-  hardJump: 4
-  easyGravity: 1
-  hardGravity: 1.5
-  isAlive: 1
---- !u!4 &1142143150
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142143148}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8126116, y: 0.77577335, z: -0.049751267}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1146666288
 GameObject:
   m_ObjectHideFlags: 0
@@ -7923,6 +7873,5 @@ SceneRoots:
   - {fileID: 1921310122}
   - {fileID: 439226014}
   - {fileID: 1515568424}
-  - {fileID: 1142143150}
   - {fileID: 86818215}
   - {fileID: 675769065}
