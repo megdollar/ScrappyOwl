@@ -38,6 +38,21 @@ public class LogSpawnerScript : MonoBehaviour
 
         //create an object at a specified position and rotation
         GameObject newLog = Instantiate(log, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        
+        // Ensure the log has a BoxCollider2D
+        AddColliderToLog(newLog);
+
         newLog.tag = "Log";
+    }
+
+     // Method to ensure a BoxCollider2D is added to each log
+    void AddColliderToLog(GameObject log)
+    {
+        // Check if the log already has a BoxCollider2D
+        if (log.GetComponent<BoxCollider2D>() == null)
+        {
+            log.AddComponent<BoxCollider2D>();
+        }
+
     }
 }
