@@ -71,16 +71,34 @@ public class ScrappyOwlController : MonoBehaviour
         }
     }
 
+    // Method to increase score when owl passes by logs
+    void OnTriggerEnter2D(Collider2D other)
+    {
+   
+        if (other.CompareTag("LogTrigger")) 
+            Debug.Log("Owl passed the log!");
+            IncreaseScore();
+    }
+
     // Handle owl's collision with branches
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject.CompareTag("Logs") && owlModel.isAlive)
-        if (owlModel.isAlive)
 
+            Debug.Log("Owl collided with: " + collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Ground"))
         {
+            Debug.Log("Collision with ground");
+            owlModel.isAlive = false;
+            Time.timeScale = 0;
+            ShowGameOver();
+        }
+        else if (collision.gameObject.CompareTag("Log"))
+        {
+            Debug.Log("Collision with log");
             owlModel.isAlive = false;  
             DecreaseScore();  
-            ShowGameOver();  
+            //ShowGameOver();  
         }
     }
 
@@ -110,7 +128,7 @@ public class ScrappyOwlController : MonoBehaviour
         if (!pauseGame && !gameOver)
         {
             pauseGame = true;
-            Time.timeScale = 0f;
+            Time.timeScale = 0;
             owlView.ShowPauseScreen();
         }
     }
@@ -148,8 +166,6 @@ public class ScrappyOwlController : MonoBehaviour
 
         
     }
-
-
 
     // Method for Easy Mode
     public void StartEasyMode()
