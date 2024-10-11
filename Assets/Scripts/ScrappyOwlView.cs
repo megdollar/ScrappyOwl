@@ -9,6 +9,10 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject scoreScreen;
     public GameObject settingScreen;
     public GameObject leaderboardScreen;
+    public GameObject gameScreen;
+
+    public GameObject instructionsScreen;
+    public GameObject modeSelectionScreen;
     public Text leaderboardText;
 
     public Text scoreText;
@@ -28,12 +32,23 @@ public class ScrappyOwlView : MonoBehaviour
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
         scoreScreen.SetActive(false);
+        gameScreen.SetActive(false);
+        settingScreen.SetActive(false);
+        leaderboardScreen.SetActive(false);
+        modeSelectionScreen.SetActive(false);
+        instructionsScreen.SetActive(false);
     }
 
     // Method to show the pause screen
     public void ShowPauseScreen()
     {
         pauseScreen.SetActive(true);
+    }
+
+    public void ShowGameScreen()
+    {
+        HideScreens();
+        gameScreen.SetActive(true); 
     }
 
     // Hide all the screens when game is playing
@@ -45,6 +60,9 @@ public class ScrappyOwlView : MonoBehaviour
         scoreScreen.SetActive(false);
         settingScreen.SetActive(false);
         leaderboardScreen.SetActive(false);
+        gameScreen.SetActive(false);
+        modeSelectionScreen.SetActive(false);
+        instructionsScreen.SetActive(false);
     }
 
     // Method to show game over screen and score
@@ -107,6 +125,18 @@ public class ScrappyOwlView : MonoBehaviour
     {
         HideScreens();
         settingScreen.SetActive(true);
+    }
+
+    public void ShowModeSelectionScreen()
+    {
+        HideScreens();
+        modeSelectionScreen.SetActive(true);
+    }
+
+   public void ShowInstructionsScreen()
+    {
+        HideScreens();
+        instructionsScreen.SetActive(true);
     }
 
     public void ShowLeaderboardScreen()
