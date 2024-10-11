@@ -10,6 +10,8 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject settingScreen;
     public GameObject leaderboardScreen;
     public GameObject gameScreen;
+    public GameObject backButtonPrefab;
+    public GameObject quitButton;
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
@@ -37,6 +39,9 @@ public class ScrappyOwlView : MonoBehaviour
         leaderboardScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
+
+        //Adding Listener for the quit button
+        quitButton.onClick.AddListener(QuitGame);
     }
 
     // Method to show the pause screen
@@ -73,7 +78,7 @@ public class ScrappyOwlView : MonoBehaviour
 
         if (score > highScore)
         {
-            highScore = score;
+            highScore = currentScore;
             PlayerPrefs.SetInt("HighScore", highScore);
             UpdateHighScoreText(highScore);
         }
@@ -125,24 +130,55 @@ public class ScrappyOwlView : MonoBehaviour
     {
         HideScreens();
         settingScreen.SetActive(true);
+
+        // Create a Back Button
+        GameObject backButton = Instantiate(backButtonPrefab, settingScreen.transfrom);
+        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
     }
 
     public void ShowModeSelectionScreen()
     {
         HideScreens();
         modeSelectionScreen.SetActive(true);
+
+        GameObject backButton = Instantiate(backButtonPrefab, modeSelectionScreen.transform);
+        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
     }
 
    public void ShowInstructionsScreen()
     {
         HideScreens();
         instructionsScreen.SetActive(true);
+
+        GameObject backButton = Instantiate(backButtonPrefab, instructionsScreen.transform);
+        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
+    }
     }
 
     public void ShowLeaderboardScreen()
     {
         HideScreens();  
         leaderboardScreen.SetActive(true);  
+
+        GameObject backButton = Instantiate(backButtonPrefab, leaderboardScreen.transform);
+        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
+    }
+
+    public void OnBackButtonClick()
+    {
+        HideCurrentScreen();
+
+        // Contextual, either resume game or show the previous screen
+        if (pauseGame)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            // Show previous screen based on context (i.e. home screen)
+            ShowHomeScreen();
+        }
+    }
 
         // Get the high scores from  LeaderboardLogic
         //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
