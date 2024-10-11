@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScrappyOwlView : MonoBehaviour
 {
@@ -17,19 +18,44 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject modeSelectionScreen;
     public Text leaderboardText;
 
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public Text difficultyText;  
     public Text highScoreText;
 
     public GameObject owlSprite;
-    public GameObject[] logs;  
+    public GameObject[] logs; 
+
+    // Variables for storing current and previous panels
+    private GameObject currentPanel;
+    private GameObject previousPanel;
 
     private int currentScore = 0;
     private int highScore = 0;
 
+    // Method to show Home Screen by default
+    void Start()
+    {
+        ShowHomeScreen();
+    }
+
+    // Method to show a specific panel and track the previous panel
+    private void ShowPanel(GameObjectPanelToShow)
+    {
+        if (currentPanel != null)
+        {
+            previousPanel = currentPanel;
+            currentPanel.SetActive(false);
+        }
+
+        currentPanel = panelToShow;
+        currentPanel.SetActive(true);
+    }
+
     // Method to show home screen
     public void ShowHomeScreen()
     {
+        ShowPanel(homeScreen);
+        
         homeScreen.SetActive(true);
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
@@ -47,13 +73,13 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show the pause screen
     public void ShowPauseScreen()
     {
-        pauseScreen.SetActive(true);
+        ShowPanel(pauseScreen);
     }
 
     public void ShowGameScreen()
     {
-        HideScreens();
-        gameScreen.SetActive(true); 
+        // Hide all panels when the game starts
+        ShowPanel(null); 
     }
 
     // Hide all the screens when game is playing
@@ -75,10 +101,11 @@ public class ScrappyOwlView : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
+        ShowPanel(gameOverScreen);
 
         if (score > highScore)
         {
-            highScore = currentScore;
+            highScore = score;
             PlayerPrefs.SetInt("HighScore", highScore);
             UpdateHighScoreText(highScore);
         }
@@ -91,6 +118,7 @@ public class ScrappyOwlView : MonoBehaviour
     {
         scoreScreen.SetActive(true);
         scoreText.text = "Current score: " + currentScore.ToString();
+        ShowPanel(scoreScreen);
     }
 
     // Update the owl's position
@@ -102,10 +130,8 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show the score in the UI
     public void UpdateScore(int newScore)
     {
-        currentScore += newScore;
-        scoreText.text = "Score: " + currentScore.ToString();
+        scoreText.text = newScore.ToString();
     }
-
 
 
     public void UpdateHighScoreText(int highScore)
@@ -128,58 +154,48 @@ public class ScrappyOwlView : MonoBehaviour
 
     public void ShowSettingsScreen()
     {
-        HideScreens();
-        settingScreen.SetActive(true);
-
-        // Create a Back Button
-        GameObject backButton = Instantiate(backButtonPrefab, settingScreen.transfrom);
-        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
+       ShowPanel(settingScreen);
     }
 
     public void ShowModeSelectionScreen()
     {
-        HideScreens();
-        modeSelectionScreen.SetActive(true);
-
-        GameObject backButton = Instantiate(backButtonPrefab, modeSelectionScreen.transform);
-        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
+       ShowPanel(modeSelectionScreen);
     }
 
    public void ShowInstructionsScreen()
     {
-        HideScreens();
-        instructionsScreen.SetActive(true);
-
-        GameObject backButton = Instantiate(backButtonPrefab, instructionsScreen.transform);
-        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
+        ShowPanel(instuctionScreen);
     }
-    }
+    
 
     public void ShowLeaderboardScreen()
     {
-        HideScreens();  
-        leaderboardScreen.SetActive(true);  
-
-        GameObject backButton = Instantiate(backButtonPrefab, leaderboardScreen.transform);
-        backButton.GetComponent<Button>().onClick.AddListener(OnBackButtonClick);
+        ShowPanel(leaderboardScreen);
     }
 
-    public void OnBackButtonClick()
+    // Method for the Back Button to return users to previous panel
+    public void BackToPreviousPanel()
     {
-        HideCurrentScreen();
-
-        // Contextual, either resume game or show the previous screen
-        if (pauseGame)
+        if (previousPanel != null)
         {
-            ResumeGame();
-        }
-        else
-        {
-            // Show previous screen based on context (i.e. home screen)
-            ShowHomeScreen();
+            ShowPanel(previousPanel);
         }
     }
 
+    // Hide all screens (used for resuming game or starting new one
+    public void HideAllPanels()
+    {
+        homeScreen.SetActive(false);
+        pauseScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+        scoreScreen.SetActive(false);
+        settingScreen.SetActive(false);
+        leaderboardScreen.SetActive(false);
+        gameScreen.SetActive(false);
+        modeSelectionScreen.SetActive(false);
+        instructionsScreen.SetActive(false);
+    }
+  
         // Get the high scores from  LeaderboardLogic
         //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
 
