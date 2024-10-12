@@ -155,7 +155,7 @@ public class ScrappyOwlController : MonoBehaviour
         score = 0;
         owlModel.ResetOwl();
         owlView.HideScreens();
-        owlView.ShowGameScreen();
+       // owlView.ShowGameScreen();
     }
 
     // Method to show score when score button is pressed
@@ -174,10 +174,10 @@ public class ScrappyOwlController : MonoBehaviour
 
     }
     // Method to modeSelection
-    public void ShowModeSelection()
+   public void ShowModeSelection()
     {
 
-        owlView.ShowModeSelectionScreen();
+       // owlView.ShowModeSelectionScreen();
 
 
     }
@@ -186,7 +186,7 @@ public class ScrappyOwlController : MonoBehaviour
     public void showInstructions()
     {
 
-        owlView.ShowInstructionsScreen();
+        //owlView.ShowInstructionsScreen();
 
 
     }
@@ -243,14 +243,14 @@ public class ScrappyOwlController : MonoBehaviour
         if (!pauseGame)
             PauseGame();
 
-        owlView.ShowSettingsScreen();
+       // owlView.ShowSettingsScreen();
     }
 
 
     // Method to show the leaderboard screen
     public void ShowLeaderboard()
     {
-        owlView.ShowLeaderboardScreen();
+        //owlView.ShowLeaderboardScreen();
     }
 
 
