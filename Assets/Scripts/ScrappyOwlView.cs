@@ -12,7 +12,7 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject leaderboardScreen;
     public GameObject gameScreen;
     public GameObject backButtonPrefab;
-    public GameObject quitButton;
+    public Button quitButton;
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
@@ -32,6 +32,7 @@ public class ScrappyOwlView : MonoBehaviour
     private int currentScore = 0;
     private int highScore = 0;
 
+
     // Method to show Home Screen by default
     void Start()
     {
@@ -39,7 +40,7 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
     // Method to show a specific panel and track the previous panel
-    private void ShowPanel(GameObjectPanelToShow)
+    private void ShowPanel(GameObject panelToShow)
     {
         if (currentPanel != null)
         {
@@ -164,7 +165,7 @@ public class ScrappyOwlView : MonoBehaviour
 
    public void ShowInstructionsScreen()
     {
-        ShowPanel(instuctionScreen);
+        ShowPanel(instructionsScreen);
     }
     
 
@@ -195,7 +196,12 @@ public class ScrappyOwlView : MonoBehaviour
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
     }
-  
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+   
         // Get the high scores from  LeaderboardLogic
         //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
 
@@ -248,8 +254,4 @@ public class ScrappyOwlView : MonoBehaviour
 
     //    }
     //}
-
-
-
-
 
