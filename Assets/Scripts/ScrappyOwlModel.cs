@@ -1,74 +1,63 @@
 using UnityEngine;
 
-public class ScrappyOwlModel
+public class ScrappyOwlModel : MonoBehaviour
 {
 
     // Variables for the game
-    // How fast owldrops down
-    public float gravity;
-    // How high the owl jumps
-    public float jumpHeight;
-    // Current velocity of owl
-    public Vector2 velocity;
+    public Rigidbody2D owlRigidbody;
+    // Jump force for easy mode
+    public float easyJump = 20f;
+    // Jump force for hard mode
+    public float hardJump = 4f;  
+    public float easyGravity = 1f;  
+    public float hardGravity = 1.5f;
+
 
     // Tracks if owl is alive
     public bool isAlive = true;
     // Position of the owl
     private Vector2 position;
 
-    // Change the mode to easy or hard setting the gravity and jumpHeight
+    // Easy by default
+    private bool hardMode = true;
+
+    private void Start()
+    {
+        owlRigidbody = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D attached to the owl
+        SetDifficulty(false);  // Start in easy mode by default
+    }
+
+    // Method to change difficulty
     public void SetDifficulty(bool hardMode)
     {
-        if (hardMode)
-        {
-            // Hard mode settings
-            // 15 is stronger than the eath's pull
-            gravity = -15f;
-            // lower jump 
-            jumpHeight = 4f;
-        }
-        else
-        {
-            // Easy mode settings
-            // 9.8 m/s close to earth's pull
-            gravity = -9.8f;
-            // higher jump 
-            jumpHeight = 7f;
-        }
+        // Adjust gravity based on difficulty mode
+        owlRigidbody.gravityScale = hardMode ? hardGravity : easyGravity;
     }
+    
 
-    // Method to update the postition
-    public void UpdatePosition(float deltaTime)
-    {
-        if (isAlive)
-        {
-            velocity.y += gravity * deltaTime;
-            position += velocity * deltaTime;
-
-        }
-    }
 
     // Method to handle owl's jump
     public void Jump()
     {
-        if (isAlive)
+        if (owlRigidbody != null && isAlive)  
         {
-            velocity.y = jumpHeight;
+            float jumpForce = hardMode ? hardJump : easyJump;
+            owlRigidbody.velocity = Vector2.up * jumpForce;
         }
     }
 
     // Method to reset the game
     public void ResetOwl()
     {
-        position = Vector2.zero;
-        velocity = Vector2.zero;
+        owlRigidbody.position = Vector2.zero;
+        owlRigidbody.velocity = Vector2.zero;
         isAlive = true;
     }
 
     // Method to get current position
     public Vector2 GetPosition()
     {
-        return position;
+        return owlRigidbody.position;
     }
 
 }
