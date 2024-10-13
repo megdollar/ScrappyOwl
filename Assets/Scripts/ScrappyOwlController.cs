@@ -14,9 +14,12 @@ public class ScrappyOwlController : MonoBehaviour
     public Button showScore;
     public Button settings;
     public Button showLeaderboard;
+<<<<<<< HEAD
     public Button showModeSelection;
 
     public Button showInstructionsBtn;
+=======
+>>>>>>> Connor
     public Slider musicSlider; // New Slider for music volume
     public InputField userName;
     public Text scoreText;
@@ -39,11 +42,16 @@ public class ScrappyOwlController : MonoBehaviour
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
         settings.onClick.AddListener(ShowSettingsScreen);
+<<<<<<< HEAD
         showLeaderboard.onClick.AddListener(ShowLeaderboard);
         showModeSelection.onClick.AddListener(ShowModeSelection);
         showInstructionsBtn.onClick.AddListener(showInstructions);
 
 
+=======
+        // showLeaderboard.onClick.AddListener(ShowLeaderboard);
+
+>>>>>>> Connor
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
         // Initialize the game with beginning position
@@ -155,7 +163,11 @@ public class ScrappyOwlController : MonoBehaviour
         score = 0;
         owlModel.ResetOwl();
         owlView.HideScreens();
+<<<<<<< HEAD
        // owlView.ShowGameScreen();
+=======
+        owlView.ShowGameScreen();
+>>>>>>> Connor
     }
 
     // Method to show score when score button is pressed
@@ -172,6 +184,7 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowGameOverScreen(score);
 
 
+<<<<<<< HEAD
     }
     // Method to modeSelection
    public void ShowModeSelection()
@@ -189,6 +202,8 @@ public class ScrappyOwlController : MonoBehaviour
         //owlView.ShowInstructionsScreen();
 
 
+=======
+>>>>>>> Connor
     }
 
 
@@ -243,14 +258,22 @@ public class ScrappyOwlController : MonoBehaviour
         if (!pauseGame)
             PauseGame();
 
+<<<<<<< HEAD
        // owlView.ShowSettingsScreen();
+=======
+        owlView.ShowSettingsScreen();
+>>>>>>> Connor
     }
 
 
     // Method to show the leaderboard screen
     public void ShowLeaderboard()
     {
+<<<<<<< HEAD
         //owlView.ShowLeaderboardScreen();
+=======
+        owlView.ShowLeaderboardScreen();
+>>>>>>> Connor
     }
 
 
