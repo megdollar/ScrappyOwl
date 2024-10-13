@@ -10,12 +10,9 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject settingScreen;
     public GameObject leaderboardScreen;
     public GameObject gameScreen;
-<<<<<<< HEAD
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
-=======
->>>>>>> Connor
     public Text leaderboardText;
 
     public Text scoreText;
@@ -38,11 +35,8 @@ public class ScrappyOwlView : MonoBehaviour
         gameScreen.SetActive(false);
         settingScreen.SetActive(false);
         leaderboardScreen.SetActive(false);
-<<<<<<< HEAD
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
-=======
->>>>>>> Connor
     }
 
     // Method to show the pause screen
@@ -66,13 +60,9 @@ public class ScrappyOwlView : MonoBehaviour
         scoreScreen.SetActive(false);
         settingScreen.SetActive(false);
         leaderboardScreen.SetActive(false);
-<<<<<<< HEAD
         gameScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
-=======
-        gameScreen.SetActive(true);
->>>>>>> Connor
     }
 
     // Method to show game over screen and score
@@ -137,7 +127,6 @@ public class ScrappyOwlView : MonoBehaviour
         settingScreen.SetActive(true);
     }
 
-<<<<<<< HEAD
     public void ShowModeSelectionScreen()
     {
         HideScreens();
@@ -153,13 +142,7 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowLeaderboardScreen()
     {
         HideScreens();  
-       // leaderboardScreen.SetActive(true);  
-=======
-    public void ShowLeaderboardScreen()
-    {
-        HideScreens();  
         leaderboardScreen.SetActive(true);  
->>>>>>> Connor
 
         // Get the high scores from  LeaderboardLogic
         //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
@@ -214,7 +197,3 @@ public class ScrappyOwlView : MonoBehaviour
     //    }
     //}
 }
-
-
-
-
