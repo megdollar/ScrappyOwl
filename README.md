@@ -1,4 +1,10 @@
 # ScrappyOwl
+<<<<<<< HEAD
+<<<<<<< HEAD
+Scrappy Owl, is an arcade-style game where a player controls an owl character, which moves persistently to the right. The player navigates the owl through a forest, dodging obstacles. 
+=======
+=======
+>>>>>>> Connor
 Scrappy Owl, is an arcade-style game where a player controls an owl character, which moves persistently to the right. The player navigates the owl through a forest, dodging obstacles and gains points in the process. 
 
 Installation: 
@@ -8,3 +14,7 @@ How to Play: The goal of this game is to gain points by dodging incoming obstacl
 Difficulty Modes: Scrappy Owl has two difficulty modes - Easy mode and Hard mode. The main distinction between these modes is the number of obstacles and how fast they appear. 
 
 Settings: Use the settings menu to toggle game music on and off and adjust the volume of the music with the slider. 
+<<<<<<< HEAD
+>>>>>>> eed5097542d9fe3197b17448f75ded8ec1d34075
+=======
+>>>>>>> Connor

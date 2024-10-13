@@ -197,7 +197,3 @@ public class ScrappyOwlView : MonoBehaviour
     //    }
     //}
 }
-
-
-
-
