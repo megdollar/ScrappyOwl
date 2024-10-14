@@ -21,13 +21,11 @@ public class LogSpawnerScript : MonoBehaviour
         if (timer < spawnRate)
         {
             timer = timer + Time.deltaTime;
-            Debug.Log("Timer: " + timer); // Check timer value
         }
         else
         {
             spawnLog();
             timer = 0;
-            Debug.Log("Log Spawned"); // Confirm log spawning
 
         }
     }
