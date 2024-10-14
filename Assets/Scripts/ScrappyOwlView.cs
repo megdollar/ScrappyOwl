@@ -12,7 +12,7 @@ public class ScrappyOwlView : MonoBehaviour
  
     public GameObject gameScreen;
     public GameObject backButtonPrefab;
-    public Button quitButton;
+ 
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
@@ -40,7 +40,6 @@ public class ScrappyOwlView : MonoBehaviour
         {
             owlAudioSource = GetComponent<AudioSource>();
         }
-        quitButton.onClick.AddListener(QuitGame);
 
     }
 
@@ -155,9 +154,6 @@ public class ScrappyOwlView : MonoBehaviour
         instructionsScreen.SetActive(false);
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+
    
 }

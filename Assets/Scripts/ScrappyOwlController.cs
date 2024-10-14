@@ -19,7 +19,7 @@ public class ScrappyOwlController : MonoBehaviour
     public Button showInstructionsBtn;
     public Slider musicSlider; // New Slider for music volume
     public InputField userName;
-   
+    public Button quitButton;
     public int score = 0;
     public bool pauseGame = false;
     public bool gameOver = false;
@@ -29,6 +29,9 @@ public class ScrappyOwlController : MonoBehaviour
     void Start()
     {
 
+        Debug.Log("Start method called"); 
+        if (owlView == null) Debug.LogError("owlView is not assigned!");
+        if (owlModel == null) Debug.LogError("owlModel is not assigned!");
         // Show the home screen initially
         owlView.ShowHomeScreen();
 
@@ -43,6 +46,7 @@ public class ScrappyOwlController : MonoBehaviour
         showModeSelection.onClick.AddListener(ShowModeSelection);
         showInstructionsBtn.onClick.AddListener(showInstructions);
 
+        quitButton.onClick.AddListener(QuitGame);
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
@@ -99,25 +103,16 @@ public class ScrappyOwlController : MonoBehaviour
 
         Debug.Log("Owl collided with: " + collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            Debug.Log("Collision with ground");
-            owlModel.isAlive = false;
-            Time.timeScale = 0;
-            ShowGameOver();
-        }
-        else if (collision.gameObject.CompareTag("Log"))
-        {
-            Debug.Log("Collision with log");
-            owlModel.isAlive = false;
-            DecreaseScore();
-            //ShowGameOver();  
-        }
+        owlModel.isAlive = false;
+        Time.timeScale = 0;
+        ShowGameOver();
+        
     }
 
     // Method when play button is clicked
     public void PlayGame()
     {
+        Time.timeScale = 1f;
         if (pauseGame)
         {
             // The game was paused, keep playing
