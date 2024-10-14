@@ -151,7 +151,7 @@ public class ScrappyOwlController : MonoBehaviour
     // Method to quit the game
     public void QuitGame()
     {
-        Application.Quit();
+        owlView.ShowHomeScreen();
     }
 
     // Method to start a new game
