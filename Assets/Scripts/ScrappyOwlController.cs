@@ -32,11 +32,12 @@ public class ScrappyOwlController : MonoBehaviour
         Debug.Log("Start method called"); 
         if (owlView == null) Debug.LogError("owlView is not assigned!");
         if (owlModel == null) Debug.LogError("owlModel is not assigned!");
+        owlView.HideAllPanels();
         // Show the home screen initially
         owlView.ShowHomeScreen();
 
         // Add listeners for play, pause, show score, difficulty buttons
-        play.onClick.AddListener(PlayGame);
+       // play.onClick.AddListener(PlayGame);
         pause.onClick.AddListener(PauseGame);
         
         easy.onClick.AddListener(StartEasyMode);
@@ -66,8 +67,6 @@ public class ScrappyOwlController : MonoBehaviour
                 owlModel.Jump();
             }
 
-            //// Logs move accross the screen
-            //owlView.LogMove();
 
             // Check if the owl is still alive
             if (!owlModel.isAlive)
@@ -193,7 +192,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);
-        owlView.UpdateDifficultyDisplay(false);
+        //owlView.UpdateDifficultyDisplay(false);
         // Debugging, remove later
         Debug.Log("Easy Mode");
         PlayGame();
@@ -205,7 +204,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true);
-        owlView.UpdateDifficultyDisplay(true);
+        //owlView.UpdateDifficultyDisplay(true);
         // Debugging, remove late 
         Debug.Log("Hard Mode Selected");
         PlayGame();
