@@ -6,14 +6,14 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject homeScreen;
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
-    public GameObject scoreScreen;
+    //public GameObject scoreScreen;
     public GameObject settingScreen;
-    public GameObject leaderboardScreen;
+    //public GameObject leaderboardScreen;
     public GameObject gameScreen;
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
-    public Text leaderboardText;
+    //public Text leaderboardText;
 
     public Text scoreText;
     public Text difficultyText;  
@@ -25,16 +25,22 @@ public class ScrappyOwlView : MonoBehaviour
     private int currentScore = 0;
     private int highScore = 0;
 
+void Start()
+{
+    ShowHomeScreen();
+}
+
     // Method to show home screen
     public void ShowHomeScreen()
     {
+
         homeScreen.SetActive(true);
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
-        scoreScreen.SetActive(false);
+       // scoreScreen.SetActive(false);
         gameScreen.SetActive(false);
         settingScreen.SetActive(false);
-        leaderboardScreen.SetActive(false);
+      //  leaderboardScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
     }
@@ -57,9 +63,9 @@ public class ScrappyOwlView : MonoBehaviour
         homeScreen.SetActive(false);
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
-        scoreScreen.SetActive(false);
+       // scoreScreen.SetActive(false);
         settingScreen.SetActive(false);
-        leaderboardScreen.SetActive(false);
+       // leaderboardScreen.SetActive(false);
         gameScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
@@ -82,11 +88,12 @@ public class ScrappyOwlView : MonoBehaviour
 
 
     // Show the score screen and display the current score
-    public void ShowScoreScreen(int score)
-    {
-        scoreScreen.SetActive(true);
-        scoreText.text = "Current score: " + currentScore.ToString();
-    }
+   // public void ShowScoreScreen(int score)
+   // {
+   //     Debug.Log("show score screens method called");
+    //    scoreScreen.SetActive(true);
+    //    scoreText.text = "Current score: " + currentScore.ToString();
+   // }
 
     // Update the owl's position
     public void UpdateOwlPosition(Vector2 position)
@@ -129,6 +136,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     public void ShowModeSelectionScreen()
     {
+
         HideScreens();
         modeSelectionScreen.SetActive(true);
     }
@@ -139,10 +147,10 @@ public class ScrappyOwlView : MonoBehaviour
         instructionsScreen.SetActive(true);
     }
 
-    public void ShowLeaderboardScreen()
-    {
-        HideScreens();  
-        leaderboardScreen.SetActive(true);  
+   // public void ShowLeaderboardScreen()
+   // {
+   //     HideScreens();  
+   //     leaderboardScreen.SetActive(true);  
 
         // Get the high scores from  LeaderboardLogic
         //List<HighScoreEntry> highScores = Leaderboard.Instance.GetHighScores();
@@ -196,4 +204,4 @@ public class ScrappyOwlView : MonoBehaviour
 
     //    }
     //}
-}
+//}
