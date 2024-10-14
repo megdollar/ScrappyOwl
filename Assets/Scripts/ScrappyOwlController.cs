@@ -13,7 +13,11 @@ public class ScrappyOwlController : MonoBehaviour
     public Button play;
     public Button showScore;
     public Button settings;
+
    // public Button showLeaderboard;
+
+    public Button showLeaderboard;
+
     public Button showModeSelection;
 
     public Button showInstructionsBtn;
@@ -39,7 +43,11 @@ public class ScrappyOwlController : MonoBehaviour
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
         settings.onClick.AddListener(ShowSettingsScreen);
+
         //showLeaderboard.onClick.AddListener(ShowLeaderboard);
+
+        showLeaderboard.onClick.AddListener(ShowLeaderboard);
+
         showModeSelection.onClick.AddListener(ShowModeSelection);
         showInstructionsBtn.onClick.AddListener(showInstructions);
 
@@ -145,6 +153,12 @@ public class ScrappyOwlController : MonoBehaviour
         pauseGame = false;
         Time.timeScale = 1f;
         owlView.HideScreens();
+    }
+
+    // Method to quit the game
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     // Method to start a new game
