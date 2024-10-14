@@ -7,16 +7,22 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject homeScreen;
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
-    public GameObject scoreScreen;
+    //public GameObject scoreScreen;
     public GameObject settingScreen;
-    public GameObject leaderboardScreen;
+    //public GameObject leaderboardScreen;
     public GameObject gameScreen;
+
+    public GameObject instructionsScreen;
+    public GameObject modeSelectionScreen;
+    //public Text leaderboardText;
+
     public GameObject backButtonPrefab;
     public Button quitButton;
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
     public Text leaderboardText;
+
 
     public TextMeshProUGUI scoreText;
     public Text difficultyText;  
@@ -31,6 +37,12 @@ public class ScrappyOwlView : MonoBehaviour
 
     private int currentScore = 0;
     private int highScore = 0;
+
+
+void Start()
+{
+    ShowHomeScreen();
+}
 
 
     // Method to show Home Screen by default
@@ -52,23 +64,34 @@ public class ScrappyOwlView : MonoBehaviour
         currentPanel.SetActive(true);
     }
 
+
     // Method to show home screen
     public void ShowHomeScreen()
     {
+
+
+
         ShowPanel(homeScreen);
         
+
         homeScreen.SetActive(true);
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
-        scoreScreen.SetActive(false);
+       // scoreScreen.SetActive(false);
         gameScreen.SetActive(false);
         settingScreen.SetActive(false);
+
+      //  leaderboardScreen.SetActive(false);
+        modeSelectionScreen.SetActive(false);
+        instructionsScreen.SetActive(false);
+
         leaderboardScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
 
         //Adding Listener for the quit button
         quitButton.onClick.AddListener(QuitGame);
+
     }
 
     // Method to show the pause screen
@@ -89,9 +112,13 @@ public class ScrappyOwlView : MonoBehaviour
         homeScreen.SetActive(false);
         pauseScreen.SetActive(false);
         gameOverScreen.SetActive(false);
-        scoreScreen.SetActive(false);
+       // scoreScreen.SetActive(false);
         settingScreen.SetActive(false);
+
+       // leaderboardScreen.SetActive(false);
+
         leaderboardScreen.SetActive(false);
+
         gameScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
@@ -115,12 +142,21 @@ public class ScrappyOwlView : MonoBehaviour
 
 
     // Show the score screen and display the current score
+
+   // public void ShowScoreScreen(int score)
+   // {
+   //     Debug.Log("show score screens method called");
+    //    scoreScreen.SetActive(true);
+    //    scoreText.text = "Current score: " + currentScore.ToString();
+   // }
+
     public void ShowScoreScreen(int score)
     {
         scoreScreen.SetActive(true);
         scoreText.text = "Current score: " + currentScore.ToString();
         ShowPanel(scoreScreen);
     }
+
 
     // Update the owl's position
     public void UpdateOwlPosition(Vector2 position)
@@ -169,8 +205,25 @@ public class ScrappyOwlView : MonoBehaviour
     }
     
 
-    public void ShowLeaderboardScreen()
+    public void ShowModeSelectionScreen()
     {
+
+
+        HideScreens();
+        modeSelectionScreen.SetActive(true);
+    }
+
+   public void ShowInstructionsScreen()
+    {
+        HideScreens();
+        instructionsScreen.SetActive(true);
+    }
+
+   // public void ShowLeaderboardScreen()
+   // {
+   //     HideScreens();  
+   //     leaderboardScreen.SetActive(true);  
+
         ShowPanel(leaderboardScreen);
     }
 
@@ -182,6 +235,7 @@ public class ScrappyOwlView : MonoBehaviour
             ShowPanel(previousPanel);
         }
     }
+
 
     // Hide all screens (used for resuming game or starting new one
     public void HideAllPanels()
@@ -254,4 +308,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     //    }
     //}
+
+//}
+
 
