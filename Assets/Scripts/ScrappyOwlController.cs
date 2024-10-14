@@ -13,11 +13,7 @@ public class ScrappyOwlController : MonoBehaviour
     public Button play;
     public Button showScore;
     public Button settings;
-
-   // public Button showLeaderboard;
-
     public Button showLeaderboard;
-
     public Button showModeSelection;
 
     public Button showInstructionsBtn;
@@ -39,15 +35,11 @@ public class ScrappyOwlController : MonoBehaviour
         // Add listeners for play, pause, show score, difficulty buttons
         play.onClick.AddListener(PlayGame);
         pause.onClick.AddListener(PauseGame);
-        //showScore.onClick.AddListener(ShowScore);
+        showScore.onClick.AddListener(ShowScore);
         easy.onClick.AddListener(StartEasyMode);
         hard.onClick.AddListener(StartHardMode);
         settings.onClick.AddListener(ShowSettingsScreen);
-
-        //showLeaderboard.onClick.AddListener(ShowLeaderboard);
-
         showLeaderboard.onClick.AddListener(ShowLeaderboard);
-
         showModeSelection.onClick.AddListener(ShowModeSelection);
         showInstructionsBtn.onClick.AddListener(showInstructions);
 
@@ -173,10 +165,10 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
     // Method to show score when score button is pressed
-    //public void ShowScore()
-   // {
-   //     owlView.ShowScoreScreen(score);
-   // }
+    public void ShowScore()
+    {
+        owlView.ShowScoreScreen(score);
+    }
 
     // Method to show game over screen and update the score
     public void ShowGameOver()
@@ -262,10 +254,10 @@ public class ScrappyOwlController : MonoBehaviour
 
 
     // Method to show the leaderboard screen
-   // public void ShowLeaderboard()
-   // {
-   //     owlView.ShowLeaderboardScreen();
-   // }
+    public void ShowLeaderboard()
+    {
+        owlView.ShowLeaderboardScreen();
+    }
 
 
     public void OnMusicSliderChanged(float value)
