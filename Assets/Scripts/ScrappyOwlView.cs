@@ -22,12 +22,20 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject owlSprite;
     public GameObject[] logs;  
 
+    public AudioSource owlAudioSource;
+
+
     private int currentScore = 0;
     private int highScore = 0;
 
 void Start()
 {
     ShowHomeScreen();
+    // Ensure AudioSource is set if not already assigned in the inspector
+        if (owlAudioSource == null)
+        {
+            owlAudioSource = GetComponent<AudioSource>();
+        }
 }
 
     // Method to show home screen
@@ -147,6 +155,20 @@ void Start()
         instructionsScreen.SetActive(true);
     }
 
+   // public AudioClip owlFlapSound; 
+
+   
+    // Call this method to play the owl's flap sound
+   // public void PlayOwlFlapSound()
+   // {
+   //     if (owlFlapSound != null && owlAudioSource != null)
+    //    {
+    //        owlAudioSource.PlayOneShot(owlFlapSound);
+    //    }
+   // }
+}
+
+
    // public void ShowLeaderboardScreen()
    // {
    //     HideScreens();  
@@ -171,8 +193,8 @@ void Start()
         // }
 
         // leaderboardText.text = leaderboardDisplay;
-    }
-
+    //}
+//
 
 
 

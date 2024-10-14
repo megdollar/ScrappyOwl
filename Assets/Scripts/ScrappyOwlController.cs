@@ -50,6 +50,16 @@ public class ScrappyOwlController : MonoBehaviour
         owlModel.ResetOwl();
         owlView.UpdateOwlPosition(owlModel.GetPosition());
     }
+   // void Update()
+   // {
+    //    if (Input.GetMouseButtonDown(0)) // Example of input for flap action
+    // <summary>
+    //{
+    // </summary>
+     //    PlayOwlFlapSound();  // Play the flap sound
+        // Your other code to make the owl flap
+    // }
+   // }
 
     void Update()
     {
