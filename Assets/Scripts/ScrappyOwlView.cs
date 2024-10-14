@@ -40,6 +40,7 @@ public class ScrappyOwlView : MonoBehaviour
         {
             owlAudioSource = GetComponent<AudioSource>();
         }
+        quitButton.onClick.AddListener(QuitGame);
 
     }
 
@@ -53,7 +54,10 @@ public class ScrappyOwlView : MonoBehaviour
         }
 
         currentPanel = panelToShow;
-        currentPanel.SetActive(true);
+        if (currentPanel != null)
+        {
+            currentPanel.SetActive(true);
+        }   
     }
 
     // Method to show home screen
@@ -61,16 +65,6 @@ public class ScrappyOwlView : MonoBehaviour
     {
         ShowPanel(homeScreen);
         
-        homeScreen.SetActive(true);
-        pauseScreen.SetActive(false);
-        gameOverScreen.SetActive(false);
-        gameScreen.SetActive(false);
-        settingScreen.SetActive(false);
-        modeSelectionScreen.SetActive(false);
-        instructionsScreen.SetActive(false);
-
-        //Adding Listener for the quit button
-        quitButton.onClick.AddListener(QuitGame);
     }
 
     // Method to show the pause screen
@@ -81,26 +75,13 @@ public class ScrappyOwlView : MonoBehaviour
 
     public void ShowGameScreen()
     {
-        // Hide all panels when the game starts
-        ShowPanel(null); 
+        ShowPanel(gameScreen); 
     }
 
-    // Hide all the screens when game is playing
-    public void HideScreens()
-    {
-        homeScreen.SetActive(false);
-        pauseScreen.SetActive(false);
-        gameOverScreen.SetActive(false);
-        settingScreen.SetActive(false);
-        gameScreen.SetActive(false);
-        modeSelectionScreen.SetActive(false);
-        instructionsScreen.SetActive(false);
-    }
 
     // Method to show game over screen and score
     public void ShowGameOverScreen(int score)
     {
-        gameOverScreen.SetActive(true);
         scoreText.text = "Game Over! Your score: " + score.ToString();
         ShowPanel(gameOverScreen);
         
@@ -155,6 +136,10 @@ public class ScrappyOwlView : MonoBehaviour
         if (previousPanel != null)
         {
             ShowPanel(previousPanel);
+        }
+        else
+        {
+                        ShowHomeScreen();
         }
     }
 

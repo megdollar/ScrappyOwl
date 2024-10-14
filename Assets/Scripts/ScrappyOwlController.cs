@@ -69,7 +69,7 @@ public class ScrappyOwlController : MonoBehaviour
             if (!owlModel.isAlive)
             {
                 // If dead, game over
-                owlView.ShowGameOverScreen(score);
+                ShowGameOver();
             }
 
             // Update the owl's position and view each frame
@@ -151,7 +151,7 @@ public class ScrappyOwlController : MonoBehaviour
     {
         pauseGame = false;
         Time.timeScale = 1f;
-        owlView.HideScreens();
+        owlView.HideAllPanels();
     }
 
     // Method to quit the game
@@ -167,7 +167,7 @@ public class ScrappyOwlController : MonoBehaviour
         gameOver = false;
         score = 0;
         owlModel.ResetOwl();
-        owlView.HideScreens();
+        owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
    

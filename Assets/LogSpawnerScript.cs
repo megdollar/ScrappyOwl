@@ -42,20 +42,21 @@ public class LogSpawnerScript : MonoBehaviour
 
         GameObject newLog = Instantiate(log, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
 
-        // Ensure the log has a BoxCollider2D
-        AddColliderToLog(newLog);
-
+        // Set the log's tag to "Log"
         newLog.tag = "Log";
+
+        // Add a collider for collisions (e.g., the owl hitting the log)
+        BoxCollider2D collisionCollider = newLog.AddComponent<BoxCollider2D>();
+        collisionCollider.isTrigger = false; // This is the collision collider
+
+        // Add a second collider for the trigger (e.g., detecting when the owl passes the log)
+        //BoxCollider2D triggerCollider = newLog.AddComponent<BoxCollider2D>();
+       // triggerCollider.isTrigger = true; // This is the trigger collider for passing by
+
+        // Optionally set the tag for the trigger (if needed)
+        //newLog.tag = "LogTrigger";
+
     }
 
-    // Method to ensure a BoxCollider2D is added to each log
-    void AddColliderToLog(GameObject log)
-    {
-        // Check if the log already has a BoxCollider2D
-        if (log.GetComponent<BoxCollider2D>() == null)
-        {
-            log.AddComponent<BoxCollider2D>();
-        }
 
-    }
 }
