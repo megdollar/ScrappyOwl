@@ -7,19 +7,19 @@ public class ScrappyOwlController : MonoBehaviour
     // Link to model, view, easy mode, hard mode and set initial score to 0
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
-    public Button easy;
-    public Button hard;
-    public Button pause;
-    public Button play;
-    public Button showScore;
-    public Button settings;
-    public Button showLeaderboard;
-    public Button showModeSelection;
+    // public Button easy;
+    // public Button hard;
+    // public Button pause;
+    // public Button play;
+   
+    // public Button settings;
+    
+    // public Button showModeSelection;
 
-    public Button showInstructionsBtn;
+    // public Button showInstructionsBtn;
     public Slider musicSlider; // New Slider for music volume
     public InputField userName;
-    public Text scoreText;
+    // public Button quitButton;
     public int score = 0;
     public bool pauseGame = false;
     public bool gameOver = false;
@@ -29,20 +29,25 @@ public class ScrappyOwlController : MonoBehaviour
     void Start()
     {
 
+        Debug.Log("Start method called"); 
+        if (owlView == null) Debug.LogError("owlView is not assigned!");
+        if (owlModel == null) Debug.LogError("owlModel is not assigned!");
+        owlView.HideAllPanels();
         // Show the home screen initially
         owlView.ShowHomeScreen();
 
         // Add listeners for play, pause, show score, difficulty buttons
-        play.onClick.AddListener(PlayGame);
-        pause.onClick.AddListener(PauseGame);
-        showScore.onClick.AddListener(ShowScore);
-        easy.onClick.AddListener(StartEasyMode);
-        hard.onClick.AddListener(StartHardMode);
-        settings.onClick.AddListener(ShowSettingsScreen);
-        showLeaderboard.onClick.AddListener(ShowLeaderboard);
-        showModeSelection.onClick.AddListener(ShowModeSelection);
-        showInstructionsBtn.onClick.AddListener(showInstructions);
+       // play.onClick.AddListener(PlayGame);
+        // pause.onClick.AddListener(PauseGame);
+        
+        // easy.onClick.AddListener(StartEasyMode);
+        // hard.onClick.AddListener(StartHardMode);
+        // settings.onClick.AddListener(ShowSettingsScreen);
+        
+        // showModeSelection.onClick.AddListener(ShowModeSelection);
+        // showInstructionsBtn.onClick.AddListener(showInstructions);
 
+        // quitButton.onClick.AddListener(QuitGame);
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
@@ -62,14 +67,12 @@ public class ScrappyOwlController : MonoBehaviour
                 owlModel.Jump();
             }
 
-            //// Logs move accross the screen
-            //owlView.LogMove();
 
             // Check if the owl is still alive
             if (!owlModel.isAlive)
             {
                 // If dead, game over
-                owlView.ShowGameOverScreen(score);
+                ShowGameOver();
             }
 
             // Update the owl's position and view each frame
@@ -85,6 +88,13 @@ public class ScrappyOwlController : MonoBehaviour
             Debug.Log("Owl passed the log!");
         IncreaseScore();
     }
+// Method to show game over screen and update the score
+    public void ShowGameOver()
+    {
+        gameOver = true;
+        //SaveScore();
+        owlView.ShowGameOverScreen(score);
+    }
 
     // Handle owl's collision with branches
     void OnCollisionEnter2D(Collision2D collision)
@@ -92,25 +102,16 @@ public class ScrappyOwlController : MonoBehaviour
 
         Debug.Log("Owl collided with: " + collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            Debug.Log("Collision with ground");
-            owlModel.isAlive = false;
-            Time.timeScale = 0;
-            ShowGameOver();
-        }
-        else if (collision.gameObject.CompareTag("Log"))
-        {
-            Debug.Log("Collision with log");
-            owlModel.isAlive = false;
-            DecreaseScore();
-            //ShowGameOver();  
-        }
+        owlModel.isAlive = false;
+        Time.timeScale = 0;
+        ShowGameOver();
+        
     }
 
     // Method when play button is clicked
     public void PlayGame()
     {
+        Time.timeScale = 1f;
         if (pauseGame)
         {
             // The game was paused, keep playing
@@ -144,7 +145,7 @@ public class ScrappyOwlController : MonoBehaviour
     {
         pauseGame = false;
         Time.timeScale = 1f;
-        owlView.HideScreens();
+        owlView.HideAllPanels();
     }
 
     // Method to quit the game
@@ -160,25 +161,11 @@ public class ScrappyOwlController : MonoBehaviour
         gameOver = false;
         score = 0;
         owlModel.ResetOwl();
-        owlView.HideScreens();
+        owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
+   
 
-    // Method to show score when score button is pressed
-    public void ShowScore()
-    {
-        owlView.ShowScoreScreen(score);
-    }
-
-    // Method to show game over screen and update the score
-    public void ShowGameOver()
-    {
-        gameOver = true;
-        //SaveScore();
-        owlView.ShowGameOverScreen(score);
-
-
-    }
     // Method to modeSelection
     public void ShowModeSelection()
     {
@@ -205,7 +192,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);
-        owlView.UpdateDifficultyDisplay(false);
+        //owlView.UpdateDifficultyDisplay(false);
         // Debugging, remove later
         Debug.Log("Easy Mode");
         PlayGame();
@@ -217,7 +204,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true);
-        owlView.UpdateDifficultyDisplay(true);
+        //owlView.UpdateDifficultyDisplay(true);
         // Debugging, remove late 
         Debug.Log("Hard Mode Selected");
         PlayGame();
@@ -253,29 +240,10 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
 
-    // Method to show the leaderboard screen
-    public void ShowLeaderboard()
-    {
-        owlView.ShowLeaderboardScreen();
-    }
-
-
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
     }
 
-    // Method to save the high score with initials
-    public void SaveScore()
-    {
-        string initials = userName.text;
-        int highScore = score;
-
-        // Save the high score and users initials
-        // LeaderboardLogic.Instance.AddHighScore(initials, highScore);
-
-        // Clear the userName input field for next user
-        userName.text = "";
-    }
 
 }
