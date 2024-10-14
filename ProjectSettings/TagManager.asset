@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Log
+  - Owl
+  - Ground
+  - LogTrigger
   layers:
   - Default
   - TransparentFX
@@ -38,12 +42,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 1900495861
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Middle
-    uniqueID: 280728395
     locked: 0
