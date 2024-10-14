@@ -32,11 +32,18 @@ public class ScrappyOwlView : MonoBehaviour
     private int currentScore = 0;
     private int highScore = 0;
 
+    public AudioSource owlAudioSource;
+
 
     // Method to show Home Screen by default
     void Start()
     {
         ShowHomeScreen();
+         if (owlAudioSource == null)
+        {
+            owlAudioSource = GetComponent<AudioSource>();
+        }
+
     }
 
     // Method to show a specific panel and track the previous panel
