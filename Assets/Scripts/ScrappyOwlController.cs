@@ -7,19 +7,19 @@ public class ScrappyOwlController : MonoBehaviour
     // Link to model, view, easy mode, hard mode and set initial score to 0
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
-    public Button easy;
-    public Button hard;
-    public Button pause;
-    public Button play;
+    // public Button easy;
+    // public Button hard;
+    // public Button pause;
+    // public Button play;
    
-    public Button settings;
+    // public Button settings;
     
-    public Button showModeSelection;
+    // public Button showModeSelection;
 
-    public Button showInstructionsBtn;
+    // public Button showInstructionsBtn;
     public Slider musicSlider; // New Slider for music volume
     public InputField userName;
-    public Button quitButton;
+    // public Button quitButton;
     public int score = 0;
     public bool pauseGame = false;
     public bool gameOver = false;
@@ -38,16 +38,16 @@ public class ScrappyOwlController : MonoBehaviour
 
         // Add listeners for play, pause, show score, difficulty buttons
        // play.onClick.AddListener(PlayGame);
-        pause.onClick.AddListener(PauseGame);
+        // pause.onClick.AddListener(PauseGame);
         
-        easy.onClick.AddListener(StartEasyMode);
-        hard.onClick.AddListener(StartHardMode);
-        settings.onClick.AddListener(ShowSettingsScreen);
+        // easy.onClick.AddListener(StartEasyMode);
+        // hard.onClick.AddListener(StartHardMode);
+        // settings.onClick.AddListener(ShowSettingsScreen);
         
-        showModeSelection.onClick.AddListener(ShowModeSelection);
-        showInstructionsBtn.onClick.AddListener(showInstructions);
+        // showModeSelection.onClick.AddListener(ShowModeSelection);
+        // showInstructionsBtn.onClick.AddListener(showInstructions);
 
-        quitButton.onClick.AddListener(QuitGame);
+        // quitButton.onClick.AddListener(QuitGame);
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
