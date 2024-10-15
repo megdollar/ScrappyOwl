@@ -1,4 +1,3 @@
-//DELETE LATER
 //used to test OwlJumpScript for gameOver
 
 using UnityEngine;
