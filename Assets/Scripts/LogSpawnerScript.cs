@@ -13,6 +13,9 @@ public class LogSpawnerScript : MonoBehaviour
     public float minLogHeight = -3f;  // Minimum height offset from the center
     public float maxLogHeight = 6f;    // Maximum height offset from the center
 
+    // Add this line to declare the logs list
+    private List<GameObject> logs = new List<GameObject>(); // List to keep track of logs
+
     void Start()
     {
         spawnLog();  // Spawn an initial log at the start
@@ -47,10 +50,23 @@ public class LogSpawnerScript : MonoBehaviour
         Vector3 spawnPosition = new Vector3(transform.position.x + cam.orthographicSize * cam.aspect, spawnYPosition, 0);
 
         GameObject newLog = Instantiate(log, spawnPosition, transform.rotation);
-
         newLog.tag = "Log";
+        logs.Add(newLog); // Add the new log to the list
 
         BoxCollider2D collisionCollider = newLog.AddComponent<BoxCollider2D>();
         collisionCollider.isTrigger = false;  // Make sure it's a physical collider
+    }
+
+    // Make sure to include the HideLogs method you previously wrote
+    public void HideLogs()
+    {
+        foreach (GameObject log in logs)
+        {
+            if (log != null) // Check if the log still exists
+            {
+                Destroy(log); // Destroy the log GameObject
+            }
+        }
+        logs.Clear(); // Clear the list after destroying the logs
     }
 }

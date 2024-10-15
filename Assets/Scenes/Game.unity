@@ -507,7 +507,7 @@ MonoBehaviour:
   backButtonPrefab: {fileID: 0}
   instructionsScreen: {fileID: 853011535}
   modeSelectionScreen: {fileID: 1920223911}
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 2020153246}
   difficultyText: {fileID: 0}
   owlSprite: {fileID: 1576551560}
   logs:
@@ -1140,7 +1140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 1005f6611f278054db3473f34057ac8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1724,7 +1724,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: c3703916938669c4bafc56dd420ae761, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2072,6 +2072,7 @@ MonoBehaviour:
   gameOver: 0
   hardMode: 0
   musicVolume: 1
+  logSpawner: {fileID: 0}
 --- !u!4 &675769065
 Transform:
   m_ObjectHideFlags: 0
@@ -4765,6 +4766,7 @@ GameObject:
   - component: {fileID: 1576551563}
   - component: {fileID: 1576551565}
   - component: {fileID: 1576551566}
+  - component: {fileID: 1576551567}
   m_Layer: 3
   m_Name: ScrappyOwl
   m_TagString: Owl
@@ -4919,6 +4921,30 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.0000038146973}
   serializedVersion: 2
   m_Radius: 2.59
+--- !u!114 &1576551567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576551560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bf39c0fea110e47b498b6676be81fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owlModel: {fileID: 1576551563}
+  owlView: {fileID: 86818214}
+  pauseButton: {fileID: 0}
+  musicSlider: {fileID: 0}
+  score: 0
+  scoreText: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  pauseGame: 0
+  gameOver: 0
+  hardMode: 0
+  musicVolume: 1
+  logSpawner: {fileID: 1273664183}
 --- !u!1 &1586462941
 GameObject:
   m_ObjectHideFlags: 0
