@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 //Controller class 
 public class ScrappyOwlController : MonoBehaviour
@@ -7,47 +9,21 @@ public class ScrappyOwlController : MonoBehaviour
     // Link to model, view, easy mode, hard mode and set initial score to 0
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
-    // public Button easy;
-    // public Button hard;
-    // public Button pause;
-    // public Button play;
-   
-    // public Button settings;
-    
-    // public Button showModeSelection;
-
-    // public Button showInstructionsBtn;
-    public Slider musicSlider; // New Slider for music volume
-    public InputField userName;
-    // public Button quitButton;
+    public Button pauseButton;
+    public Slider musicSlider; 
     public int score = 0;
     public bool pauseGame = false;
     public bool gameOver = false;
     public bool hardMode = false;
-    public float musicVolume = 1.0f; // Initial music volume
+    public float musicVolume = 1.0f; 
 
     void Start()
     {
 
-        Debug.Log("Start method called"); 
-        if (owlView == null) Debug.LogError("owlView is not assigned!");
-        if (owlModel == null) Debug.LogError("owlModel is not assigned!");
+
         owlView.HideAllPanels();
         // Show the home screen initially
         owlView.ShowHomeScreen();
-
-        // Add listeners for play, pause, show score, difficulty buttons
-       // play.onClick.AddListener(PlayGame);
-        // pause.onClick.AddListener(PauseGame);
-        
-        // easy.onClick.AddListener(StartEasyMode);
-        // hard.onClick.AddListener(StartHardMode);
-        // settings.onClick.AddListener(ShowSettingsScreen);
-        
-        // showModeSelection.onClick.AddListener(ShowModeSelection);
-        // showInstructionsBtn.onClick.AddListener(showInstructions);
-
-        // quitButton.onClick.AddListener(QuitGame);
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
@@ -62,9 +38,13 @@ public class ScrappyOwlController : MonoBehaviour
         if (!pauseGame && !gameOver && owlModel.isAlive)
         {
             // Handle input to make the owl jump
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+           if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                owlModel.Jump();
+                if (!IsPauseButtonClicked())
+                {
+                    owlModel.Jump();
+                }
+                
             }
 
 
@@ -79,6 +59,24 @@ public class ScrappyOwlController : MonoBehaviour
             owlView.UpdateOwlPosition(owlModel.GetPosition());
         }
     }
+    
+    private bool IsPauseButtonClicked()
+    {
+      
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            // Get the currently selected GameObject
+            GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+
+            // Check if the selected GameObject is the pause button
+            if (currentSelected != null && currentSelected == pauseButton.gameObject)
+            {
+                return true;  
+            }
+        }
+        return false; 
+    }
+
 
     // Method to increase score when owl passes by logs
     void OnTriggerEnter2D(Collider2D other)
@@ -192,9 +190,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);
-        //owlView.UpdateDifficultyDisplay(false);
-        // Debugging, remove later
-        Debug.Log("Easy Mode");
+
         PlayGame();
     }
 
@@ -204,9 +200,7 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true);
-        //owlView.UpdateDifficultyDisplay(true);
-        // Debugging, remove late 
-        Debug.Log("Hard Mode Selected");
+
         PlayGame();
     }
 

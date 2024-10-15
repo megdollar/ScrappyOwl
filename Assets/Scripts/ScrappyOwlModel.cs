@@ -6,10 +6,10 @@ public class ScrappyOwlModel : MonoBehaviour
     // Variables for the game
     public Rigidbody2D owlRigidbody;
     // Jump force for easy mode
-    public float easyJump = 7f;
+    public float easyJump = 10f;
     // Jump force for hard mode
-    public float hardJump = 4f;  
-    public float easyGravity = 1f;  
+    public float hardJump = 3f;  
+    public float easyGravity = .5f;  
     public float hardGravity = 1.5f;
 
 

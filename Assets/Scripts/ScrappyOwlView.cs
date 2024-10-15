@@ -138,7 +138,7 @@ public class ScrappyOwlView : MonoBehaviour
         }
         else
         {
-                        ShowHomeScreen();
+            ShowHomeScreen();
         }
     }
 
