@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 //Controller class 
@@ -92,20 +93,20 @@ public class ScrappyOwlController : MonoBehaviour
     public void ShowGameOver()
     {
         gameOver = true;
-        //SaveScore();
-        owlView.ShowGameOverScreen(score);
+        SceneManager.LoadScene("GameOver");
+        Time.timeScale = 0;  // Optional: stop the game time
     }
 
-    // Handle owl's collision with branches
+    // Handle owl's collision with branches and logs
     void OnCollisionEnter2D(Collision2D collision)
     {
-
-        Debug.Log("Owl collided with: " + collision.gameObject.name);
-
-        owlModel.isAlive = false;
-        Time.timeScale = 0;
-        ShowGameOver();
-        
+        // Check if the collided object has the tag "Log"
+        if (collision.gameObject.CompareTag("Log"))
+        {
+            Debug.Log("Owl collided with a log!");
+            owlModel.isAlive = false;
+            ShowGameOver();
+        }
     }
 
     // Method when play button is clicked
