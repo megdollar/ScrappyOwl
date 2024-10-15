@@ -8,11 +8,12 @@ TagManager:
   - Log
   - Ground
   - LogTrigger
+  - Logic
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Owl
   - Water
   - UI
   - 

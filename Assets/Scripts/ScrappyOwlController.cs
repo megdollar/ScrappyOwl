@@ -14,15 +14,15 @@ public class ScrappyOwlController : MonoBehaviour
     public Slider musicSlider; 
     public int score = 0;
     public TMP_Text scoreText;
+    public TMP_Text finalScoreText;
     public bool pauseGame = false;
     public bool gameOver = false;
     public bool hardMode = false;
-    public float musicVolume = 1.0f; 
+    public float musicVolume = 1.0f;
+
 
     void Start()
     {
-
-
         owlView.HideAllPanels();
         // Show the home screen initially
         owlView.ShowHomeScreen();
@@ -224,6 +224,7 @@ public class ScrappyOwlController : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+        finalScoreText.text = score.ToString();
         owlView.UpdateScore(score);
     }
 
