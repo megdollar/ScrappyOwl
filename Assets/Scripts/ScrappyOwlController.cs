@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -12,6 +13,7 @@ public class ScrappyOwlController : MonoBehaviour
     public Button pauseButton;
     public Slider musicSlider; 
     public int score = 0;
+    public TMP_Text scoreText;
     public bool pauseGame = false;
     public bool gameOver = false;
     public bool hardMode = false;
@@ -217,9 +219,11 @@ public class ScrappyOwlController : MonoBehaviour
 
 
     // Method to increment the score
+    [ContextMenu("Increase Score")]
     public void IncreaseScore()
     {
         score++;
+        scoreText.text = score.ToString();
         owlView.UpdateScore(score);
     }
 
