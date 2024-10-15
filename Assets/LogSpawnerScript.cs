@@ -4,57 +4,59 @@ using UnityEngine;
 
 public class LogSpawnerScript : MonoBehaviour
 {
-    public GameObject log;
-    public float spawnRate = 3;
-    private float timer = 0;
-    public float heightOffset = 8;
+    public GameObject log;  
+    public float spawnRate = 3f;  
+    private float timer = 0f;
+    public float heightOffset = 8f;  
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnLog();
+        spawnLog();  // Spawn an initial log at the start
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Timer to control spawning rate
         if (timer < spawnRate)
         {
-            timer = timer + Time.deltaTime;
+            timer += Time.deltaTime;  // Increment timer
         }
         else
         {
-            spawnLog();
-            timer = 0;
-
+            spawnLog();  // Spawn a new log
+            timer = 0f;  // Reset the timer
         }
     }
 
-    // create function for spawning log that can be called elsewhere in code
+    // Function to spawn a log at random heights within the camera's view
     void spawnLog()
     {
-        float lowestPoint = transform.position.y - heightOffset;
-        float highestPoint = transform.position.y + heightOffset;
+        // Get the camera's position
+        Camera cam = Camera.main;
 
-        //create an object at a specified position and rotation
+        // Get the vertical bounds of the camera's view
+        float screenHeight = cam.orthographicSize;  // Half the height of the camera view
+        float screenWidth = screenHeight * cam.aspect;  // Calculate the screen width based on aspect ratio
 
-        GameObject newLog = Instantiate(log, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        // Define the vertical range for spawning logs, within the visible area
+        float lowestPoint = cam.transform.position.y - screenHeight + heightOffset;
+        float highestPoint = cam.transform.position.y + screenHeight - heightOffset;
+
+        float spawnYPosition = Random.Range(lowestPoint, highestPoint);
+        Vector3 spawnPosition = new Vector3(transform.position.x + screenWidth, spawnYPosition, 0);  
+
+        GameObject newLog = Instantiate(log, spawnPosition, transform.rotation); 
 
         // Set the log's tag to "Log"
         newLog.tag = "Log";
 
-        // Add a collider for collisions (e.g., the owl hitting the log)
+        // Add a collision collider (BoxCollider2D) for physical collisions
         BoxCollider2D collisionCollider = newLog.AddComponent<BoxCollider2D>();
-        collisionCollider.isTrigger = false; // This is the collision collider
+        collisionCollider.isTrigger = false;  // Make sure it's a physical collider
 
-        // Add a second collider for the trigger (e.g., detecting when the owl passes the log)
-        //BoxCollider2D triggerCollider = newLog.AddComponent<BoxCollider2D>();
-       // triggerCollider.isTrigger = true; // This is the trigger collider for passing by
-
-        // Optionally set the tag for the trigger (if needed)
-        //newLog.tag = "LogTrigger";
-
+        // BoxCollider2D triggerCollider = newLog.AddComponent<BoxCollider2D>();
+        // triggerCollider.isTrigger = true;  // This would be a trigger for passing by
     }
-
-
 }
