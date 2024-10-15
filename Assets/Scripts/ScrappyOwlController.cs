@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 //Controller class 
@@ -11,18 +12,20 @@ public class ScrappyOwlController : MonoBehaviour
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
     public Button pauseButton;
-    public Slider musicSlider; 
+    public Slider musicSlider;
     public int score = 0;
     public TMP_Text scoreText;
+    public TMP_Text finalScoreText;
     public bool pauseGame = false;
     public bool gameOver = false;
     public bool hardMode = false;
-    public float musicVolume = 1.0f; 
+    public float musicVolume = 1.0f;
+
+    public LogSpawnerScript logSpawner;
+
 
     void Start()
     {
-
-
         owlView.HideAllPanels();
         // Show the home screen initially
         owlView.ShowHomeScreen();
@@ -40,13 +43,13 @@ public class ScrappyOwlController : MonoBehaviour
         if (!pauseGame && !gameOver && owlModel.isAlive)
         {
             // Handle input to make the owl jump
-           if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 if (!IsPauseButtonClicked())
                 {
                     owlModel.Jump();
                 }
-                
+
             }
 
 
@@ -61,10 +64,10 @@ public class ScrappyOwlController : MonoBehaviour
             owlView.UpdateOwlPosition(owlModel.GetPosition());
         }
     }
-    
+
     private bool IsPauseButtonClicked()
     {
-      
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             // Get the currently selected GameObject
@@ -73,39 +76,62 @@ public class ScrappyOwlController : MonoBehaviour
             // Check if the selected GameObject is the pause button
             if (currentSelected != null && currentSelected == pauseButton.gameObject)
             {
-                return true;  
+                return true;
             }
         }
-        return false; 
+        return false;
     }
 
 
-    // Method to increase score when owl passes by logs
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("LogTrigger"))
+        // Check if the collided object has the tag "Log" or if it is on the correct layer
+        if (other.CompareTag("LogTrigger"))  // Check if the object has the "Log" tag
+        {
+            IncreaseScore();  // Increase score when the owl passes the log
             Debug.Log("Owl passed the log!");
-        IncreaseScore();
+        }
     }
-// Method to show game over screen and update the score
+
+
     public void ShowGameOver()
     {
+        owlModel.isAlive = false;
         gameOver = true;
-        //SaveScore();
-        owlView.ShowGameOverScreen(score);
+        Time.timeScale = 0;  // Optional: stop the game time
+
+        // Call HideLogs from LogSpawnerScript
+        if (logSpawner != null)
+        {
+            logSpawner.HideLogs(); // Call the HideLogs method
+        }
+        else
+        {
+            Debug.LogError("LogSpawnerScript reference is not assigned in the Inspector.");
+        }
+
+        if (owlView != null)
+        {
+            owlView.ShowGameOverScreen(score);
+        }
+        else
+        {
+            Debug.LogError("ScrappyOwlView reference is not assigned in the Inspector.");
+        }
     }
 
-    // Handle owl's collision with branches
+
+    // Handle owl's collision with branches and logs
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // Check if the collided object has the tag "Log"
+        if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("Owl collided with a log!");
+            owlView.HideAllPanels();
 
-        Debug.Log("Owl collided with: " + collision.gameObject.name);
-
-        owlModel.isAlive = false;
-        Time.timeScale = 0;
-        ShowGameOver();
-        
+            ShowGameOver();
+        }
     }
 
     // Method when play button is clicked
@@ -171,14 +197,16 @@ public class ScrappyOwlController : MonoBehaviour
     // Method to start a new game
     public void NewGame()
     {
+        Time.timeScale = 1f;
         pauseGame = false;
         gameOver = false;
         score = 0;
         owlModel.ResetOwl();
+        owlView.UpdateOwlPosition(owlModel.GetPosition()); // Ensure view reflects the model's position
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
-   
+
 
     // Method to modeSelection
     public void ShowModeSelection()
@@ -237,7 +265,6 @@ public class ScrappyOwlController : MonoBehaviour
     public void IncreaseScore()
     {
         score++;
-        scoreText.text = score.ToString();
         owlView.UpdateScore(score);
     }
 
@@ -256,6 +283,4 @@ public class ScrappyOwlController : MonoBehaviour
     {
         musicVolume = value;
     }
-
-
 }

@@ -7,21 +7,22 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject homeScreen;
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
-   
+
     public GameObject settingScreen;
- 
+
     public GameObject gameScreen;
     public GameObject backButtonPrefab;
- 
+
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
 
     public TextMeshProUGUI scoreText;
-    public Text difficultyText;  
+    public TextMeshProUGUI finalScoreText;
+    public Text difficultyText;
 
     public GameObject owlSprite;
-    public GameObject[] logs; 
+    public GameObject[] logs;
 
     // Variables for storing current and previous panels
     private GameObject currentPanel;
@@ -36,7 +37,7 @@ public class ScrappyOwlView : MonoBehaviour
     void Start()
     {
         ShowHomeScreen();
-         if (owlAudioSource == null)
+        if (owlAudioSource == null)
         {
             owlAudioSource = GetComponent<AudioSource>();
         }
@@ -56,14 +57,14 @@ public class ScrappyOwlView : MonoBehaviour
         if (currentPanel != null)
         {
             currentPanel.SetActive(true);
-        }   
+        }
     }
 
     // Method to show home screen
     public void ShowHomeScreen()
     {
         ShowPanel(homeScreen);
-        
+
     }
 
     // Method to show the pause screen
@@ -74,16 +75,15 @@ public class ScrappyOwlView : MonoBehaviour
 
     public void ShowGameScreen()
     {
-        ShowPanel(gameScreen); 
+        ShowPanel(gameScreen);
     }
 
 
     // Method to show game over screen and score
     public void ShowGameOverScreen(int score)
     {
-        scoreText.text = "Game Over! Your score: " + score.ToString();
         ShowPanel(gameOverScreen);
-        
+        finalScoreText.text = score.ToString();
     }
 
 
@@ -109,24 +109,24 @@ public class ScrappyOwlView : MonoBehaviour
         else
         {
             difficultyText.text = "Difficulty: Easy";
-        }      
+        }
     }
 
     public void ShowSettingsScreen()
     {
-       ShowPanel(settingScreen);
+        ShowPanel(settingScreen);
     }
 
     public void ShowModeSelectionScreen()
     {
-       ShowPanel(modeSelectionScreen);
+        ShowPanel(modeSelectionScreen);
     }
 
-   public void ShowInstructionsScreen()
+    public void ShowInstructionsScreen()
     {
         ShowPanel(instructionsScreen);
     }
-    
+
 
 
     // Method for the Back Button to return users to previous panel
@@ -155,5 +155,5 @@ public class ScrappyOwlView : MonoBehaviour
     }
 
 
-   
+
 }
