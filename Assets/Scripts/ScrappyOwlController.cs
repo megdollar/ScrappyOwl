@@ -83,35 +83,16 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
 
-    // Method to increase score when owl passes by logs
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("LogTrigger"))
-            Debug.Log("Owl passed the log!");
-        IncreaseScore();
-    }
-
-    /*
-// Method to show game over screen and update the score
-    public void ShowGameOver()
-    {
-        gameOver = true;
-        SceneManager.LoadScene("GameOver");
-        Time.timeScale = 0;  // Optional: stop the game time
-    }
-
-    // Handle owl's collision with branches and logs
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if the collided object has the tag "Log"
-        if (collision.gameObject.CompareTag("Log"))
+        // Check if the collided object has the tag "Log" or if it is on the correct layer
+        if (other.CompareTag("LogTrigger"))  // Check if the object has the "Log" tag
         {
-            Debug.Log("Owl collided with a log!");
-            owlModel.isAlive = false;
-            ShowGameOver();
+            IncreaseScore();  // Increase score when the owl passes the log
+            Debug.Log("Owl passed the log!");
         }
-    } */
+    }
+
 
     public void ShowGameOver()
     {
@@ -144,7 +125,7 @@ public class ScrappyOwlController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the collided object has the tag "Log"
-        if (collision.gameObject.CompareTag("Log"))
+        if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
         {
             Debug.Log("Owl collided with a log!");
             owlView.HideAllPanels();
@@ -202,10 +183,12 @@ public class ScrappyOwlController : MonoBehaviour
     // Method to start a new game
     public void NewGame()
     {
+        Time.timeScale = 1f;
         pauseGame = false;
         gameOver = false;
         score = 0;
         owlModel.ResetOwl();
+        owlView.UpdateOwlPosition(owlModel.GetPosition()); // Ensure view reflects the model's position
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
@@ -268,8 +251,6 @@ public class ScrappyOwlController : MonoBehaviour
     public void IncreaseScore()
     {
         score++;
-        scoreText.text = score.ToString();
-        finalScoreText.text = score.ToString();
         owlView.UpdateScore(score);
     }
 

@@ -18,6 +18,7 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject modeSelectionScreen;
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI finalScoreText;
     public Text difficultyText;
 
     public GameObject owlSprite;
@@ -81,9 +82,8 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show game over screen and score
     public void ShowGameOverScreen(int score)
     {
-        //scoreText.text = "Game Over! Your score: " + score.ToString();
         ShowPanel(gameOverScreen);
-
+        finalScoreText.text = score.ToString();
     }
 
 
