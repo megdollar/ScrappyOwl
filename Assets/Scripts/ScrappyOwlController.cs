@@ -172,6 +172,7 @@ public class ScrappyOwlController : MonoBehaviour
         pauseGame = false;
         Time.timeScale = 1f;
         owlView.HideAllPanels();
+        owlView.ShowGameScreen();
     }
 
     // Method to quit the game
