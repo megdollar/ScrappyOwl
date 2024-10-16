@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ScrappyOwlModel : MonoBehaviour
 {
-
     // Variables for the game
     public Rigidbody2D owlRigidbody;
     // Jump force for easy mode
@@ -12,13 +11,10 @@ public class ScrappyOwlModel : MonoBehaviour
     public float easyGravity = .5f;
     public float hardGravity = 1.5f;
 
-
     // Tracks if owl is alive
     public bool isAlive = true;
     // Position of the owl
-
     public Vector2 startingPosition = new Vector2(0, 0); // Adjust this to your desired starting point
-
 
     // Easy by default
     private bool hardMode = true;
@@ -36,8 +32,6 @@ public class ScrappyOwlModel : MonoBehaviour
         owlRigidbody.gravityScale = hardMode ? hardGravity : easyGravity;
     }
 
-
-
     // Method to handle owl's jump
     public void Jump()
     {
@@ -49,29 +43,18 @@ public class ScrappyOwlModel : MonoBehaviour
     }
 
     // Method to reset the game
-    /*public void ResetOwl()
-    {
-        owlRigidbody.position = startingPosition; // Set to starting position
-        owlRigidbody.velocity = Vector2.zero; // Reset velocity
-        isAlive = true; // Reset alive state
-        
-    } */
-
-    public void ResetOwl()
+    public void ResetOwl(Vector2 newStartingPosition)
     {
         // Set both the transform and Rigidbody2D position to the starting position
-        //transform.position = startingPosition;
-        owlRigidbody.position = startingPosition;
-        owlRigidbody.velocity = Vector2.zero; // Reset velocity to avoid any movement after resetting
-        isAlive = true; // Set the owl to alive state
+        owlRigidbody.position = newStartingPosition; // Set to starting position
+        transform.position = newStartingPosition; // Set transform position
+        owlRigidbody.velocity = Vector2.zero; // Reset velocity
+        isAlive = true; // Reset alive state
     }
-
-
 
     // Method to get current position
     public Vector2 GetPosition()
     {
         return owlRigidbody.position;
     }
-
 }

@@ -153,7 +153,4 @@ public class ScrappyOwlView : MonoBehaviour
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
     }
-
-
-
 }
