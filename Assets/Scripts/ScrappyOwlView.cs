@@ -9,10 +9,8 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject gameOverScreen;
 
     public GameObject settingScreen;
-
     public GameObject gameScreen;
     public GameObject backButtonPrefab;
-
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
@@ -30,18 +28,29 @@ public class ScrappyOwlView : MonoBehaviour
 
     private int currentScore = 0;
 
-    public AudioSource owlAudioSource;
-
+    public AudioSource owlAudioSource; // Reference to the AudioSource
 
     // Method to show Home Screen by default
     void Start()
     {
-        ShowHomeScreen();
+        // Ensure the AudioSource is assigned
         if (owlAudioSource == null)
         {
             owlAudioSource = GetComponent<AudioSource>();
         }
 
+        // Play the music
+        if (owlAudioSource != null)
+        {
+            owlAudioSource.loop = true; // Loop the music
+            owlAudioSource.Play(); // Start playing the music
+        }
+        else
+        {
+            Debug.LogError("AudioSource component not found on the GameObject.");
+        }
+
+        ShowHomeScreen();
     }
 
     // Method to show a specific panel and track the previous panel
@@ -64,7 +73,6 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowHomeScreen()
     {
         ShowPanel(homeScreen);
-
     }
 
     // Method to show the pause screen
@@ -78,14 +86,12 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(gameScreen);
     }
 
-
     // Method to show game over screen and score
     public void ShowGameOverScreen(int score)
     {
         ShowPanel(gameOverScreen);
         finalScoreText.text = score.ToString();
     }
-
 
     // Update the owl's position
     public void UpdateOwlPosition(Vector2 position)
@@ -98,7 +104,6 @@ public class ScrappyOwlView : MonoBehaviour
     {
         scoreText.text = newScore.ToString();
     }
-
 
     public void UpdateDifficultyDisplay(bool hardMode)
     {
@@ -127,9 +132,7 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(instructionsScreen);
     }
 
-
-
-    // Method for the Back Button to return users to previous panel
+    // Method for the Back Button to return users to the previous panel
     public void BackToPreviousPanel()
     {
         if (previousPanel != null)
@@ -142,7 +145,7 @@ public class ScrappyOwlView : MonoBehaviour
         }
     }
 
-    // Hide all screens (used for resuming game or starting new one
+    // Hide all screens (used for resuming game or starting new one)
     public void HideAllPanels()
     {
         homeScreen.SetActive(false);
@@ -152,5 +155,15 @@ public class ScrappyOwlView : MonoBehaviour
         gameScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
+    }
+
+    // Method to update music volume
+    public void UpdateMusicVolume(float volume)
+    {
+        if (owlAudioSource != null)
+        {
+            owlAudioSource.volume = volume; // Set the volume
+            Debug.Log($"Music volume set to: {volume}");
+        }
     }
 }

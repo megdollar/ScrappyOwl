@@ -11,7 +11,7 @@ public class ScrappyOwlController : MonoBehaviour
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
     public Button pauseButton;
-    public Slider musicSlider;
+    public Slider musicSlider; // Reference to the music volume slider
     public int score = 0;
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
@@ -24,6 +24,7 @@ public class ScrappyOwlController : MonoBehaviour
 
     // Starting position for the owl
     private Vector2 startingPosition = new Vector2(44f, 12f); // Adjusted to Vector2
+    private AudioSource musicSource; // Reference to the audio source
 
     void Start()
     {
@@ -31,10 +32,26 @@ public class ScrappyOwlController : MonoBehaviour
         // Show the home screen initially
         owlView.ShowHomeScreen();
 
+        // Initialize the music volume from PlayerPrefs
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
-        // Initialize the game with beginning position
+        // Get the AudioSource component (ensure your GameObject has one)
+        musicSource = GetComponent<AudioSource>();
+        if (musicSource != null)
+        {
+            musicSource.volume = musicVolume; // Set the initial volume
+        }
+        else
+        {
+            Debug.LogError("AudioSource component not found on the GameObject.");
+        }
+
+        // Initialize the game with the beginning position
         ResetOwl();
+
+        // Set slider value and add listener
+        musicSlider.value = musicVolume; // Set slider to current volume
+        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged); // Add listener to handle volume change
     }
 
     void Update()
@@ -123,7 +140,6 @@ public class ScrappyOwlController : MonoBehaviour
         {
             Debug.Log("Owl collided with a log!");
             owlView.HideAllPanels();
-
             ShowGameOver();
         }
     }
@@ -255,10 +271,13 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowSettingsScreen();
     }
 
+    // Method to handle volume change from the slider
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
+        owlView.UpdateMusicVolume(musicVolume); // Update the view's audio source volume
     }
+
 
     // Method to quit the game
     public void QuitGame()
@@ -283,10 +302,4 @@ public class ScrappyOwlController : MonoBehaviour
     {
         owlView.ShowHomeScreen();
     }
-
-
 }
-
-
-
-
