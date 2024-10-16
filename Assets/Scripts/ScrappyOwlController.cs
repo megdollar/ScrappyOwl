@@ -172,12 +172,27 @@ public class ScrappyOwlController : MonoBehaviour
         pauseGame = false;
         Time.timeScale = 1f;
         owlView.HideAllPanels();
+        owlView.ShowGameScreen();
     }
 
     // Method to quit the game
     public void QuitGame()
     {
-        owlView.ShowHomeScreen();
+        // Handle Quitting based on platform (Unity Editor)
+        if (Application.isEditor)
+        {
+            EditorApplication.ExitPlaymode();
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor || 
+        Application.platform == RuntimePlatform.OSXEditor)
+        {
+            Application.Quit();
+        }
+        else
+        {
+            owlView.ShowHomeScreen();
+        }
+        
     }
 
     // Method to start a new game
