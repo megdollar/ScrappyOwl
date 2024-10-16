@@ -176,7 +176,7 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
     // Method to quit the game
-    public void QuitGame()
+    /* public void QuitGame()
     {
         // Handle Quitting based on platform (Unity Editor)
         if (Application.isEditor)
@@ -193,7 +193,7 @@ public class ScrappyOwlController : MonoBehaviour
             owlView.ShowHomeScreen();
         }
         
-    }
+    } */
 
     // Method to start a new game
     public void NewGame()
