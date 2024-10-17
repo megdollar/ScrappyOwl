@@ -13,6 +13,8 @@ public class ScrappyOwlController : MonoBehaviour
     public Slider musicSlider;
     public Slider flapSoundSlider;
     public int score = 0;
+    public TMP_Text scoreText;
+    public TMP_Text finalScoreText;
     public bool pauseGame = false;
     public bool gameOver = false;
     public bool hardMode = false;
@@ -97,8 +99,7 @@ public class ScrappyOwlController : MonoBehaviour
         if (other.CompareTag("LogTrigger"))
         {
             // Increase score when the owl passes the log
-            IncreaseScore(score);
-
+            IncreaseScore();
         }
     }
 
@@ -107,7 +108,7 @@ public class ScrappyOwlController : MonoBehaviour
         owlModel.isAlive = false;
         gameOver = true;
         Time.timeScale = 0;
-        owlView.UpdateScore(score);
+
         // Call HideLogs from LogSpawnerScript
         if (logSpawner != null)
         {
@@ -138,7 +139,6 @@ public class ScrappyOwlController : MonoBehaviour
         if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
         {
             owlView.HideAllPanels();
-            DecreaseScore(score);
             ShowGameOver();
         }
     }
@@ -246,22 +246,21 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
     // Method to decrease score
-    public void DecreaseScore(int score)
+    public void DecreaseScore()
     {
         if (score > 0)
         {
             score--;
-             owlView.UpdateScore(score);
         }
+        owlView.UpdateScore(score);
     }
 
     // Method to increment the score
     [ContextMenu("Increase Score")]
-    public void IncreaseScore(int score)
+    public void IncreaseScore()
     {
         score++;
         owlView.UpdateScore(score);
-
     }
 
     // Show Settings Screen method
