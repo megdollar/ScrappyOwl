@@ -42,10 +42,7 @@ public class ScrappyOwlController : MonoBehaviour
             // Set the volume
             musicSource.volume = musicVolume; 
         }
-        else
-        {
-            Debug.LogError("AudioSource component not found on the GameObject.");
-        }
+        
 
         // Initialize the game with the beginning position
         owlModel.ResetOwl(startingPosition);
@@ -118,19 +115,13 @@ public class ScrappyOwlController : MonoBehaviour
         {
             logSpawner.HideLogs();
         }
-        else
-        {
-            Debug.LogError("LogSpawnerScript reference is not assigned in the Inspector.");
-        }
+
 
         if (owlView != null)
         {
             owlView.ShowGameOverScreen(score);
         }
-        else
-        {
-            Debug.LogError("ScrappyOwlView reference is not assigned in the Inspector.");
-        }
+        
     }
 
     // Handle owl's collision with branches and logs
