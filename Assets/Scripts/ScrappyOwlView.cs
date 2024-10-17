@@ -39,8 +39,8 @@ public class ScrappyOwlView : MonoBehaviour
         // Play the music
         if (owlAudioSource != null)
         {
-            owlAudioSource.loop = true; 
-            owlAudioSource.Play(); 
+            owlAudioSource.loop = true;
+            owlAudioSource.Play();
         }
 
 
@@ -84,7 +84,6 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowGameOverScreen(int score)
     {
         ShowPanel(gameOverScreen);
-        finalScoreText.text = score.ToString();
     }
 
     // Update the owl's position
@@ -97,6 +96,7 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         scoreText.text = newScore.ToString();
+        finalScoreText.text = newScore.ToString();
     }
 
 
