@@ -42,10 +42,7 @@ public class ScrappyOwlView : MonoBehaviour
             owlAudioSource.loop = true; 
             owlAudioSource.Play(); 
         }
-        else
-        {
-            Debug.LogError("AudioSource component not found on the GameObject.");
-        }
+
 
         ShowHomeScreen();
     }
