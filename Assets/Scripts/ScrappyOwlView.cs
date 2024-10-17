@@ -10,14 +10,12 @@ public class ScrappyOwlView : MonoBehaviour
 
     public GameObject settingScreen;
     public GameObject gameScreen;
-    public GameObject backButtonPrefab;
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI finalScoreText;
-    public Text difficultyText;
 
     public GameObject owlSprite;
 
@@ -39,8 +37,8 @@ public class ScrappyOwlView : MonoBehaviour
         // Play the music
         if (owlAudioSource != null)
         {
-            owlAudioSource.loop = true;
-            owlAudioSource.Play();
+            owlAudioSource.loop = true; 
+            owlAudioSource.Play(); 
         }
 
 
@@ -84,6 +82,8 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowGameOverScreen(int score)
     {
         ShowPanel(gameOverScreen);
+                 finalScoreText.text = score.ToString();
+
     }
 
     // Update the owl's position
@@ -96,8 +96,10 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         scoreText.text = newScore.ToString();
-        finalScoreText.text = newScore.ToString();
+
+
     }
+
 
 
     public void ShowSettingsScreen()
