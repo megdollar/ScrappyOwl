@@ -279,24 +279,21 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
 
-    // Method to quit the game
     public void QuitGame()
     {
         // Log the action for debugging
         Debug.Log("Quitting the game.");
 
         // Check if the application is running in the editor
-        if (Application.isEditor)
-        {
-            // If in the Unity editor, exit play mode
-            UnityEditor.EditorApplication.ExitPlaymode();
-        }
-        else
-        {
-            // If in a built application, quit the application
-            Application.Quit();
-        }
+#if UNITY_EDITOR
+        // If in the Unity editor, exit play mode
+        UnityEditor.EditorApplication.ExitPlaymode();
+#else
+        // If in a built application, quit the application
+        Application.Quit();
+#endif
     }
+
 
     public void MainMenuButton()
     {
