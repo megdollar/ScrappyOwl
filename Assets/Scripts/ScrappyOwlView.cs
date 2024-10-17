@@ -7,7 +7,6 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject homeScreen;
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
-
     public GameObject settingScreen;
     public GameObject gameScreen;
     public GameObject backButtonPrefab;
@@ -20,11 +19,8 @@ public class ScrappyOwlView : MonoBehaviour
     public Text difficultyText;
 
     public GameObject owlSprite;
-
-    // New variable for flap sound AudioSource
     public AudioSource flapAudioSource;
 
-    // Variables for storing current and previous panels
     private GameObject currentPanel;
     private GameObject previousPanel;
 
@@ -33,7 +29,6 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show Home Screen by default
     void Start()
     {
-        // Ensure the AudioSources are assigned
         if (owlAudioSource == null)
         {
             owlAudioSource = GetComponent<AudioSource>();
@@ -82,12 +77,13 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(pauseScreen);
     }
 
+    // Method to show game screen
     public void ShowGameScreen()
     {
         ShowPanel(gameScreen);
     }
 
-    // Method to show game over screen and score
+    // Method to show game-over screen and score
     public void ShowGameOverScreen(int score)
     {
         finalScoreText.text = score.ToString();
@@ -107,16 +103,19 @@ public class ScrappyOwlView : MonoBehaviour
 
     }
 
+    // Method to show the settings screen
     public void ShowSettingsScreen()
     {
         ShowPanel(settingScreen);
     }
 
+    // Method to show the mode selection screen
     public void ShowModeSelectionScreen()
     {
         ShowPanel(modeSelectionScreen);
     }
 
+    // Method to show the instructions screen
     public void ShowInstructionsScreen()
     {
         ShowPanel(instructionsScreen);
@@ -152,7 +151,7 @@ public class ScrappyOwlView : MonoBehaviour
     {
         if (owlAudioSource != null)
         {
-            owlAudioSource.volume = volume; // Set the volume
+            owlAudioSource.volume = volume;
         }
     }
 
@@ -161,7 +160,7 @@ public class ScrappyOwlView : MonoBehaviour
     {
         if (flapAudioSource != null)
         {
-            flapAudioSource.volume = volume; // Set the volume
+            flapAudioSource.volume = volume;
         }
         else
         {

@@ -10,7 +10,7 @@ public class ScrappyOwlModel : MonoBehaviour
     public bool isAlive = true;
     private bool hardMode = true;
 
-    public AudioSource flapSound; // Reference to the audio source for flapping
+    public AudioSource flapSound;
 
     private ScrappyOwlController gameController;
 
@@ -19,7 +19,6 @@ public class ScrappyOwlModel : MonoBehaviour
         owlRigidbody = GetComponent<Rigidbody2D>();
         SetDifficulty(false);
 
-        // Get reference to the game controller
         gameController = FindObjectOfType<ScrappyOwlController>();
     }
 
@@ -35,7 +34,6 @@ public class ScrappyOwlModel : MonoBehaviour
             float jumpForce = hardMode ? hardJump : easyJump;
             owlRigidbody.velocity = Vector2.up * jumpForce;
 
-            // Play flap sound only if the game is in progress
             if (flapSound != null && gameController != null && !gameController.gameOver)
             {
                 flapSound.Play();

@@ -7,12 +7,11 @@ using UnityEngine.SceneManagement;
 // Controller class 
 public class ScrappyOwlController : MonoBehaviour
 {
-    // Link to model, view, easy mode, hard mode and set initial score to 0
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
     public Button pauseButton;
     public Slider musicSlider;
-    public Slider flapSoundSlider; // New slider for flap sound
+    public Slider flapSoundSlider;
     public int score = 0;
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
@@ -20,7 +19,7 @@ public class ScrappyOwlController : MonoBehaviour
     public bool gameOver = false;
     public bool hardMode = false;
     public float musicVolume = 1.0f;
-    public float flapSoundVolume = 1.0f; // New variable for flap sound volume
+    public float flapSoundVolume = 1.0f;
 
     public LogSpawnerScript logSpawner;
 
@@ -34,11 +33,9 @@ public class ScrappyOwlController : MonoBehaviour
         // Show the home screen initially
         owlView.ShowHomeScreen();
 
-        // Get the AudioSource component (ensure your GameObject has one)
         musicSource = GetComponent<AudioSource>();
         if (musicSource != null)
         {
-            // Set the volume
             musicSource.volume = musicVolume;
         }
 
@@ -49,36 +46,35 @@ public class ScrappyOwlController : MonoBehaviour
         musicSlider.value = musicVolume;
         musicSlider.onValueChanged.AddListener(OnMusicSliderChanged);
 
-        flapSoundSlider.value = flapSoundVolume; // Set initial value for flap sound slider
-        flapSoundSlider.onValueChanged.AddListener(OnFlapSoundSliderChanged); // Add listener for flap sound slider
-    }
+        flapSoundSlider.value = flapSoundVolume;
+        flapSoundSlider.onValueChanged.AddListener(OnFlapSoundSliderChanged);
 
-    void Update()
-    {
-        // Update the game if it is not paused/game over
-        if (!pauseGame && !gameOver && owlModel.isAlive)
+        void Update()
         {
-            // Handle input to make the owl jump
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            // Update the game if it is not paused/game over
+            if (!pauseGame && !gameOver && owlModel.isAlive)
             {
-                if (!IsPauseButtonClicked())
+                // Handle input to make the owl jump
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 {
-                    owlModel.Jump();
-                    owlView.flapAudioSource.Play(); // Play flap sound
+                    if (!IsPauseButtonClicked())
+                    {
+                        owlModel.Jump();
+                        owlView.flapAudioSource.Play(); // Play flap sound
+                    }
                 }
-            }
 
-            // Check if the owl is still alive
-            if (!owlModel.isAlive)
-            {
-                // If dead, game over
-                ShowGameOver();
-            }
+                // Check if the owl is still alive
+                if (!owlModel.isAlive)
+                {
+                    // If dead, game over
+                    ShowGameOver();
+                }
 
-            // Update the owl's position and view each frame
-            owlView.UpdateOwlPosition(owlModel.GetPosition());
+                // Update the owl's position and view each frame
+                owlView.UpdateOwlPosition(owlModel.GetPosition());
+            }
         }
-    }
 
     private bool IsPauseButtonClicked()
     {
@@ -149,12 +145,11 @@ public class ScrappyOwlController : MonoBehaviour
     public void PlayGame()
     {
         Time.timeScale = 1f;
-        score = 0; // Reset score when starting the game
-        owlView.UpdateScore(score); // Update the score UI
+        score = 0;
+        owlView.UpdateScore(score);
 
         if (pauseGame)
         {
-            // The game was paused, keep playing
             ResumeGame();
         }
         else
@@ -184,19 +179,32 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowGameScreen();
     }
 
+    // Method to start a new game
     public void NewGame()
     {
         Time.timeScale = 1f;
         pauseGame = false;
         gameOver = false;
         score = 0;
-        owlView.UpdateScore(score); // Ensure the score UI reflects the reset value
+        owlView.UpdateScore(score);
         owlModel.ResetOwl(startingPosition);
 
-        // Ensure view reflects the model's position
         owlView.UpdateOwlPosition(owlModel.GetPosition());
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
+    }
+
+    // Method to reset the game state
+    public void ResetGameState()
+    {
+        Time.timeScale = 1f;
+        pauseGame = false;
+        gameOver = false;
+        score = 0;
+        owlView.UpdateScore(score);
+        owlModel.ResetOwl(startingPosition);
+
+        owlView.UpdateOwlPosition(owlModel.GetPosition());
     }
 
 
@@ -266,7 +274,7 @@ public class ScrappyOwlController : MonoBehaviour
     {
         musicVolume = value;
         owlView.UpdateMusicVolume(musicVolume);
-        PlayerPrefs.SetFloat("MusicVolume", musicVolume); // Save music volume
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
     }
 
     // Method to handle volume change from the flap sound slider
@@ -274,7 +282,7 @@ public class ScrappyOwlController : MonoBehaviour
     {
         flapSoundVolume = value;
         owlView.UpdateFlapSoundVolume(flapSoundVolume);
-        PlayerPrefs.SetFloat("FlapSoundVolume", flapSoundVolume); // Save flap sound volume
+        PlayerPrefs.SetFloat("FlapSoundVolume", flapSoundVolume);
     }
 
     public void QuitGame()
@@ -291,6 +299,7 @@ public class ScrappyOwlController : MonoBehaviour
 
     public void MainMenuButton()
     {
+        ResetGameState();
         owlView.ShowHomeScreen();
     }
 }
