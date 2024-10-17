@@ -11,7 +11,7 @@ public class ScrappyOwlController : MonoBehaviour
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
     public Button pauseButton;
-    public Slider musicSlider; 
+    public Slider musicSlider;
     public int score = 0;
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
@@ -24,7 +24,7 @@ public class ScrappyOwlController : MonoBehaviour
 
     // Starting position for the owl
     private Vector2 startingPosition = new Vector2(44f, 12f);
-    private AudioSource musicSource; 
+    private AudioSource musicSource;
 
     void Start()
     {
@@ -40,16 +40,16 @@ public class ScrappyOwlController : MonoBehaviour
         if (musicSource != null)
         {
             // Set the volume
-            musicSource.volume = musicVolume; 
+            musicSource.volume = musicVolume;
         }
-        
+
 
         // Initialize the game with the beginning position
         owlModel.ResetOwl(startingPosition);
 
         // Set slider value and add listener
-        musicSlider.value = musicVolume; 
-        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged); 
+        musicSlider.value = musicVolume;
+        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged);
     }
 
     void Update()
@@ -97,10 +97,10 @@ public class ScrappyOwlController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collided object has the tag "Log" or if it is on the correct layer
-        if (other.CompareTag("LogTrigger"))  
+        if (other.CompareTag("LogTrigger"))
         {
             // Increase score when the owl passes the log
-            IncreaseScore();  
+            IncreaseScore();
         }
     }
 
@@ -108,7 +108,7 @@ public class ScrappyOwlController : MonoBehaviour
     {
         owlModel.isAlive = false;
         gameOver = true;
-        Time.timeScale = 0;  
+        Time.timeScale = 0;
 
         // Call HideLogs from LogSpawnerScript
         if (logSpawner != null)
@@ -121,7 +121,7 @@ public class ScrappyOwlController : MonoBehaviour
         {
             owlView.ShowGameOverScreen(score);
         }
-        
+
     }
 
     // Handle owl's collision with branches and logs
@@ -144,7 +144,7 @@ public class ScrappyOwlController : MonoBehaviour
             // The game was paused, keep playing
             ResumeGame();
         }
-        else 
+        else
         {
             NewGame();
         }
@@ -177,7 +177,7 @@ public class ScrappyOwlController : MonoBehaviour
         pauseGame = false;
         gameOver = false;
         score = 0;
-
+        owlView.UpdateScore(0);
         owlModel.ResetOwl(startingPosition);
 
         // Ensure view reflects the model's position
@@ -251,13 +251,13 @@ public class ScrappyOwlController : MonoBehaviour
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
-        owlView.UpdateMusicVolume(musicVolume); 
+        owlView.UpdateMusicVolume(musicVolume);
     }
 
 
     public void QuitGame()
     {
-        
+
         // Check if the application is running in the editor
 #if UNITY_EDITOR
         // If in the Unity editor, exit play mode
