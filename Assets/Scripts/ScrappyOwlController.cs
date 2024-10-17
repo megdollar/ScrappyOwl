@@ -48,33 +48,34 @@ public class ScrappyOwlController : MonoBehaviour
 
         flapSoundSlider.value = flapSoundVolume;
         flapSoundSlider.onValueChanged.AddListener(OnFlapSoundSliderChanged);
+    }
 
-        void Update()
+    void Update()
+    {
+        // Update the game if it is not paused/game over
+        if (!pauseGame && !gameOver && owlModel.isAlive)
         {
-            // Update the game if it is not paused/game over
-            if (!pauseGame && !gameOver && owlModel.isAlive)
+            // Handle input to make the owl jump
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                // Handle input to make the owl jump
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                if (!IsPauseButtonClicked())
                 {
-                    if (!IsPauseButtonClicked())
-                    {
-                        owlModel.Jump();
-                        owlView.flapAudioSource.Play(); // Play flap sound
-                    }
+                    owlModel.Jump();
+                    owlView.flapAudioSource.Play(); // Play flap sound
                 }
-
-                // Check if the owl is still alive
-                if (!owlModel.isAlive)
-                {
-                    // If dead, game over
-                    ShowGameOver();
-                }
-
-                // Update the owl's position and view each frame
-                owlView.UpdateOwlPosition(owlModel.GetPosition());
             }
+
+            // Check if the owl is still alive
+            if (!owlModel.isAlive)
+            {
+                // If dead, game over
+                ShowGameOver();
+            }
+
+            // Update the owl's position and view each frame
+            owlView.UpdateOwlPosition(owlModel.GetPosition());
         }
+    }
 
     private bool IsPauseButtonClicked()
     {
