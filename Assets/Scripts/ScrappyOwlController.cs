@@ -157,6 +157,11 @@ public class ScrappyOwlController : MonoBehaviour
         {
             NewGame();
         }
+
+        if (owlView.flapAudioSource != null)
+        {
+            owlView.flapAudioSource.enabled = true;
+        }
     }
 
 

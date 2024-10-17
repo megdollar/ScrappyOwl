@@ -69,6 +69,10 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowHomeScreen()
     {
         ShowPanel(homeScreen);
+        if (flapAudioSource != null)
+        {
+            flapAudioSource.enabled = false;
+        }
     }
 
     // Method to show the pause screen

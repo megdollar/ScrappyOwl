@@ -33,11 +33,6 @@ public class ScrappyOwlModel : MonoBehaviour
         {
             float jumpForce = hardMode ? hardJump : easyJump;
             owlRigidbody.velocity = Vector2.up * jumpForce;
-
-            if (flapSound != null && gameController != null && !gameController.gameOver)
-            {
-                flapSound.Play();
-            }
         }
     }
 
