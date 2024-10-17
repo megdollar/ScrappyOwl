@@ -21,6 +21,9 @@ public class ScrappyOwlView : MonoBehaviour
 
     public GameObject owlSprite;
 
+    // New variable for flap sound AudioSource
+    public AudioSource flapAudioSource;
+
     // Variables for storing current and previous panels
     private GameObject currentPanel;
     private GameObject previousPanel;
@@ -30,10 +33,15 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show Home Screen by default
     void Start()
     {
-        // Ensure the AudioSource is assigned
+        // Ensure the AudioSources are assigned
         if (owlAudioSource == null)
         {
             owlAudioSource = GetComponent<AudioSource>();
+        }
+
+        if (flapAudioSource == null)
+        {
+            flapAudioSource = GetComponent<AudioSource>();
         }
 
         // Play the music
@@ -42,7 +50,6 @@ public class ScrappyOwlView : MonoBehaviour
             owlAudioSource.loop = true;
             owlAudioSource.Play();
         }
-
 
         ShowHomeScreen();
     }
@@ -99,7 +106,6 @@ public class ScrappyOwlView : MonoBehaviour
         finalScoreText.text = newScore.ToString();
     }
 
-
     public void ShowSettingsScreen()
     {
         ShowPanel(settingScreen);
@@ -146,6 +152,19 @@ public class ScrappyOwlView : MonoBehaviour
         if (owlAudioSource != null)
         {
             owlAudioSource.volume = volume; // Set the volume
+        }
+    }
+
+    // Method to update flap sound volume
+    public void UpdateFlapSoundVolume(float volume)
+    {
+        if (flapAudioSource != null)
+        {
+            flapAudioSource.volume = volume; // Set the volume
+        }
+        else
+        {
+            Debug.LogWarning("Flap AudioSource is not assigned.");
         }
     }
 }

@@ -511,6 +511,7 @@ MonoBehaviour:
   finalScoreText: {fileID: 1543516776}
   difficultyText: {fileID: 0}
   owlSprite: {fileID: 1576551560}
+  flapAudioSource: {fileID: 1133360523}
   owlAudioSource: {fileID: 655540480}
 --- !u!4 &86818215
 Transform:
@@ -2064,6 +2065,7 @@ MonoBehaviour:
   owlView: {fileID: 86818214}
   pauseButton: {fileID: 950738368}
   musicSlider: {fileID: 1424293124}
+  flapSoundSlider: {fileID: 1106566224}
   score: 0
   scoreText: {fileID: 2020153246}
   finalScoreText: {fileID: 1543516776}
@@ -2071,6 +2073,7 @@ MonoBehaviour:
   gameOver: 0
   hardMode: 0
   musicVolume: 1
+  flapSoundVolume: 1
   logSpawner: {fileID: 1273664183}
 --- !u!4 &675769065
 Transform:
@@ -4508,7 +4511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -33.00003, y: 0}
+  m_AnchoredPosition: {x: -33, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462501245
@@ -5019,6 +5022,7 @@ MonoBehaviour:
   finalScoreText: {fileID: 0}
   difficultyText: {fileID: 0}
   owlSprite: {fileID: 0}
+  flapAudioSource: {fileID: 0}
   owlAudioSource: {fileID: 0}
 --- !u!1 &1576551560
 GameObject:
@@ -5205,6 +5209,7 @@ MonoBehaviour:
   owlView: {fileID: 86818214}
   pauseButton: {fileID: 0}
   musicSlider: {fileID: 0}
+  flapSoundSlider: {fileID: 0}
   score: 0
   scoreText: {fileID: 0}
   finalScoreText: {fileID: 0}
@@ -5212,6 +5217,7 @@ MonoBehaviour:
   gameOver: 0
   hardMode: 0
   musicVolume: 1
+  flapSoundVolume: 1
   logSpawner: {fileID: 1273664183}
 --- !u!1 &1586462941
 GameObject:
@@ -5952,7 +5958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -33.00003, y: 0}
+  m_AnchoredPosition: {x: -33, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1877998276
@@ -6067,7 +6073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -33.00003, y: 0}
+  m_AnchoredPosition: {x: -33, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1920223913
