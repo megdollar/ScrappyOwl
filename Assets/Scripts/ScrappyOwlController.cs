@@ -4,15 +4,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-
-//Controller class 
+// Controller class 
 public class ScrappyOwlController : MonoBehaviour
 {
     // Link to model, view, easy mode, hard mode and set initial score to 0
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
     public Button pauseButton;
-    public Slider musicSlider;
+    public Slider musicSlider; 
     public int score = 0;
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
@@ -23,6 +22,9 @@ public class ScrappyOwlController : MonoBehaviour
 
     public LogSpawnerScript logSpawner;
 
+    // Starting position for the owl
+    private Vector2 startingPosition = new Vector2(44f, 12f);
+    private AudioSource musicSource; 
 
     void Start()
     {
@@ -30,11 +32,24 @@ public class ScrappyOwlController : MonoBehaviour
         // Show the home screen initially
         owlView.ShowHomeScreen();
 
+        // Initialize the music volume from PlayerPrefs
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
-        // Initialize the game with beginning position
-        owlModel.ResetOwl();
-        owlView.UpdateOwlPosition(owlModel.GetPosition());
+        // Get the AudioSource component (ensure your GameObject has one)
+        musicSource = GetComponent<AudioSource>();
+        if (musicSource != null)
+        {
+            // Set the volume
+            musicSource.volume = musicVolume; 
+        }
+        
+
+        // Initialize the game with the beginning position
+        owlModel.ResetOwl(startingPosition);
+
+        // Set slider value and add listener
+        musicSlider.value = musicVolume; 
+        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged); 
     }
 
     void Update()
@@ -49,9 +64,7 @@ public class ScrappyOwlController : MonoBehaviour
                 {
                     owlModel.Jump();
                 }
-
             }
-
 
             // Check if the owl is still alive
             if (!owlModel.isAlive)
@@ -67,7 +80,6 @@ public class ScrappyOwlController : MonoBehaviour
 
     private bool IsPauseButtonClicked()
     {
-
         if (EventSystem.current.IsPointerOverGameObject())
         {
             // Get the currently selected GameObject
@@ -82,44 +94,35 @@ public class ScrappyOwlController : MonoBehaviour
         return false;
     }
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collided object has the tag "Log" or if it is on the correct layer
-        if (other.CompareTag("LogTrigger"))  // Check if the object has the "Log" tag
+        if (other.CompareTag("LogTrigger"))  
         {
-            IncreaseScore();  // Increase score when the owl passes the log
-            Debug.Log("Owl passed the log!");
+            // Increase score when the owl passes the log
+            IncreaseScore();  
         }
     }
-
 
     public void ShowGameOver()
     {
         owlModel.isAlive = false;
         gameOver = true;
-        Time.timeScale = 0;  // Optional: stop the game time
+        Time.timeScale = 0;  
 
         // Call HideLogs from LogSpawnerScript
         if (logSpawner != null)
         {
-            logSpawner.HideLogs(); // Call the HideLogs method
+            logSpawner.HideLogs();
         }
-        else
-        {
-            Debug.LogError("LogSpawnerScript reference is not assigned in the Inspector.");
-        }
+
 
         if (owlView != null)
         {
             owlView.ShowGameOverScreen(score);
         }
-        else
-        {
-            Debug.LogError("ScrappyOwlView reference is not assigned in the Inspector.");
-        }
+        
     }
-
 
     // Handle owl's collision with branches and logs
     void OnCollisionEnter2D(Collision2D collision)
@@ -127,9 +130,7 @@ public class ScrappyOwlController : MonoBehaviour
         // Check if the collided object has the tag "Log"
         if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Owl collided with a log!");
             owlView.HideAllPanels();
-
             ShowGameOver();
         }
     }
@@ -143,14 +144,8 @@ public class ScrappyOwlController : MonoBehaviour
             // The game was paused, keep playing
             ResumeGame();
         }
-        else if (gameOver)
+        else 
         {
-            // Reset and start the game
-            NewGame();
-        }
-        else
-        {
-            // Start game from home screen
             NewGame();
         }
     }
@@ -175,26 +170,6 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowGameScreen();
     }
 
-    // Method to quit the game
-    public void QuitGame()
-    {
-        // Handle Quitting based on platform (Unity Editor)
-        if (Application.isEditor)
-        {
-            EditorApplication.ExitPlaymode();
-        }
-        else if (Application.platform == RuntimePlatform.WindowsEditor || 
-        Application.platform == RuntimePlatform.OSXEditor)
-        {
-            Application.Quit();
-        }
-        else
-        {
-            owlView.ShowHomeScreen();
-        }
-        
-    }
-
     // Method to start a new game
     public void NewGame()
     {
@@ -202,8 +177,11 @@ public class ScrappyOwlController : MonoBehaviour
         pauseGame = false;
         gameOver = false;
         score = 0;
-        owlModel.ResetOwl();
-        owlView.UpdateOwlPosition(owlModel.GetPosition()); // Ensure view reflects the model's position
+
+        owlModel.ResetOwl(startingPosition);
+
+        // Ensure view reflects the model's position
+        owlView.UpdateOwlPosition(owlModel.GetPosition());
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
@@ -212,22 +190,14 @@ public class ScrappyOwlController : MonoBehaviour
     // Method to modeSelection
     public void ShowModeSelection()
     {
-
         owlView.ShowModeSelectionScreen();
-
-
     }
 
     // Method to instructions
     public void showInstructions()
     {
-
         owlView.ShowInstructionsScreen();
-
-
     }
-
-
 
     // Method for Easy Mode
     public void StartEasyMode()
@@ -235,7 +205,6 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);
-
         PlayGame();
     }
 
@@ -245,7 +214,6 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true);
-
         PlayGame();
     }
 
@@ -258,8 +226,6 @@ public class ScrappyOwlController : MonoBehaviour
         }
         owlView.UpdateScore(score);
     }
-
-
 
     // Method to increment the score
     [ContextMenu("Increase Score")]
@@ -274,14 +240,37 @@ public class ScrappyOwlController : MonoBehaviour
     {
         // Pause if game is playing
         if (!pauseGame)
+        {
             PauseGame();
+        }
 
         owlView.ShowSettingsScreen();
     }
 
-
+    // Method to handle volume change from the slider
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
+        owlView.UpdateMusicVolume(musicVolume); 
+    }
+
+
+    public void QuitGame()
+    {
+        
+        // Check if the application is running in the editor
+#if UNITY_EDITOR
+        // If in the Unity editor, exit play mode
+        UnityEditor.EditorApplication.ExitPlaymode();
+#else
+        // If in a built application, quit the application
+        Application.Quit();
+#endif
+    }
+
+
+    public void MainMenuButton()
+    {
+        owlView.ShowHomeScreen();
     }
 }
