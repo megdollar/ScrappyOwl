@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class LogMoveScript : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed at which the log moves to the left
-    public float deadZone = -45f; // Position beyond which the log is deleted
-    public float deleteDelay = 2f; // Delay before the log is destroyed
+    // Speed at which the log moves to the left
+    public float moveSpeed = 5f; 
+
+    // Position beyond which the log is deleted
+    public float deadZone = -45f; 
+    // Delay before the log is destroyed
+    public float deleteDelay = 2f; 
 
     private bool isDeleting = false; 
 

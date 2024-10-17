@@ -9,28 +9,32 @@ public class LogSpawnerScript : MonoBehaviour
     private float timer = 0f;
     public float heightOffset = 1f;
 
-    // Define a fixed lower range and an increased upper range for log heights
-    public float minLogHeight = -3f;  // Minimum height offset from the center
-    public float maxLogHeight = 6f;    // Maximum height offset from the center
+    // Minimum height offset from the center
+    public float minLogHeight = -3f;  
+     // Maximum height offset from the center
+    public float maxLogHeight = 6f;   
 
-    // Add this line to declare the logs list
-    private List<GameObject> logs = new List<GameObject>(); // List to keep track of logs
-
+   // List to keep track of logs
+    private List<GameObject> logs = new List<GameObject>(); 
     void Start()
     {
-        spawnLog();  // Spawn an initial log at the start
+         // Spawn an initial log at the start
+        spawnLog(); 
     }
 
     void Update()
     {
         if (timer < spawnRate)
         {
-            timer += Time.deltaTime;  // Increment timer
+            // Increment timer
+            timer += Time.deltaTime;  
         }
         else
         {
-            spawnLog();  // Spawn a new log
-            timer = 0f;  // Reset the timer
+            // Spawn a new log
+            spawnLog();  
+            // Reset the timer
+            timer = 0f;  
         }
     }
 
@@ -44,17 +48,16 @@ public class LogSpawnerScript : MonoBehaviour
         // Set a random Y position, allowing more height but keeping the lower limit
         float spawnYPosition = Random.Range(centerY + minLogHeight, centerY + maxLogHeight);
 
-        // Debug log to see the spawn position
-        Debug.Log($"Spawn Y Position: {spawnYPosition}");
-
         Vector3 spawnPosition = new Vector3(transform.position.x + cam.orthographicSize * cam.aspect, spawnYPosition, 0);
 
         GameObject newLog = Instantiate(log, spawnPosition, transform.rotation);
         newLog.tag = "Log";
-        logs.Add(newLog); // Add the new log to the list
+        // Add the new log to the list
+        logs.Add(newLog); 
 
         BoxCollider2D collisionCollider = newLog.AddComponent<BoxCollider2D>();
-        collisionCollider.isTrigger = false;  // Make sure it's a physical collider
+        // Make sure it's a physical collider
+        collisionCollider.isTrigger = false;  
     }
 
     // Make sure to include the HideLogs method you previously wrote
@@ -62,11 +65,14 @@ public class LogSpawnerScript : MonoBehaviour
     {
         foreach (GameObject log in logs)
         {
-            if (log != null) // Check if the log still exists
+            // Check if the log still exists
+            if (log != null) 
             {
-                Destroy(log); // Destroy the log GameObject
+                // Destroy the log GameObject
+                Destroy(log); 
             }
         }
-        logs.Clear(); // Clear the list after destroying the logs
+         // Clear the list after destroying the logs
+        logs.Clear();
     }
 }

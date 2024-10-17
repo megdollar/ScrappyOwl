@@ -12,17 +12,16 @@ public class ScrappyOwlModel : MonoBehaviour
     public float hardGravity = 1.5f;
 
     // Tracks if owl is alive
-    public bool isAlive = true;
-    // Position of the owl
-    public Vector2 startingPosition = new Vector2(0, 0); // Adjust this to your desired starting point
+    public bool isAlive = true;    
 
     // Easy by default
     private bool hardMode = true;
 
     private void Start()
     {
-        owlRigidbody = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D attached to the owl
-        SetDifficulty(false);  // Start in easy mode by default
+        owlRigidbody = GetComponent<Rigidbody2D>();
+        // Start in easy mode by default  
+        SetDifficulty(false); 
     }
 
     // Method to change difficulty
@@ -46,10 +45,10 @@ public class ScrappyOwlModel : MonoBehaviour
     public void ResetOwl(Vector2 newStartingPosition)
     {
         // Set both the transform and Rigidbody2D position to the starting position
-        owlRigidbody.position = newStartingPosition; // Set to starting position
-        transform.position = newStartingPosition; // Set transform position
-        owlRigidbody.velocity = Vector2.zero; // Reset velocity
-        isAlive = true; // Reset alive state
+        owlRigidbody.position = newStartingPosition; 
+        transform.position = newStartingPosition; 
+        owlRigidbody.velocity = Vector2.zero; 
+        isAlive = true; 
     }
 
     // Method to get current position

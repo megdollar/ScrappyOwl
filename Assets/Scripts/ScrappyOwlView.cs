@@ -20,15 +20,12 @@ public class ScrappyOwlView : MonoBehaviour
     public Text difficultyText;
 
     public GameObject owlSprite;
-    public GameObject[] logs;
 
     // Variables for storing current and previous panels
     private GameObject currentPanel;
     private GameObject previousPanel;
 
-    private int currentScore = 0;
-
-    public AudioSource owlAudioSource; // Reference to the AudioSource
+    public AudioSource owlAudioSource;
 
     // Method to show Home Screen by default
     void Start()
@@ -42,8 +39,8 @@ public class ScrappyOwlView : MonoBehaviour
         // Play the music
         if (owlAudioSource != null)
         {
-            owlAudioSource.loop = true; // Loop the music
-            owlAudioSource.Play(); // Start playing the music
+            owlAudioSource.loop = true; 
+            owlAudioSource.Play(); 
         }
         else
         {
@@ -105,17 +102,6 @@ public class ScrappyOwlView : MonoBehaviour
         scoreText.text = newScore.ToString();
     }
 
-    public void UpdateDifficultyDisplay(bool hardMode)
-    {
-        if (hardMode)
-        {
-            difficultyText.text = "Difficulty: Hard";
-        }
-        else
-        {
-            difficultyText.text = "Difficulty: Easy";
-        }
-    }
 
     public void ShowSettingsScreen()
     {
@@ -163,7 +149,6 @@ public class ScrappyOwlView : MonoBehaviour
         if (owlAudioSource != null)
         {
             owlAudioSource.volume = volume; // Set the volume
-            Debug.Log($"Music volume set to: {volume}");
         }
     }
 }

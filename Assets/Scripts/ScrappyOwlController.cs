@@ -11,7 +11,7 @@ public class ScrappyOwlController : MonoBehaviour
     public ScrappyOwlModel owlModel;
     public ScrappyOwlView owlView;
     public Button pauseButton;
-    public Slider musicSlider; // Reference to the music volume slider
+    public Slider musicSlider; 
     public int score = 0;
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
@@ -23,8 +23,8 @@ public class ScrappyOwlController : MonoBehaviour
     public LogSpawnerScript logSpawner;
 
     // Starting position for the owl
-    private Vector2 startingPosition = new Vector2(44f, 12f); // Adjusted to Vector2
-    private AudioSource musicSource; // Reference to the audio source
+    private Vector2 startingPosition = new Vector2(44f, 12f);
+    private AudioSource musicSource; 
 
     void Start()
     {
@@ -39,7 +39,8 @@ public class ScrappyOwlController : MonoBehaviour
         musicSource = GetComponent<AudioSource>();
         if (musicSource != null)
         {
-            musicSource.volume = musicVolume; // Set the initial volume
+            // Set the volume
+            musicSource.volume = musicVolume; 
         }
         else
         {
@@ -47,11 +48,11 @@ public class ScrappyOwlController : MonoBehaviour
         }
 
         // Initialize the game with the beginning position
-        ResetOwl();
+        owlModel.ResetOwl(startingPosition);
 
         // Set slider value and add listener
-        musicSlider.value = musicVolume; // Set slider to current volume
-        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged); // Add listener to handle volume change
+        musicSlider.value = musicVolume; 
+        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged); 
     }
 
     void Update()
@@ -99,10 +100,10 @@ public class ScrappyOwlController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collided object has the tag "Log" or if it is on the correct layer
-        if (other.CompareTag("LogTrigger"))  // Check if the object has the "Log" tag
+        if (other.CompareTag("LogTrigger"))  
         {
-            IncreaseScore();  // Increase score when the owl passes the log
-            Debug.Log("Owl passed the log!");
+            // Increase score when the owl passes the log
+            IncreaseScore();  
         }
     }
 
@@ -110,12 +111,12 @@ public class ScrappyOwlController : MonoBehaviour
     {
         owlModel.isAlive = false;
         gameOver = true;
-        Time.timeScale = 0;  // Optional: stop the game time
+        Time.timeScale = 0;  
 
         // Call HideLogs from LogSpawnerScript
         if (logSpawner != null)
         {
-            logSpawner.HideLogs(); // Call the HideLogs method
+            logSpawner.HideLogs();
         }
         else
         {
@@ -138,7 +139,6 @@ public class ScrappyOwlController : MonoBehaviour
         // Check if the collided object has the tag "Log"
         if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Owl collided with a log!");
             owlView.HideAllPanels();
             ShowGameOver();
         }
@@ -153,14 +153,8 @@ public class ScrappyOwlController : MonoBehaviour
             // The game was paused, keep playing
             ResumeGame();
         }
-        else if (gameOver)
+        else 
         {
-            // Reset and start the game
-            NewGame();
-        }
-        else
-        {
-            // Start game from home screen
             NewGame();
         }
     }
@@ -193,9 +187,7 @@ public class ScrappyOwlController : MonoBehaviour
         gameOver = false;
         score = 0;
 
-        Debug.Log("Starting a new game...");
-
-        ResetOwl(); // Pass starting position to reset the owl
+        owlModel.ResetOwl(startingPosition);
 
         // Ensure view reflects the model's position
         owlView.UpdateOwlPosition(owlModel.GetPosition());
@@ -203,15 +195,6 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowGameScreen();
     }
 
-    // Method to reset the owl
-    private void ResetOwl()
-    {
-        Debug.Log("Resetting the owl...");
-        owlModel.ResetOwl(startingPosition); // Pass starting position to reset the owl
-
-        // Check if the owl's position is correct
-        Debug.Log($"Owl position after reset: {owlModel.GetPosition()}");
-    }
 
     // Method to modeSelection
     public void ShowModeSelection()
@@ -266,7 +249,9 @@ public class ScrappyOwlController : MonoBehaviour
     {
         // Pause if game is playing
         if (!pauseGame)
+        {
             PauseGame();
+        }
 
         owlView.ShowSettingsScreen();
     }
@@ -275,15 +260,13 @@ public class ScrappyOwlController : MonoBehaviour
     public void OnMusicSliderChanged(float value)
     {
         musicVolume = value;
-        owlView.UpdateMusicVolume(musicVolume); // Update the view's audio source volume
+        owlView.UpdateMusicVolume(musicVolume); 
     }
 
 
     public void QuitGame()
     {
-        // Log the action for debugging
-        Debug.Log("Quitting the game.");
-
+        
         // Check if the application is running in the editor
 #if UNITY_EDITOR
         // If in the Unity editor, exit play mode
