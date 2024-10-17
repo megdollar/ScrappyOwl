@@ -112,7 +112,7 @@ public class ScrappyOwlController : MonoBehaviour
         // Call HideLogs from LogSpawnerScript
         if (logSpawner != null)
         {
-            logSpawner.HideLogs();
+            logSpawner.DestroyLogs();
         }
 
         // Store the final score to display in the game over UI
@@ -173,6 +173,7 @@ public class ScrappyOwlController : MonoBehaviour
             pauseGame = true;
             Time.timeScale = 0f;
             owlView.ShowPauseScreen();
+            logSpawner.HideTrees();
         }
     }
 
@@ -183,6 +184,7 @@ public class ScrappyOwlController : MonoBehaviour
         Time.timeScale = 1f;
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
+        logSpawner.ShowTrees();
     }
 
     // Method to start a new game
@@ -211,6 +213,7 @@ public class ScrappyOwlController : MonoBehaviour
         owlModel.ResetOwl(startingPosition);
 
         owlView.UpdateOwlPosition(owlModel.GetPosition());
+        logSpawner.DestroyLogs();
     }
 
 
