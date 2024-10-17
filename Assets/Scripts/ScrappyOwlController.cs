@@ -118,11 +118,22 @@ public class ScrappyOwlController : MonoBehaviour
             logSpawner.HideLogs();
         }
 
+        // Store the final score to display in the game over UI
+        int finalScore = score;
+
+        // Display the final score in the game over screen
         if (owlView != null)
         {
-            owlView.ShowGameOverScreen(score);
+            owlView.ShowGameOverScreen(finalScore);
         }
+
+        // Reset the score for the next play session
+        score = 0;
+        owlView.UpdateScore(score);
     }
+
+
+
 
     // Handle owl's collision with branches and logs
     void OnCollisionEnter2D(Collision2D collision)
@@ -135,10 +146,12 @@ public class ScrappyOwlController : MonoBehaviour
         }
     }
 
-    // Method when play button is clicked
     public void PlayGame()
     {
         Time.timeScale = 1f;
+        score = 0; // Reset score when starting the game
+        owlView.UpdateScore(score); // Update the score UI
+
         if (pauseGame)
         {
             // The game was paused, keep playing
@@ -149,6 +162,7 @@ public class ScrappyOwlController : MonoBehaviour
             NewGame();
         }
     }
+
 
     // Method when pause button is clicked
     public void PauseGame()
@@ -170,14 +184,13 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.ShowGameScreen();
     }
 
-    // Method to start a new game
     public void NewGame()
     {
         Time.timeScale = 1f;
         pauseGame = false;
         gameOver = false;
         score = 0;
-        owlView.UpdateScore(0);
+        owlView.UpdateScore(score); // Ensure the score UI reflects the reset value
         owlModel.ResetOwl(startingPosition);
 
         // Ensure view reflects the model's position
@@ -185,6 +198,8 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
+
+
 
     // Method to modeSelection
     public void ShowModeSelection()

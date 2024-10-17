@@ -90,6 +90,7 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show game over screen and score
     public void ShowGameOverScreen(int score)
     {
+        finalScoreText.text = score.ToString();
         ShowPanel(gameOverScreen);
     }
 
@@ -103,7 +104,7 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         scoreText.text = newScore.ToString();
-        finalScoreText.text = newScore.ToString();
+
     }
 
     public void ShowSettingsScreen()
