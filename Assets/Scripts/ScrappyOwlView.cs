@@ -7,7 +7,6 @@ public class ScrappyOwlView : MonoBehaviour
     public GameObject homeScreen;
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
-
     public GameObject settingScreen;
     public GameObject gameScreen;
     public GameObject backButtonPrefab;
@@ -20,8 +19,8 @@ public class ScrappyOwlView : MonoBehaviour
     public Text difficultyText;
 
     public GameObject owlSprite;
+    public AudioSource flapAudioSource;
 
-    // Variables for storing current and previous panels
     private GameObject currentPanel;
     private GameObject previousPanel;
 
@@ -30,19 +29,22 @@ public class ScrappyOwlView : MonoBehaviour
     // Method to show Home Screen by default
     void Start()
     {
-        // Ensure the AudioSource is assigned
         if (owlAudioSource == null)
         {
             owlAudioSource = GetComponent<AudioSource>();
         }
 
+        if (flapAudioSource == null)
+        {
+            flapAudioSource = GetComponent<AudioSource>();
+        }
+
         // Play the music
         if (owlAudioSource != null)
         {
-            owlAudioSource.loop = true; 
-            owlAudioSource.Play(); 
+            owlAudioSource.loop = true;
+            owlAudioSource.Play();
         }
-
 
         ShowHomeScreen();
     }
@@ -67,6 +69,10 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowHomeScreen()
     {
         ShowPanel(homeScreen);
+        if (flapAudioSource != null)
+        {
+            flapAudioSource.enabled = false;
+        }
     }
 
     // Method to show the pause screen
@@ -75,16 +81,17 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(pauseScreen);
     }
 
+    // Method to show game screen
     public void ShowGameScreen()
     {
         ShowPanel(gameScreen);
     }
 
-    // Method to show game over screen and score
+    // Method to show game-over screen and score
     public void ShowGameOverScreen(int score)
     {
-        ShowPanel(gameOverScreen);
         finalScoreText.text = score.ToString();
+        ShowPanel(gameOverScreen);
     }
 
     // Update the owl's position
@@ -97,19 +104,22 @@ public class ScrappyOwlView : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         scoreText.text = newScore.ToString();
+
     }
 
-
+    // Method to show the settings screen
     public void ShowSettingsScreen()
     {
         ShowPanel(settingScreen);
     }
 
+    // Method to show the mode selection screen
     public void ShowModeSelectionScreen()
     {
         ShowPanel(modeSelectionScreen);
     }
 
+    // Method to show the instructions screen
     public void ShowInstructionsScreen()
     {
         ShowPanel(instructionsScreen);
@@ -145,7 +155,20 @@ public class ScrappyOwlView : MonoBehaviour
     {
         if (owlAudioSource != null)
         {
-            owlAudioSource.volume = volume; // Set the volume
+            owlAudioSource.volume = volume;
+        }
+    }
+
+    // Method to update flap sound volume
+    public void UpdateFlapSoundVolume(float volume)
+    {
+        if (flapAudioSource != null)
+        {
+            flapAudioSource.volume = volume;
+        }
+        else
+        {
+            Debug.LogWarning("Flap AudioSource is not assigned.");
         }
     }
 }

@@ -1,7 +1,7 @@
 # ScrappyOwl
 Scrappy Owl, is an arcade-style game where a player controls an owl character, which moves persistently to the right. The player navigates the owl through a forest, dodging obstacles and gains points in the process. 
 
-Installation: 
+Start Up Instructions: Open the Scrappy Owl Game File. After starting up the game, you will be brought to the game's home screen. Here, you can jump right into the action, ready further instructions on how to play, and alter the settings. 
 
 How to Play: The goal of this game is to gain points by dodging incoming obstacles. Rhythmaclly press the space bar to control Scrappy’s height and keep yourself out of harms way. Scrappy Owl is an endless side scroller that continues until the player fails or quits the game.
 
