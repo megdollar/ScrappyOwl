@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -135,13 +136,14 @@ public class ScrappyOwlController : MonoBehaviour
     // Handle owl's collision with branches and logs
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the collided object has the tag "Log"
         if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
         {
-            owlView.HideAllPanels();
-            ShowGameOver();
+            owlView.PlayExplosion(transform.position);
+            Invoke("HideAllPanels", 1f);
+            Invoke("ShowGameOver", 1.5f);
         }
     }
+
 
     public void PlayGame()
     {
