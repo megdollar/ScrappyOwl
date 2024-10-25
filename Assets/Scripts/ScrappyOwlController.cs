@@ -138,11 +138,19 @@ public class ScrappyOwlController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
         {
+
             owlView.PlayExplosion(transform.position);
-            Invoke("HideAllPanels", 1f);
-            Invoke("ShowGameOver", 1.5f);
+            StartCoroutine(DelayedActions());
+            Invoke("ShowGameOver", 1f);     
         }
     }
+
+    private IEnumerator DelayedActions()
+    {
+        yield return new WaitForSeconds(1f); 
+        owlView.HideAllPanels();
+    }
+
 
 
     public void PlayGame()
