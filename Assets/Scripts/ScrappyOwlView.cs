@@ -25,6 +25,7 @@ public class ScrappyOwlView : MonoBehaviour
     private GameObject previousPanel;
 
     public AudioSource owlAudioSource;
+    public Animator animator;
 
     // Method to show Home Screen by default
     void Start()
@@ -47,6 +48,15 @@ public class ScrappyOwlView : MonoBehaviour
         }
 
         ShowHomeScreen();
+
+        // Get the Animator component
+        if (animator == null)
+            
+            animator = owlSprite.GetComponent<animator>();
+            if (animator == null)
+            {
+                Debug.LogError("Animator component not found on OwlSprite")
+            }
     }
 
     // Method to show a specific panel and track the previous panel
@@ -170,5 +180,16 @@ public class ScrappyOwlView : MonoBehaviour
         {
             Debug.LogWarning("Flap AudioSource is not assigned.");
         }
+    }
+
+    public void FlapWings()
+    {
+        animator.SetBool("Flap", true); // Trigger the wing flap animation
+        Invoke("ResetFlap", 0.2f); // Reset the animation after 0.2 seconds
+    }
+
+    private void ResetFlap()
+    {
+        animator.SetBool("Flap", false);
     }
 }

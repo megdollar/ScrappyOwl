@@ -53,7 +53,7 @@ public class ScrappyOwlController : MonoBehaviour
     void Update()
     {
         // Update the game if it is not paused/game over
-        if (!pauseGame && !gameOver && owlModel.isAlive)
+        if (!pauseGame && !gameOver && startGame && owlModel.isAlive)
         {
             // Handle input to make the owl jump
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -74,6 +74,25 @@ public class ScrappyOwlController : MonoBehaviour
 
             // Update the owl's position and view each frame
             owlView.UpdateOwlPosition(owlModel.GetPosition());
+        }
+        else if (!startGame)
+        {
+            // Check for UI Text object for the start message
+            if (owlView.startGameText != null)
+            {
+                owlView.startGameText.gameObject.SetActive(true);
+            }
+
+            // Check for User input to start the game
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                startGame = true;
+
+                if (owlView.startGameText != null)
+                {
+                    owlView.startGameText.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -200,6 +219,9 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.UpdateOwlPosition(owlModel.GetPosition());
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
+
+        // Set game to start
+        startGame = true;
     }
 
     // Method to reset the game state
@@ -264,6 +286,12 @@ public class ScrappyOwlController : MonoBehaviour
     {
         score++;
         owlView.UpdateScore(score);
+    }
+
+    public void Jump()
+    {
+        owlModel.Jump();
+        owlView.FlapWings();
     }
 
     // Show Settings Screen method
