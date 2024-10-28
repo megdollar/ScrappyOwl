@@ -26,6 +26,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     public AudioSource owlAudioSource;
     public Animator animator;
+    public GameObject startGameText;
 
     // Method to show Home Screen by default
     void Start()
@@ -52,10 +53,10 @@ public class ScrappyOwlView : MonoBehaviour
         // Get the Animator component
         if (animator == null)
             
-            animator = owlSprite.GetComponent<animator>();
+            animator = owlSprite.GetComponent<Animator>();
             if (animator == null)
             {
-                Debug.LogError("Animator component not found on OwlSprite")
+                Debug.LogError("Animator component not found on OwlSprite");
             }
     }
 

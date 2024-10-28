@@ -15,8 +15,10 @@ public class ScrappyOwlController : MonoBehaviour
     public int score = 0;
     public TMP_Text scoreText;
     public TMP_Text finalScoreText;
+    public TMP_Text startGameText;
     public bool pauseGame = false;
     public bool gameOver = false;
+    private bool startGame = false;
     public bool hardMode = false;
     public float musicVolume = 1.0f;
     public float flapSoundVolume = 1.0f;
