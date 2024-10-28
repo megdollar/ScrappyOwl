@@ -26,6 +26,9 @@ public class ScrappyOwlView : MonoBehaviour
 
     public AudioSource owlAudioSource;
 
+    public GameObject explosionPrefab; 
+    private AudioSource explosionAudioSource;
+
     // Method to show Home Screen by default
     void Start()
     {
@@ -45,6 +48,12 @@ public class ScrappyOwlView : MonoBehaviour
             owlAudioSource.loop = true;
             owlAudioSource.Play();
         }
+
+        if (explosionPrefab != null)
+        {
+            explosionAudioSource = explosionPrefab.GetComponent<AudioSource>();
+        }
+
 
         ShowHomeScreen();
     }
@@ -85,6 +94,19 @@ public class ScrappyOwlView : MonoBehaviour
     public void ShowGameScreen()
     {
         ShowPanel(gameScreen);
+    }
+
+        public void PlayExplosion(Vector3 position)
+    {
+        GameObject explosion = Instantiate(explosionPrefab, position, Quaternion.identity);
+        AudioSource explosionAudio = explosion.GetComponent<AudioSource>();
+
+         if (explosionAudio != null)
+        {
+            explosionAudio.Play();
+        }
+
+        Destroy(explosion, 1f); 
     }
 
     // Method to show game-over screen and score
