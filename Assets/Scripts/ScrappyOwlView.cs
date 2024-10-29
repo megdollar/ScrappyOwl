@@ -26,7 +26,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     public AudioSource owlAudioSource;
     public Animator animator;
-    public GameObject startGameText;
+    public gameObject startPanel;
 
     public GameObject explosionPrefab; 
     private AudioSource explosionAudioSource;
@@ -158,6 +158,12 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(instructionsScreen);
     }
 
+    // Method to show Slow Start Panel
+    public void showStartPanel()
+    {
+        ShowPanel(startPanel);
+    }
+
     // Method for the Back Button to return users to the previous panel
     public void BackToPreviousPanel()
     {
@@ -181,6 +187,7 @@ public class ScrappyOwlView : MonoBehaviour
         gameScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
+        startPanel.SetActive(false);
     }
 
     // Method to update music volume

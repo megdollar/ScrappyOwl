@@ -25,6 +25,7 @@ public class ScrappyOwlController : MonoBehaviour
     public float flapSoundVolume = 1.0f;
 
     public LogSpawnerScript logSpawner;
+    public gameObject startPanel;
 
     // Starting position for the owl
     private Vector2 startingPosition = new Vector2(44f, 12f);
@@ -80,21 +81,12 @@ public class ScrappyOwlController : MonoBehaviour
         }
         else if (!startGame)
         {
-            // Check for UI Text object for the start message
-            if (owlView.startGameText != null)
-            {
-                owlView.startGameText.gameObject.SetActive(true);
-            }
-
-            // Check for User input to start the game
+            // Check for user input to start the game
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 startGame = true;
-
-                if (owlView.startGameText != null)
-                {
-                    owlView.startGameText.gameObject.SetActive(false);
-                }
+                owlView.HideStartPanel();
+                owlView.ShowGameScreen();
             }
         }
     }
@@ -188,6 +180,9 @@ public class ScrappyOwlController : MonoBehaviour
         {
             NewGame();
         }
+
+        // Hide the start Panel
+        owlView.HideStartPanel();
 
         if (owlView.flapAudioSource != null)
         {
