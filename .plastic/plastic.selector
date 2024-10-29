@@ -1,4 +1,0 @@
-repository "ScrappyOwl@tylerbreedlove36@cloud"
-  path "/"
-    br "/main"
-    co "/main"
