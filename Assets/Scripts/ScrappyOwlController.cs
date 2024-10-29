@@ -53,6 +53,16 @@ public class ScrappyOwlController : MonoBehaviour
 
     void Update()
     {
+        if (owlView.slowStartScreen.activeSelf)
+        {
+            // Hide the instructions panel and start the game when clicked or spacebar is pressed
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                owlView.HideSlowStartScreen();
+                PlayGame(); // Start the game
+            }
+            return; // Exit the update loop if instructions are active
+        }
         // Update the game if it is not paused/game over
         if (!pauseGame && !gameOver && owlModel.isAlive)
         {
@@ -141,13 +151,13 @@ public class ScrappyOwlController : MonoBehaviour
 
             owlView.PlayExplosion(transform.position);
             StartCoroutine(DelayedActions());
-            Invoke("ShowGameOver", 1f);     
+            Invoke("ShowGameOver", 1f);
         }
     }
 
     private IEnumerator DelayedActions()
     {
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
         owlView.HideAllPanels();
     }
 
@@ -155,7 +165,7 @@ public class ScrappyOwlController : MonoBehaviour
 
     public void PlayGame()
     {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         score = 0;
         owlView.UpdateScore(score);
 
@@ -246,7 +256,12 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);
-        PlayGame();
+        //PlayGame();
+        owlModel.ResetOwl(startingPosition);
+
+        owlView.UpdateOwlPosition(owlModel.GetPosition());
+        owlView.slowStartScreen.SetActive(true);
+        ShowSlowStartScreen();
     }
 
     // Method for Hard Mode
@@ -255,7 +270,20 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true);
-        PlayGame();
+        //PlayGame();
+        owlModel.ResetOwl(startingPosition);
+
+        owlView.UpdateOwlPosition(owlModel.GetPosition());
+        owlView.slowStartScreen.SetActive(true);
+        ShowSlowStartScreen();
+    }
+
+    public void ShowSlowStartScreen()
+    {
+        // Freeze the game time
+        Time.timeScale = 0f;
+        owlView.ShowGameScreen();
+        //owlView.ShowSlowStartScreen(); // Assuming this method shows the panel with instructions
     }
 
     // Method to decrease score

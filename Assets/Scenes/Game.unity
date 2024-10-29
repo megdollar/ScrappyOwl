@@ -507,6 +507,7 @@ MonoBehaviour:
   backButtonPrefab: {fileID: 0}
   instructionsScreen: {fileID: 853011535}
   modeSelectionScreen: {fileID: 1920223911}
+  slowStartScreen: {fileID: 532994878}
   scoreText: {fileID: 2020153246}
   finalScoreText: {fileID: 1543516776}
   difficultyText: {fileID: 0}
@@ -974,7 +975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -33.999878, y: 24}
+  m_AnchoredPosition: {x: -33.999817, y: 24}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351974355
@@ -1533,6 +1534,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9197731697120004622, guid: 7a2e1b3233db6ad4fbf9919b6a391abd, type: 3}
   m_PrefabInstance: {fileID: 1945764141}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &532994878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532994879}
+  - component: {fileID: 532994881}
+  - component: {fileID: 532994880}
+  m_Layer: 5
+  m_Name: Slow Start Screen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &532994879
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532994878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1166163986}
+  m_Father: {fileID: 1877998275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &532994880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532994878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &532994881
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532994878}
+  m_CullTransparentMesh: 1
 --- !u!1 &587051594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2662,7 +2739,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1166163986}
   - {fileID: 451882096}
   - {fileID: 1473524457}
   - {fileID: 475396499}
@@ -3716,8 +3792,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 99d427893e6c2614380e9195c60b9e1e, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: ddd9c1f6ad5284a4cabab83db2ce1af6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3737,11 +3813,11 @@ Transform:
   m_GameObject: {fileID: 1166163984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: -1878.3241}
+  m_LocalPosition: {x: 30.999924, y: 1, z: -1878.3241}
   m_LocalScale: {x: 33.96845, y: 40.22744, z: 20.870268}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 853011536}
+  m_Father: {fileID: 532994879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168050259
 GameObject:
@@ -4512,7 +4588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -32.999878, y: 0}
+  m_AnchoredPosition: {x: -32.999817, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462501245
@@ -5019,6 +5095,7 @@ MonoBehaviour:
   backButtonPrefab: {fileID: 0}
   instructionsScreen: {fileID: 0}
   modeSelectionScreen: {fileID: 0}
+  slowStartScreen: {fileID: 0}
   scoreText: {fileID: 2020153246}
   finalScoreText: {fileID: 0}
   difficultyText: {fileID: 0}
@@ -5956,11 +6033,12 @@ RectTransform:
   - {fileID: 1734122255}
   - {fileID: 1921310122}
   - {fileID: 1576551561}
+  - {fileID: 532994879}
   m_Father: {fileID: 1100650857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -32.999878, y: 0}
+  m_AnchoredPosition: {x: -32.999817, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1877998276
@@ -6075,7 +6153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -32.999878, y: 0}
+  m_AnchoredPosition: {x: -32.999817, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1920223913

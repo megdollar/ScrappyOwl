@@ -13,6 +13,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     public GameObject instructionsScreen;
     public GameObject modeSelectionScreen;
+    public GameObject slowStartScreen;
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI finalScoreText;
@@ -26,7 +27,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     public AudioSource owlAudioSource;
 
-    public GameObject explosionPrefab; 
+    public GameObject explosionPrefab;
     private AudioSource explosionAudioSource;
 
     // Method to show Home Screen by default
@@ -96,17 +97,22 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(gameScreen);
     }
 
-        public void PlayExplosion(Vector3 position)
+    public void ShowSlowStartScreen()
+    {
+        ShowPanel(slowStartScreen);
+    }
+
+    public void PlayExplosion(Vector3 position)
     {
         GameObject explosion = Instantiate(explosionPrefab, position, Quaternion.identity);
         AudioSource explosionAudio = explosion.GetComponent<AudioSource>();
 
-         if (explosionAudio != null)
+        if (explosionAudio != null)
         {
             explosionAudio.Play();
         }
 
-        Destroy(explosion, 1f); 
+        Destroy(explosion, 1f);
     }
 
     // Method to show game-over screen and score
@@ -160,6 +166,16 @@ public class ScrappyOwlView : MonoBehaviour
         }
     }
 
+    public bool isSlowStartScreen()
+    {
+        return slowStartScreen.activeSelf; // or slowStartScreen.activeInHierarchy
+    }
+
+    public void HideSlowStartScreen()
+    {
+        slowStartScreen.SetActive(false);
+    }
+
     // Hide all screens (used for resuming game or starting new one)
     public void HideAllPanels()
     {
@@ -170,6 +186,7 @@ public class ScrappyOwlView : MonoBehaviour
         gameScreen.SetActive(false);
         modeSelectionScreen.SetActive(false);
         instructionsScreen.SetActive(false);
+        slowStartScreen.SetActive(false);
     }
 
     // Method to update music volume
