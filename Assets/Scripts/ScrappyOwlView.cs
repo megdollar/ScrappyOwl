@@ -112,7 +112,7 @@ public class ScrappyOwlView : MonoBehaviour
             explosionAudio.Play();
         }
 
-        Destroy(explosion, 1f);
+        Destroy(explosion, .60f);
     }
 
     // Method to show game-over screen and score
