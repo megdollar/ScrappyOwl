@@ -25,7 +25,7 @@ public class ScrappyOwlController : MonoBehaviour
     public float flapSoundVolume = 1.0f;
 
     public LogSpawnerScript logSpawner;
-    public gameObject startPanel;
+    public GameObject startPanel;
 
     // Starting position for the owl
     private Vector2 startingPosition = new Vector2(44f, 12f);

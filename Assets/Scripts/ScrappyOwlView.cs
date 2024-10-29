@@ -26,7 +26,7 @@ public class ScrappyOwlView : MonoBehaviour
 
     public AudioSource owlAudioSource;
     public Animator animator;
-    public gameObject startPanel;
+    public GameObject startPanel;
 
     public GameObject explosionPrefab; 
     private AudioSource explosionAudioSource;
@@ -164,6 +164,7 @@ public class ScrappyOwlView : MonoBehaviour
         ShowPanel(startPanel);
     }
 
+
     // Method for the Back Button to return users to the previous panel
     public void BackToPreviousPanel()
     {
@@ -221,5 +222,9 @@ public class ScrappyOwlView : MonoBehaviour
     private void ResetFlap()
     {
         animator.SetBool("Flap", false);
+    }
+    public void HideStartPanel()
+    {
+        startPanel.SetActive(false);
     }
 }
