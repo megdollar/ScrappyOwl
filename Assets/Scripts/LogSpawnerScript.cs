@@ -5,12 +5,12 @@ using UnityEngine;
 public class LogSpawnerScript : MonoBehaviour
 {
     public GameObject log;
-    public float spawnRate = 0.5f;
+    public float spawnRate = 3f;
     private float timer = 0f;
-    public float heightOffset = 1f;
+    public float heightOffset = 6f;
 
-    public float minLogHeight = -3f;
-    public float maxLogHeight = 6f;
+    public float minLogHeight = -5f;
+    public float maxLogHeight = 5f;
 
     private List<GameObject> logs = new List<GameObject>();
 
