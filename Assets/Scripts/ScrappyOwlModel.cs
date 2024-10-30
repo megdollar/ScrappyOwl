@@ -9,6 +9,7 @@ public class ScrappyOwlModel : MonoBehaviour
     public float hardGravity = 1.5f;
     public bool isAlive = true;
     private bool hardMode = true;
+    
 
     public AudioSource flapSound;
 
@@ -39,10 +40,22 @@ public class ScrappyOwlModel : MonoBehaviour
     public void ResetOwl(Vector2 newStartingPosition)
     {
         owlRigidbody.position = newStartingPosition;
+        owlRigidbody.rotation = 0f; 
         transform.position = newStartingPosition;
+        transform.rotation = Quaternion.identity;  
         owlRigidbody.velocity = Vector2.zero;
+        owlRigidbody.simulated = true;  // Ensure physics simulation is active
+
+        
+        Collider2D owlCollider = GetComponent<Collider2D>();
+        if (owlCollider != null)
+        {
+            owlCollider.enabled = false;  
+            owlCollider.enabled = true;  
+        }
         isAlive = true;
     }
+
 
     public Vector2 GetPosition()
     {

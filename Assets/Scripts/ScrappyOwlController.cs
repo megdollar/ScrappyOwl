@@ -28,6 +28,9 @@ public class ScrappyOwlController : MonoBehaviour
     private Vector2 startingPosition = new Vector2(44f, 12f);
     private AudioSource musicSource;
 
+    // **Added collision flag to limit to one collision**
+    private bool hasCollided = false;
+
     void Start()
     {
         owlView.HideAllPanels();
@@ -72,7 +75,7 @@ public class ScrappyOwlController : MonoBehaviour
                 if (!IsPauseButtonClicked())
                 {
                     owlModel.Jump();
-                    owlView.flapAudioSource.Play(); // Play flap sound
+                    owlView.flapAudioSource.Play(); 
                 }
             }
 
@@ -106,7 +109,7 @@ public class ScrappyOwlController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the collided object has the tag "Log" or if it is on the correct layer
+        // Check if the collided object has the tag "LogTrigger"
         if (other.CompareTag("LogTrigger"))
         {
             // Increase score when the owl passes the log
@@ -120,7 +123,7 @@ public class ScrappyOwlController : MonoBehaviour
         gameOver = true;
         Time.timeScale = 0;
 
-        // Call HideLogs from LogSpawnerScript
+        // Call DestroyLogs from LogSpawnerScript
         if (logSpawner != null)
         {
             logSpawner.DestroyLogs();
@@ -140,32 +143,29 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.UpdateScore(score);
     }
 
-
-
-
-    // Handle owl's collision with branches and logs
+    // **Modified to limit to one collision**
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground"))
+        if (!hasCollided && (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground")))
         {
+            Debug.Log("Collision detected with: " + collision.gameObject.name);
+            hasCollided = true;
 
             owlView.PlayExplosion(transform.position);
             StartCoroutine(DelayedActions());
-            Invoke("ShowGameOver", .7f);
+            Invoke("ShowGameOver", 0.7f);
         }
     }
 
     private IEnumerator DelayedActions()
     {
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(0.7f);
         owlView.HideAllPanels();
     }
 
-
-
     public void PlayGame()
     {
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         score = 0;
         owlView.UpdateScore(score);
 
@@ -183,7 +183,6 @@ public class ScrappyOwlController : MonoBehaviour
             owlView.flapAudioSource.enabled = true;
         }
     }
-
 
     // Method when pause button is clicked
     public void PauseGame()
@@ -207,36 +206,48 @@ public class ScrappyOwlController : MonoBehaviour
         logSpawner.ShowTrees();
     }
 
-    // Method to start a new game
+    // **Reset collision flag in NewGame**
     public void NewGame()
     {
         Time.timeScale = 1f;
         pauseGame = false;
         gameOver = false;
+        hasCollided = false; // Reset collision flag
         score = 0;
         owlView.UpdateScore(score);
         owlModel.ResetOwl(startingPosition);
+
+        Collider2D owlCollider = owlModel.GetComponent<Collider2D>();
+        if (owlCollider != null)
+        {
+            owlCollider.enabled = true;
+        }
 
         owlView.UpdateOwlPosition(owlModel.GetPosition());
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
     }
 
-    // Method to reset the game state
+    // **Reset collision flag in ResetGameState**
     public void ResetGameState()
     {
         Time.timeScale = 1f;
         pauseGame = false;
         gameOver = false;
+        hasCollided = false; 
         score = 0;
         owlView.UpdateScore(score);
         owlModel.ResetOwl(startingPosition);
 
         owlView.UpdateOwlPosition(owlModel.GetPosition());
+
+        Collider2D owlCollider = owlModel.GetComponent<Collider2D>();
+        if (owlCollider != null)
+        {
+            owlCollider.enabled = true;
+        }
         logSpawner.DestroyLogs();
     }
-
-
 
     // Method to modeSelection
     public void ShowModeSelection()
@@ -256,7 +267,6 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = false;
         // Easy mode = false
         owlModel.SetDifficulty(false);
-        //PlayGame();
         owlModel.ResetOwl(startingPosition);
 
         owlView.UpdateOwlPosition(owlModel.GetPosition());
@@ -270,7 +280,6 @@ public class ScrappyOwlController : MonoBehaviour
         hardMode = true;
         // Hard mode = true
         owlModel.SetDifficulty(true);
-        //PlayGame();
         owlModel.ResetOwl(startingPosition);
 
         owlView.UpdateOwlPosition(owlModel.GetPosition());
@@ -283,7 +292,7 @@ public class ScrappyOwlController : MonoBehaviour
         // Freeze the game time
         Time.timeScale = 0f;
         owlView.ShowGameScreen();
-        //owlView.ShowSlowStartScreen(); // Assuming this method shows the panel with instructions
+        // owlView.ShowSlowStartScreen(); // Assuming this method shows the panel with instructions
     }
 
     // Method to decrease score
