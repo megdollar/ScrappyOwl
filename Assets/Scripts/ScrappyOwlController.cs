@@ -151,13 +151,13 @@ public class ScrappyOwlController : MonoBehaviour
 
             owlView.PlayExplosion(transform.position);
             StartCoroutine(DelayedActions());
-            Invoke("ShowGameOver", 1f);
+            Invoke("ShowGameOver", .7f);
         }
     }
 
     private IEnumerator DelayedActions()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.7f);
         owlView.HideAllPanels();
     }
 
