@@ -3920,9 +3920,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   log: {fileID: 5083898527339075835, guid: 72f6d00edaf3b48bdaef6fb662953b2a, type: 3}
   spawnRate: 3
-  heightOffset: 5
+  heightOffset: 6
   minLogHeight: -5
-  maxLogHeight: 6
+  maxLogHeight: 5
 --- !u!4 &1273664184
 Transform:
   m_ObjectHideFlags: 0
