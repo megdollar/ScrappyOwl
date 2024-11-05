@@ -9,7 +9,8 @@ TagManager:
   - Ground
   - LogTrigger
   - Logic
-  - Obstacle
+  - Acorn
+  - Star
   layers:
   - Default
   - TransparentFX

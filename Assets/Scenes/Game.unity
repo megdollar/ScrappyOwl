@@ -682,8 +682,8 @@ GameObject:
   - component: {fileID: 188090787}
   - component: {fileID: 188090788}
   m_Layer: 5
-  m_Name: Obstacle Spawner
-  m_TagString: Untagged
+  m_Name: Acorn Spawner
+  m_TagString: Acorn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6130,6 +6130,7 @@ RectTransform:
   - {fileID: 1576551561}
   - {fileID: 1438690512}
   - {fileID: 188090787}
+  - {fileID: 2001737952}
   m_Father: {fileID: 1100650857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6613,6 +6614,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001481505}
   m_CullTransparentMesh: 1
+--- !u!1 &2001737951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001737952}
+  - component: {fileID: 2001737953}
+  m_Layer: 5
+  m_Name: Star Spawner
+  m_TagString: Star
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2001737952
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001737951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1877998275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1059, y: -11}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2001737953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001737951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b0a42ab4375a4c71a26b51ca1967409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  star: {fileID: 4314653576379841336, guid: 925c178186a164b42b1012f3f5357981, type: 3}
+  spawnRate: 12
+  heightOffset: 5
 --- !u!1 &2020153244
 GameObject:
   m_ObjectHideFlags: 0
