@@ -257,11 +257,10 @@ public class ScrappyOwlController : MonoBehaviour
     }
 
     // Method to increment the score
-    [ContextMenu("Increase Score")]
-    public void IncreaseScore()
+    public void IncreaseScoreByAmount(int amount)
     {
-        score++;
-        owlView.UpdateScore(score);
+        score += amount;
+        owlView.UpdateScore(score); // Update the score in the view
     }
 
     // Show Settings Screen method
