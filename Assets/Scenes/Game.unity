@@ -704,7 +704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 460, y: 98}
+  m_AnchoredPosition: {x: 1188, y: 78}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188090788
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acorn: {fileID: 285057725216403648, guid: 9d7a997fe17b04ff9aa3a94cbc109a5a, type: 3}
-  spawnRate: 2
+  spawnRate: 3
   heightOffset: 10
 --- !u!1 &218122588
 GameObject:
@@ -5390,9 +5390,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0000038146973}
+  m_Offset: {x: 0, y: -0.25}
   serializedVersion: 2
-  m_Radius: 2.59
+  m_Radius: 2.44
 --- !u!1 &1586462941
 GameObject:
   m_ObjectHideFlags: 0
