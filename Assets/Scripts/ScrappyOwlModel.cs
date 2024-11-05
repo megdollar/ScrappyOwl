@@ -10,6 +10,10 @@ public class ScrappyOwlModel : MonoBehaviour
     public bool isAlive = true;
     private bool hardMode = true;
 
+    public AudioClip collisionSound;
+
+    private AudioSource audioSource;
+
     private ScrappyOwlController gameController;
 
     // Collision flag to prevent multiple collisions
@@ -25,6 +29,8 @@ public class ScrappyOwlModel : MonoBehaviour
         {
             gameController = controllerObject.GetComponent<ScrappyOwlController>();
         }    
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetDifficulty(bool hardMode)
@@ -104,15 +110,19 @@ public class ScrappyOwlModel : MonoBehaviour
 
     // Moved OnCollisionEnter2D to this script
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-        
+        {
         if (!hasCollided && (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground")))
         {
             Debug.Log("Collision detected with: " + collision.gameObject.name);
             hasCollided = true;
 
             isAlive = false; // Update the owl's state
+
+            // Play the collision sound
+            if (audioSource != null && collisionSound != null)
+            {
+                audioSource.PlayOneShot(collisionSound); // Play sound effect
+            }
 
             // Play explosion and handle game over through the controller
             if (gameController != null)
@@ -121,5 +131,5 @@ public class ScrappyOwlModel : MonoBehaviour
                 gameController.StartCoroutine(gameController.DelayedActions());
             }
         }
-    }
+        }
 }
