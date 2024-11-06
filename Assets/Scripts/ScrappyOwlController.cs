@@ -23,6 +23,8 @@ public class ScrappyOwlController : MonoBehaviour
     public float flapSoundVolume = 1.0f;
 
     public LogSpawnerScript logSpawner;
+    public AcornSpawner acornSpawner;
+    public StarSpawner StarSpawner;
 
     // Starting position for the owl
     private Vector2 startingPosition = new Vector2(44f, 12f);
@@ -107,6 +109,18 @@ public class ScrappyOwlController : MonoBehaviour
         if (logSpawner != null)
         {
             logSpawner.DestroyLogs();
+        }
+
+        // Call DestroyAcorns from AcornSpawner Script
+        if (AcornSpawner != null)
+        {
+            AcornSpawner.DestroyAcorns();
+        }
+
+        // Call DestroyStars from StarSpawner Script
+        if (StarSpawner != null)
+        {
+            StarSpawner.DestroyStars();
         }
 
         // Store the final score to display in the game over UI

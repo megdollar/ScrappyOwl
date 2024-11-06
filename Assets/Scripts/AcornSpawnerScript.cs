@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AcornSpawner : MonoBehaviour
@@ -9,6 +10,7 @@ public class AcornSpawner : MonoBehaviour
     private float timer = 0;
     public float heightOffset = 10;
 
+    private List<GameObject> spawnedAcorns = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,20 @@ public class AcornSpawner : MonoBehaviour
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;
 
-        Instantiate(acorn, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        GameObject newAcorn = Instantiate(acorn, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        spawnedAcorns.Add(newAcorn);
+    }
 
+    public void DestroyAcorns()
+    {
+        foreach (GameObject acorn in spawnedAcorns)
+        {
+            if (acorn != null)
+            {
+                Destroy(acorn);
+            }
+         }
+
+         spawnedAcorns.Clear();
     }
 }
