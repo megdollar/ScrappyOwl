@@ -5,9 +5,9 @@ using UnityEngine;
 public class AcornSpawner : MonoBehaviour
 {
     public GameObject acorn;
-    public float spawnRate = 10;
+    public float spawnRate = 3;
     private float timer = 0;
-    public float heightOffset = 15;
+    public float heightOffset = 10;
 
     // Start is called before the first frame update
     void Start()

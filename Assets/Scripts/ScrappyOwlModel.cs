@@ -79,10 +79,24 @@ public class ScrappyOwlModel : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the object collided has the tag "LogTrigger"
-        if (other.CompareTag("LogTrigger"))
+        if (other.CompareTag("Acorn"))
         {
-            gameController.IncreaseScore(); 
+            gameController.IncreaseScoreByAmount(5); 
+
+            // Destroy the acorn
+            Destroy(other.gameObject);
+        } 
+         else if (other.CompareTag("Star"))
+        {
+            gameController.IncreaseScoreByAmount(10); 
+
+            // Destroy the acorn
+            Destroy(other.gameObject);
+        } 
+        // Check if the object collided has the tag "LogTrigger"
+        else if (other.CompareTag("LogTrigger"))
+        {
+            gameController.IncreaseScoreByAmount(1); 
         }
     }
 
@@ -91,6 +105,8 @@ public class ScrappyOwlModel : MonoBehaviour
     // Moved OnCollisionEnter2D to this script
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
+        
         if (!hasCollided && (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground")))
         {
             Debug.Log("Collision detected with: " + collision.gameObject.name);
