@@ -12,6 +12,7 @@ public class StarSpawner : MonoBehaviour
 
     // List to keep track of spawned stars
     private List<GameObject> spawnedStars = new List<GameObject>();
+    private bool isGamePaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +23,15 @@ public class StarSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < spawnRate)
+        if (!isGamePaused)
         {
             timer += Time.deltaTime;
-        }
-        else
-        {
-            spawnObstacle();
-            timer = 0;
+
+            if (timer >= spawnRate)
+            {
+                spawnObstacle();
+                timer = 0f;
+            }
         }
     }
 
@@ -40,6 +42,36 @@ public class StarSpawner : MonoBehaviour
 
         GameObject newStar = Instantiate(star, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
         spawnedStars.Add(newStar);
+    }
+    
+    // Method to hide stars on pause
+    public void HideStars()
+    {
+        isGamePaused = true;
+
+        foreach (GameObject star in spawnedStars)
+        {
+            if (star != null)
+            {
+                star.SetActive(false);
+            }
+        }
+    }
+
+    // Method to show stars on resume
+    public void ShowStars()
+    {
+        isGamePaused = false;
+
+        foreach (GameObject star in spawnedStars)
+        {
+            if (star != null)
+            {
+                star.SetActive(true);
+            }
+        }
+
+        timer = 0f;
     }
 
     // Method to destroy all spawned stars

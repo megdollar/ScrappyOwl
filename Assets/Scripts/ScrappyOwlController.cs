@@ -23,7 +23,7 @@ public class ScrappyOwlController : MonoBehaviour
     public float flapSoundVolume = 1.0f;
 
     public LogSpawnerScript logSpawner;
-    public AcornSpawner acornSpawner;
+    public AcornSpawner AcornSpawner;
     public StarSpawner StarSpawner;
 
     // Starting position for the owl
@@ -165,6 +165,11 @@ public class ScrappyOwlController : MonoBehaviour
         {
             owlView.flapAudioSource.enabled = true;
         }
+
+        if (AcornSpawner != null)
+        {
+            AcornSpawner.ShowAcorns();
+        }
     }
 
     // Method when pause button is clicked
@@ -176,6 +181,18 @@ public class ScrappyOwlController : MonoBehaviour
             Time.timeScale = 0f;
             owlView.ShowPauseScreen();
             logSpawner.HideTrees();
+            
+            if (AcornSpawner != null)
+            {
+                Debug.Log("Hiding Acorns");
+                AcornSpawner.HideAcorns();
+            }
+
+            if (StarSpawner != null)
+            {
+                Debug.Log("Hiding Stars");
+                StarSpawner.HideStars();
+            }
         }
     }
 
@@ -187,6 +204,18 @@ public class ScrappyOwlController : MonoBehaviour
         owlView.HideAllPanels();
         owlView.ShowGameScreen();
         logSpawner.ShowTrees();
+
+        if (AcornSpawner != null)
+        {
+            Debug.Log("Showing Acorns");
+            AcornSpawner.ShowAcorns();
+        }
+
+        if (StarSpawner != null)
+        {
+            Debug.Log("Showing Stars");
+            StarSpawner.ShowStars();
+        }
     }
 
     public void NewGame()
