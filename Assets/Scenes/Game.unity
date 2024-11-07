@@ -6893,7 +6893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b0a42ab4375a4c71a26b51ca1967409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star: {fileID: 7682374323690642529, guid: 72dd4254a9543ee40b0d3ef8a85bc0a3, type: 3}
+  star: {fileID: 7682374323690642529, guid: 56f61d335d2244dd7902a6d871ddbead, type: 3}
   spawnRate: 12
   heightOffset: 5
 --- !u!1 &2020153244
