@@ -10,9 +10,13 @@ public class StarMoveScript : MonoBehaviour
     // Position beyond which the Star is deleted
     public float deadZone = -45f;
 
+    public AudioClip collisionSound;
+    private AudioSource audioSource;
+
     void Start()
     {
-
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = collisionSound;
     }
 
     void Update()
@@ -23,6 +27,18 @@ public class StarMoveScript : MonoBehaviour
         {
             // Destroy the Star after the delay
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Owl")) // or whichever tag your owl has
+        {
+            // Play collision sound
+            if (audioSource != null && collisionSound != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 }

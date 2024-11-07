@@ -10,13 +10,22 @@ public class ScrappyOwlModel : MonoBehaviour
     public bool isAlive = true;
     private bool hardMode = true;
 
+    public AudioClip collisionSound;
+
+    private AudioSource audioSource;
+
     private ScrappyOwlController gameController;
 
     // Collision flag to prevent multiple collisions
     private bool hasCollided = false;
+    public AudioSource collectibleAudioSource;
+    public AudioClip acornCollectSound;
+    public AudioClip starCollectSound;
+
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         owlRigidbody = GetComponent<Rigidbody2D>();
         SetDifficulty(false);
 
@@ -24,7 +33,9 @@ public class ScrappyOwlModel : MonoBehaviour
         if (controllerObject != null)
         {
             gameController = controllerObject.GetComponent<ScrappyOwlController>();
-        }    
+        }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetDifficulty(bool hardMode)
@@ -77,42 +88,45 @@ public class ScrappyOwlModel : MonoBehaviour
     {
         return owlRigidbody.position;
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Acorn"))
         {
-            gameController.IncreaseScoreByAmount(5); 
-
-            // Destroy the acorn
+            gameController.IncreaseScoreByAmount(5);
+            collectibleAudioSource.clip = acornCollectSound; // Set the acorn sound
+            collectibleAudioSource.Play();
             Destroy(other.gameObject);
-        } 
-         else if (other.CompareTag("Star"))
+        }
+        else if (other.CompareTag("Star"))
         {
-            gameController.IncreaseScoreByAmount(10); 
-
-            // Destroy the acorn
+            gameController.IncreaseScoreByAmount(10);
+            collectibleAudioSource.clip = starCollectSound; // Set the star sound
+            collectibleAudioSource.Play();
             Destroy(other.gameObject);
-        } 
-        // Check if the object collided has the tag "LogTrigger"
+        }
         else if (other.CompareTag("LogTrigger"))
         {
-            gameController.IncreaseScoreByAmount(1); 
+            gameController.IncreaseScoreByAmount(1);
         }
     }
 
-    
 
     // Moved OnCollisionEnter2D to this script
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        
         if (!hasCollided && (collision.gameObject.CompareTag("Log") || collision.gameObject.CompareTag("Ground")))
         {
             Debug.Log("Collision detected with: " + collision.gameObject.name);
             hasCollided = true;
 
             isAlive = false; // Update the owl's state
+
+            // Play the collision sound
+            if (audioSource != null && collisionSound != null)
+            {
+                audioSource.PlayOneShot(collisionSound); // Play sound effect
+            }
 
             // Play explosion and handle game over through the controller
             if (gameController != null)
