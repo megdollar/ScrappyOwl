@@ -170,6 +170,11 @@ public class ScrappyOwlController : MonoBehaviour
         {
             AcornSpawner.ShowAcorns();
         }
+        if (StarSpawner != null)
+        {
+            StarSpawner.ShowStars();
+        }
+
     }
 
     // Method when pause button is clicked
@@ -184,13 +189,11 @@ public class ScrappyOwlController : MonoBehaviour
             
             if (AcornSpawner != null)
             {
-                Debug.Log("Hiding Acorns");
                 AcornSpawner.HideAcorns();
             }
 
             if (StarSpawner != null)
             {
-                Debug.Log("Hiding Stars");
                 StarSpawner.HideStars();
             }
         }
@@ -207,13 +210,11 @@ public class ScrappyOwlController : MonoBehaviour
 
         if (AcornSpawner != null)
         {
-            Debug.Log("Showing Acorns");
             AcornSpawner.ShowAcorns();
         }
 
         if (StarSpawner != null)
         {
-            Debug.Log("Showing Stars");
             StarSpawner.ShowStars();
         }
     }
@@ -350,5 +351,6 @@ public class ScrappyOwlController : MonoBehaviour
     {
         ResetGameState();
         owlView.ShowHomeScreen();
+
     }
 }

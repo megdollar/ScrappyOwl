@@ -2031,6 +2031,8 @@ MonoBehaviour:
   musicVolume: 1
   flapSoundVolume: 1
   logSpawner: {fileID: 1273664183}
+  AcornSpawner: {fileID: 188090788}
+  StarSpawner: {fileID: 2001737953}
 --- !u!4 &675769065
 Transform:
   m_ObjectHideFlags: 0
